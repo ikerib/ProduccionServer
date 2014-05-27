@@ -1,0 +1,37 @@
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<p>Asocia las refencias a los colores:</p>
+<div id="linea1" class="row">
+	<div class="col-md-2"></div>	
+    <div class="col-md-8">
+    	<div class="row">
+    		<div class="col-md-4">
+    			<div class="col-header">Referencia:</div>
+    		</div>
+    		<div class="col-md-4">
+    			<div class="col-header">Color fondo:</div>
+    		</div>
+    		<div class="col-md-4">
+    			<div class="col-header">Color texto:</div>
+    		</div>
+    	</div>
+    			
+    	<div class="row" ng-repeat="s in mysettings">
+    		<div class="col-md-4">
+    			<div colorpicker class="col-header">{{s.ref}}</div>
+                
+    		</div>
+    		<div class="col-md-4">
+    			<div class="col-header">
+                    <span colorpicker style="display:block; background-color:{{ s.backcolor }}; width:100px; height:20px;" ng-model="s.backcolor">&nbsp;</span>
+
+                </div>
+    		</div>
+    		<div class="col-md-4">
+    			<div class="col-header"><span style="display:block; border:1px solid #ccc; background-color:{{ s.forecolor }}; width:100px; height:20px;">&nbsp;</span></div>
+    		</div>
+    	</div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

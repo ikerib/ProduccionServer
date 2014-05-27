@@ -2,7 +2,8 @@
 var connect = require('connect')
     , express = require('express')
     , io = require('socket.io')
-    , port = (process.env.PORT || 8081);
+    , port = (process.env.PORT || 8081)
+    , fs = require('fs');
 
 //Setup Express
 var server = express.createServer();
@@ -66,6 +67,26 @@ server.get('/', function(req,res){
              ,analyticssiteid: 'XXXXXXX' 
             }
   });
+});
+
+server.get('/json', function(req,res){
+
+
+    var file = __dirname + '/static/data.json';
+    var that = this;
+    fs.readFile(file, 'utf8', function (err, data) {
+        if (err) {
+            console.log('Error: ' + err);
+            return;
+        }
+
+        data = JSON.parse(data);
+
+        res.writeHead('Content-Type', 'application/json');
+        res.end(JSON.stringify(data));
+
+    });
+
 });
 
 
