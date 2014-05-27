@@ -1,9 +1,14 @@
 //setup Dependencies
+
 var connect = require('connect')
     , express = require('express')
     , io = require('socket.io')
     , port = (process.env.PORT || 8081)
-    , fs = require('fs');
+    , fs = require('fs')
+    , path = require('path')
+    , get = require('./routes/get');
+
+
 
 //Setup Express
 var server = express.createServer();
@@ -12,9 +17,13 @@ server.configure(function(){
     server.set('view options', { layout: false });
     server.use(connect.bodyParser());
     server.use(express.cookieParser());
-    server.use(express.session({ secret: "shhhhhhhhh!"}));
+    server.use(express.session({ secret: "ezdoknahi!!"}));
     server.use(connect.static(__dirname + '/static'));
-    server.use(server.router);
+});
+
+
+server.configure('development', function(){
+    server.use(express.errorHandler());
 });
 
 //setup the errors
@@ -68,6 +77,8 @@ server.get('/', function(req,res){
             }
   });
 });
+
+server.get('/planificacion/:fetxa', get.all);
 
 server.get('/json', function(req,res){
 
