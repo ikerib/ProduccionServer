@@ -42,7 +42,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
     $scope.nameFilter = null;
     $scope.getDatuak = function() {
-        $http.get('/json').success(function(data){
+        $http.get('/planificacion/a').success(function(data){
             $scope.datuak=data;
         }).error(function(){
             console.log("error al obtener datos");
