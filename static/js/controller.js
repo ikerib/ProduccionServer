@@ -1,5 +1,5 @@
 
-var produccionApp = angular.module('produccionApp', ['ngRoute','ui.bootstrap','colorpicker.module']);
+var produccionApp = angular.module('produccionApp', ['ngRoute','ui.bootstrap','colorpicker.module','xeditable']);
 
 produccionApp.config(function($routeProvider) {
     $routeProvider
@@ -22,6 +22,9 @@ produccionApp.factory('produccionAPIservice', function($http) {
 
 });
 
+produccionApp.run(function(editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
 
 produccionApp.controller('produccionController', function ($scope, $http) {
     $scope.datepickers = {
@@ -46,7 +49,6 @@ produccionApp.controller('produccionController', function ($scope, $http) {
             $scope.datuak=data;
         }).error(function(){
             console.log("error al obtener datos");
-                console.log(e);
         });
     };
     $scope.getDatuak();
@@ -203,6 +205,20 @@ produccionApp.controller('produccionController', function ($scope, $http) {
       { ref: '3CI00001', backcolor: '#000000', forecolor: '#ffffff' },
       { ref: '3CI00002', backcolor: '#5cb85c', forecolor: '#000000' }
     ];
+
+
+    $scope.updateUser = function(data, l) {
+
+        var miid = l.$editable.attrs.miid;
+
+        var results = [];
+        for (var i = $scope.datuak.length; i--;) {
+            var d = $scope.datuak[i];
+            results.push($http.post('/saveplanificacion', d));
+        }
+
+//        return results;
+    };
 });
 
 produccionApp.controller('settingController', function ($scope, Data) {

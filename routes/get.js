@@ -20,10 +20,37 @@ exports.all = function(req, res){
                 res.json(items);
             });
         } else {
-            onErr(err,callback);
+            onErr(err, function(){
+                console.log(err);
+            });
         }
     });
 };
+
+exports.save = function(req, res){
+    db.open(function(err, db) {
+        if(!err) {
+            var data = req.body;
+//            console.log(data.egunak);
+            var BSON = mongo.BSONPure;
+            var o_id = new BSON.ObjectID(data._id);
+//            db.collection('test').find({'_id': o_id}).toArray(function (err, items) {
+//                res.json(items);
+//            });
+
+            db.collection('test').update({'_id': o_id}, { $set :{ egunak: data.egunak } }, {safe:true, multi:false, upsert:true}, function(e, result){
+                if (e) console.log(e)
+                res.send((result===1)?{msg:'success'}:{msg:'error'})
+            })
+
+        } else {
+            onErr(err, function(){
+                console.log(err);
+            });
+        }
+    });
+};
+
 
 //exports.one = function(req, res){
 //    var id = req.params.id;

@@ -80,8 +80,10 @@ server.get('/', function(req,res){
 
 server.get('/planificacion/:fetxa', get.all);
 
-server.get('/json', function(req,res){
+server.post('/saveplanificacion', get.save);
 
+
+server.get('/json', function(req,res){
 
     var file = __dirname + '/static/data.json';
     var that = this;
