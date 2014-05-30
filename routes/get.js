@@ -38,7 +38,7 @@ exports.save = function(req, res){
 //                res.json(items);
 //            });
 
-            db.collection('test').update({'_id': o_id}, { $set :{ egunak: data.egunak } }, {safe:true, multi:false, upsert:true}, function(e, result){
+            db.collection('test').update({'_id': o_id}, { $set :{ egunak: data.egunak } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
                 res.send((result===1)?{msg:'success'}:{msg:'error'})
             })
