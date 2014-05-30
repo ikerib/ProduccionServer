@@ -219,6 +219,16 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
 //        return results;
     };
+
+    $scope.addData = function(scope,data, l) {
+        $scope.users.push({
+            id: $scope.users.length+1,
+            name: '',
+            status: null,
+            group: null,
+            isNew: true
+        });
+    };
 });
 
 produccionApp.controller('settingController', function ($scope, Data) {
