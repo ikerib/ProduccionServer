@@ -14,9 +14,15 @@ var onErr = function(err,callback){
 };
 
 exports.all = function(req, res){
+
+    var desde = new Date(req.params.desde);
+//    ISODate("2011-11-24")
+    var hasta = new Date(req.params.hasta);
+
     db.open(function(err, db) {
         if(!err) {
-            db.collection('test').find().toArray(function (err, items) {
+
+            db.collection('test').find({fetxa: {$gte: desde, $lt: hasta}}).toArray(function (err, items) {
                 res.json(items);
             });
         } else {

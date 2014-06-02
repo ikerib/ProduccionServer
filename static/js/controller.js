@@ -40,20 +40,6 @@ produccionApp.controller('produccionController', function ($scope, $http) {
     $scope.format = $scope.formats[0];
     $scope.astea = ['0'];
 
-    console.log($scope.astea);
-
-//    $scope.datuak = produccionAPIservice.getDatos();
-//    console.log(produccionAPIservice.getDatos());
-
-    $scope.nameFilter = null;
-    $scope.getDatuak = function() {
-        $http.get('/planificacion/a').success(function(data){
-            $scope.datuak=data;
-        }).error(function(){
-            console.log("error al obtener datos");
-        });
-    };
-    $scope.getDatuak();
 
 
     $scope.lortuastelehena = function (fetxa) {
@@ -110,6 +96,17 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         }
         $scope.eratufetxak(fetxaberria);
     }
+
+    $scope.nameFilter = null;
+
+    $scope.getDatuak = function() {
+        $http.get('/planificacion/'+ moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function(data){
+            $scope.datuak=data;
+        }).error(function(){
+            console.log("error al obtener datos");
+        });
+    };
+    $scope.getDatuak();
 
     $scope.checkStatus = function(fec, nireindex) {
       switch (nireindex) {

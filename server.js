@@ -78,13 +78,12 @@ server.get('/', function(req,res){
   });
 });
 
-server.get('/planificacion/:fetxa', get.all);
+server.get('/planificacion/:desde/:hasta', get.all);
 
 server.post('/saveplanificacion', get.save);
 
 
 server.get('/json', function(req,res){
-
     var file = __dirname + '/static/data.json';
     var that = this;
     fs.readFile(file, 'utf8', function (err, data) {
