@@ -75,12 +75,13 @@
                                 </table>
                               </td>                             
                           </tr>
-                          <tr>
-                              <td><table><tr><td><span data-miid="{{ lineas._id }}" editable-text="orden.ref" onbeforesave="addData($data, this)">+</span></td></tr></table></td>
-                              <td><table><tr><td><span data-miid="{{ lineas._id }}" editable-text="orden.ref" onbeforesave="addData($data, this)">+</span></td></tr></table></td>
-                              <td><table><tr><td><span data-miid="{{ lineas._id }}" editable-text="orden.ref" onbeforesave="addData($data, this)">+</span></td></tr></table></td>
-                          </tr>
+
                         </tbody>
+                          <tr>
+                              <td><table><tr><td><span data-miid="{{ lineas._id }}" data-fetxa="{{nireindex}}" data-turno="1" editable-text="orden.ref" onbeforesave="addData($data, this)">+</span></td></tr></table></td>
+                              <td><table><tr><td><span data-miid="{{ lineas._id }}" data-fetxa="{{nireindex}}" data-turno="2" editable-text="orden.ref" onbeforesave="addData($data, this)">+</span></td></tr></table></td>
+                              <td><table><tr><td><span data-miid="{{ lineas._id }}" data-fetxa="{{nireindex}}" data-turno="3" editable-text="orden.ref" onbeforesave="addData($data, this)">+</span></td></tr></table></td>
+                          </tr>
                       </table>
                     </td>
                   </tr> <!-- lineas -->

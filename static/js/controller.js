@@ -40,6 +40,8 @@ produccionApp.controller('produccionController', function ($scope, $http) {
     $scope.format = $scope.formats[0];
     $scope.astea = ['0'];
 
+    console.log($scope.astea);
+
 //    $scope.datuak = produccionAPIservice.getDatos();
 //    console.log(produccionAPIservice.getDatos());
 
@@ -220,14 +222,46 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 //        return results;
     };
 
-    $scope.addData = function(scope,data, l) {
-        $scope.users.push({
-            id: $scope.users.length+1,
-            name: '',
-            status: null,
-            group: null,
-            isNew: true
-        });
+    $scope.updateData = function() {
+
+        var results = [];
+        for (var i = $scope.datuak.length; i--;) {
+            var d = $scope.datuak[i];
+            results.push($http.post('/saveplanificacion', d));
+        }
+
+    };
+
+    $scope.addData = function(midata, l) {
+        var miid = l.$editable.attrs.miid;
+        var fetxa = l.$editable.attrs.fetxa;
+        var miturno = l.$editable.attrs.turno;
+
+        for (i=0; i < $scope.datuak.length; i++) {
+            var temp = $scope.datuak[i];
+            if ( temp._id === miid ) {
+                if ( "turnoak" in temp.egunak[fetxa] ) {
+                    for ( k=0; k< temp.egunak[fetxa].turnoak.length; k++) {
+                        var mt = temp.egunak[fetxa].turnoak[k];
+                        if ( mt.turno === parseInt(miturno) ) {
+                            if ( mt.ordenes.length > 0) {
+                                mt.ordenes.push ({
+                                    ref: midata
+                                });
+                            }
+                        }
+                    }
+                } else {
+                    temp.egunak[fetxa].turnoak =[{
+                        turno : parseInt(miturno),
+                        ordenes: {
+                            ref: midata
+                        }
+                    }];
+                }
+            }
+        }
+        $scope.updateData();
     };
 });
 
