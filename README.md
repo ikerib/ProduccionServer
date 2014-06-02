@@ -7,5 +7,9 @@ Tech:
 =====
 
 - Node.js
+- express
+- socket.io
+- Mongo
 - Angular
 - Angular-ui
+- Angular xeditable
