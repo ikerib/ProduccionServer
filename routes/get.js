@@ -22,9 +22,13 @@ exports.all = function(req, res){
     db.open(function(err, db) {
         if(!err) {
 
-            db.collection('test').find({fetxa: {$gte: desde, $lt: hasta}}).toArray(function (err, items) {
+            db.collection('test').find().toArray(function (err, items) {
                 res.json(items);
             });
+
+//            db.collection('test').find({fetxa: {$gte: desde, $lt: hasta}}).toArray(function (err, items) {
+//                res.json(items);
+//            });
         } else {
             onErr(err, function(){
                 console.log(err);
@@ -37,12 +41,8 @@ exports.save = function(req, res){
     db.open(function(err, db) {
         if(!err) {
             var data = req.body;
-//            console.log(data.egunak);
             var BSON = mongo.BSONPure;
             var o_id = new BSON.ObjectID(data._id);
-//            db.collection('test').find({'_id': o_id}).toArray(function (err, items) {
-//                res.json(items);
-//            });
 
             db.collection('test').update({'_id': o_id}, { $set :{ egunak: data.egunak } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
@@ -57,16 +57,8 @@ exports.save = function(req, res){
     });
 };
 
+exports.sartu = function (req, res) {
+    var data = req.body;
 
-//exports.one = function(req, res){
-//    var id = req.params.id;
-//    if (connection) {
-//        var queryString = 'select * from commodores where id = ?';
-//        connection.query(queryString, [id], function(err, rows, fields) {
-//            if (err) throw err;
-//            res.contentType('application/json');
-//            res.write(JSON.stringify(rows));
-//            res.end();
-//        });
-//    }
-//};
+};
+
