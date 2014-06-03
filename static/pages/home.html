@@ -46,9 +46,9 @@
                           <tr>
                               <td>
                                 <table>
-                                  <tr ng-repeat="orden in lineas.egunak[nireindex].turnoak[0].ordenes" ng-if="checkStatus(lineas.egunak[nireindex].fetxa,nireindex)">
+                                  <tr ng-repeat="orden in lineas.turnoak[0].ordenes" ng-if="checkStatus(lineas.fetxa,nireindex)">
                                     <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
-                                        <span data-miid="{{ lineas._id }}" editable-text="orden.ref" onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                        <span data-miid="{{ lineas._id }}" data-fetxa="lineas.fetxa" editable-text="orden.ref" onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
                                         <!--<span data-miid="{{ lineas._id }}" editable-text="orden.of"  onbeforesave="updateUser($data, this)">{{ orden.of }}</span>-->
                                     </td>
                                   </tr>
@@ -56,7 +56,7 @@
                               </td>
                               <td>
                                 <table>
-                                  <tr ng-repeat="orden in lineas.egunak[nireindex].turnoak[1].ordenes" ng-if="checkStatus(lineas.egunak[nireindex].fetxa,nireindex)">
+                                  <tr ng-repeat="orden in lineas.turnoak[1].ordenes" ng-if="checkStatus(lineas.fetxa,nireindex)">
                                     <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
                                         <span data-miid="{{ lineas._id }}" editable-text="orden.ref" onbeforesave="updateUser(orden,$data, this)">{{ orden.ref }}</span>
                                         <span data-miid="{{ lineas._id }}" editable-text="orden.of"  onbeforesave="updateUser($data, this)">{{ orden.of }}</span>
@@ -66,7 +66,7 @@
                               </td>
                               <td>
                                 <table>
-                                  <tr ng-repeat="orden in lineas.egunak[nireindex].turnoak[2].ordenes" ng-if="checkStatus(lineas.egunak[nireindex].fetxa,nireindex)">
+                                  <tr ng-repeat="orden in lineas.turnoak[2].ordenes" ng-if="checkStatus(lineas.fetxa,nireindex)">
                                       <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
                                           <span data-miid="{{ lineas._id }}" editable-text="orden.ref" onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
                                           <span data-miid="{{ lineas._id }}" editable-text="orden.of"  onbeforesave="updateUser($data, this)">{{ orden.of }}</span>

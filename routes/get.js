@@ -28,7 +28,7 @@ exports.all = function(req, res){
 //            });
 
                 db.collection('planificacion').find({
-                    "egunak.fetxa": {$gte: new Date('2014-01-01T14:56:59.301Z') }
+                    "fetxa": {$gte: new Date('2014-01-01T14:56:59.301Z') }
                 }).toArray(function(err, items){
                     res.json(items);
                     db.close();
@@ -52,7 +52,7 @@ exports.save = function(req, res){
             var BSON = mongo.BSONPure;
             var o_id = new BSON.ObjectID(data._id);
 
-            db.collection('planificacion').update({'_id': o_id}, { $set :{ egunak: data.egunak } }, {safe:true, multi:false, upsert:false}, function(e, result){
+            db.collection('planificacion').update({'_id': o_id, fetxa: new Date(data.fetxa)}, { $set :{ turnoak: data.turnoak } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
                 res.send((result===1)?{msg:'success'}:{msg:'error'})
             })
@@ -71,15 +71,13 @@ exports.sartu = function (req, res) {
             var data = req.body;
 
             db.collection('planificacion').insert({
+                fetxa:new Date(data.fetxa),
                 linea: data.linea,
-                egunak: [{
-                    fetxa: new Date(data.fetxa),
-                    turnoak: [{
-                        turno: data.turno,
-                        ordenes:[{
-                            ref: data.ref
-                        }]
-                    }]
+                turnoak: [{
+                   turno: data.turno,
+                   ordenes:[{
+                       ref: data.ref
+                   }]
                 }]
             }, function() {
                 db.close();

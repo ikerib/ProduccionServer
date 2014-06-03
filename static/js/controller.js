@@ -99,12 +99,22 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
     $scope.nameFilter = null;
 
+    $scope.hemaneguna = function(fec) {
+      switch ( fec ) {
+          case "":
+              break;
+      }
+    };
+
+
     $scope.getDatuak = function() {
         $http.get('/planificacion/'+ moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function(data){
             $scope.datuak=data;
         }).error(function(){
             console.log("error al obtener datos");
+            return;
         });
+
     };
     $scope.getDatuak();
 
@@ -240,10 +250,12 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         for (i=0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
             if ( temp._id === miid ) {
-                if ( "turnoak" in temp.egunak[fetxa] ) {
-                    for ( k=0; k< temp.egunak[fetxa].turnoak.length; k++) {
-                        var mt = temp.egunak[fetxa].turnoak[k];
+                if ( "turnoak" in temp ) {
+                    var aurkitua = false;
+                    for ( k=0; k< temp.turnoak.length; k++) {
+                        var mt = temp.turnoak[k];
                         if ( mt.turno === parseInt(miturno) ) {
+                            aurkitua=true;
                             if ( mt.ordenes.length > 0) {
                                 mt.ordenes.push ({
                                     ref: midata
@@ -251,8 +263,16 @@ produccionApp.controller('produccionController', function ($scope, $http) {
                             }
                         }
                     }
+                    if ( aurkitua == false ) {
+                        temp.turnoak.push({
+                            turno : parseInt(miturno),
+                            ordenes:[{
+                                ref: midata
+                            }]
+                        });
+                    }
                 } else {
-                    temp.egunak[fetxa].turnoak =[{
+                    temp.turnoak =[{
                         turno : parseInt(miturno),
                         ordenes: {
                             ref: midata
