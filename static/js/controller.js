@@ -170,7 +170,8 @@ produccionApp.controller('produccionController', function ($scope, $http) {
       var esanfec = $scope.nirefec;
       console.log(esanfec);
     };
-    
+
+
     $scope.today = function () {
         // $scope.dt = new Date();
         $scope.dt = moment($scope.dt).toDate();
