@@ -82,6 +82,7 @@ server.get('/planificacion/:desde/:hasta', get.all);
 
 server.post('/saveplanificacion', get.save);
 
+server.post('/sartu', get.sartu);
 
 server.get('/json', function(req,res){
     var file = __dirname + '/static/data.json';

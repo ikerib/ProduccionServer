@@ -109,6 +109,9 @@ produccionApp.controller('produccionController', function ($scope, $http) {
     $scope.getDatuak();
 
     $scope.checkStatus = function(fec, nireindex) {
+
+        fec = moment(fec).format("YYYY/MM/DD");
+
       switch (nireindex) {
         case 0:
           if ( $scope.eguna1 == fec) {
@@ -259,6 +262,48 @@ produccionApp.controller('produccionController', function ($scope, $http) {
             }
         }
         $scope.updateData();
+    };
+
+    $scope.sartu = function(midata, l) {
+        var fetxa = l.$editable.attrs.fetxa;
+        var miturno = l.$editable.attrs.turno;
+        var milinea = l.$editable.attrs.miid;
+        var mifec;
+
+        switch (fetxa) {
+            case "0":
+                mifec = $scope.eguna1;
+                break;
+            case "1":
+                mifec = $scope.eguna2;
+                break;
+            case "2":
+                mifec = $scope.eguna3;
+                break;
+            case "3":
+                mifec = $scope.eguna4;
+                break;
+            case "4":
+                mifec = $scope.eguna5;
+                break;
+            case "5":
+                mifec = $scope.eguna6;
+                break;
+            case "6":
+                mifec = $scope.eguna7;
+                break;
+        }
+
+
+        var d = {
+            linea: parseInt(milinea),
+            fetxa: moment(mifec,"YYYY/MM/DD").toISOString(),
+            turno: parseInt(miturno),
+            ref: midata
+            };
+        var results = [];
+        results.push($http.post('/sartu', d));
+
     };
 });
 

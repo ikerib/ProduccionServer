@@ -85,6 +85,40 @@
                       </table>
                     </td>
                   </tr> <!-- lineas -->
+                  <tr ng-show="!datuak.length || ((datuak.length)  &&(datuak.linea!=2))">
+                      <td class="tdlinea">Linea:1</td>
+                      <td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">
+                          <table class="table text-center table-condensed">
+                              <thead>
+                              <th>Mañana</th>
+                              <th>Tarde</th>
+                              <th>Noche</th>
+                              </thead>
+                              <tbody>
+                              <td><table><tr><td><span data-miid="1" data-fetxa="{{nireindex}}" data-turno="1" editable-text="orden.ref" onbeforesave="sartu($data, this)">+</span></td></tr></table></td>
+                              <td><table><tr><td><span data-miid="1" data-fetxa="{{nireindex}}" data-turno="2" editable-text="orden.ref" onbeforesave="sartu($data, this)">+</span></td></tr></table></td>
+                              <td><table><tr><td><span data-miid="1" data-fetxa="{{nireindex}}" data-turno="3" editable-text="orden.ref" onbeforesave="sartu($data, this)">+</span></td></tr></table></td>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr>
+                  <tr ng-show="!datuak.length">
+                      <td class="tdlinea">Linea:2</td>
+                      <td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">
+                          <table class="table text-center table-condensed">
+                              <thead>
+                              <th>Mañana</th>
+                              <th>Tarde</th>
+                              <th>Noche</th>
+                              </thead>
+                              <tbody>
+                              <td><table><tr><td><span data-miid="2" data-fetxa="{{nireindex}}" data-turno="1" editable-text="orden.ref" onbeforesave="sartu($data, this)">+</span></td></tr></table></td>
+                              <td><table><tr><td><span data-miid="2" data-fetxa="{{nireindex}}" data-turno="2" editable-text="orden.ref" onbeforesave="sartu($data, this)">+</span></td></tr></table></td>
+                              <td><table><tr><td><span data-miid="2" data-fetxa="{{nireindex}}" data-turno="3" editable-text="orden.ref" onbeforesave="sartu($data, this)">+</span></td></tr></table></td>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr>
                 </tbody>
             </table>
 
