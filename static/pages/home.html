@@ -37,9 +37,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="lineas in datuak">
-                        <td class="tdlinea">Linea:{{ lineas.linea }}</td>
-                        <td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">
+                    <tr >
+                        <td class="tdlinea">Linea:11</td>
+                        <!--<td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">-->
+                        <td  ng-repeat="lineas in datuak">
                             <table class="table text-center table-condensed">
                                 <thead>
                                 <th>Mañana</th>
@@ -47,11 +48,10 @@
                                 <th>Noche</th>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr >
                                     <td>
                                         <table>
-                                            <tr ng-repeat="turnos in lineas.turnoak"
-                                                ng-if="checkStatus(lineas.fetxa,nireindex)">
+                                            <tr ng-repeat="turnos in lineas.turnoak">
                                                 <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
                                                     <table>
                                                         <tbody>
@@ -73,8 +73,7 @@
                                     </td>
                                     <td>
                                         <table>
-                                            <tr ng-repeat="turnos in lineas.turnoak"
-                                                ng-if="checkStatus(lineas.fetxa,nireindex)">
+                                            <tr ng-repeat="turnos in lineas.turnoak">
                                                 <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
                                                     <table>
                                                         <tbody>
@@ -96,8 +95,7 @@
                                     </td>
                                     <td>
                                         <table>
-                                            <tr ng-repeat="turnos in lineas.turnoak"
-                                                ng-if="checkStatus(lineas.fetxa,nireindex)">
+                                            <tr ng-repeat="turnos in lineas.turnoak">
                                                 <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
                                                     <table>
                                                         <tbody>
@@ -175,7 +173,7 @@
                                 <td>
                                     <table>
                                         <tr>
-                                            <td><span data-miid="1" data-fetxa="{{nireindex}}" data-turno="1"
+                                            <td><span data-berria="1" data-miid="1" data-fetxa="{{nireindex}}" data-turno="1"
                                                       editable-text="orden.ref"
                                                       onbeforesave="sartu($data, this)">+</span></td>
                                         </tr>

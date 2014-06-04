@@ -6,10 +6,11 @@ var connect = require('connect')
     , port = (process.env.PORT || 8081)
     , fs = require('fs')
     , path = require('path')
-    , get = require('./routes/get');
+    , get = require('./routes/get')
+    , moment = require('moment');
 
 
-
+moment().format();
 //Setup Express
 var server = express.createServer();
 server.configure(function(){
