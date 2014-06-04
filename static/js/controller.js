@@ -245,12 +245,17 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
     $scope.addData = function(midata, l) {
         var miid = l.$editable.attrs.miid;
-        var fetxa = l.$editable.attrs.fetxa;
+        var milinea = l.$editable.attrs.linea;
+        var turno = l.$editable.attrs.turno;
+        var fetxa = moment($scope.hemanEguna(l.$editable.attrs.fetxa),"YYYY/MM/DD").toISOString();
         var miturno = l.$editable.attrs.turno;
+
+        var eguneratuSartu = false;
 
         for (i=0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
-            if ( temp._id === miid ) {
+            if ( (temp._id === miid) && ( temp.fetxa === fetxa ) ) {
+                eguneratuSartu = true;
                 if ( "turnoak" in temp ) {
                     var aurkitua = false;
                     for ( k=0; k< temp.turnoak.length; k++) {
@@ -282,6 +287,20 @@ produccionApp.controller('produccionController', function ($scope, $http) {
                 }
             }
         }
+
+        if ( eguneratuSartu == false ) {
+
+            var d = {
+                linea: parseInt(milinea),
+                fetxa: fetxa,
+                turno: parseInt(miturno),
+                ref: midata
+            };
+            var results = [];
+            results.push($http.post('/sartu', d));
+        }
+
+
         $scope.updateData();
     };
 
@@ -325,6 +344,32 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         var results = [];
         results.push($http.post('/sartu', d));
 
+    };
+
+    $scope.hemanEguna = function(numeguna){
+        switch (numeguna) {
+            case "0":
+                return $scope.eguna1;
+                break;
+            case "1":
+                return $scope.eguna2;
+                break;
+            case "2":
+                return $scope.eguna3;
+                break;
+            case "3":
+                return $scope.eguna4;
+                break;
+            case "4":
+                return $scope.eguna5;
+                break;
+            case "5":
+                return $scope.eguna6;
+                break;
+            case "6":
+                return $scope.eguna7;
+                break;
+        }
     };
 });
 

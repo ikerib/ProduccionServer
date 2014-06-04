@@ -40,6 +40,7 @@ exports.all = function(req, res){
         } else {
             onErr(err, function(){
                 console.log(err);
+                db.close();
             });
         }
     });
@@ -55,11 +56,13 @@ exports.save = function(req, res){
             db.collection('planificacion').update({'_id': o_id, fetxa: new Date(data.fetxa)}, { $set :{ turnoak: data.turnoak } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
                 res.send((result===1)?{msg:'success'}:{msg:'error'})
+                db.close();
             })
 
         } else {
             onErr(err, function(){
                 console.log(err);
+                db.close();
             });
         }
     });

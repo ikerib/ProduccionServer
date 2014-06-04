@@ -59,6 +59,8 @@
                                                             <td>
                                                                 <span data-miid="{{ lineas._id }}"
                                                                       data-fetxa="lineas.fetxa"
+                                                                      data-turno="1"
+                                                                      data-linea="{{ lineas.linea }}"
                                                                       editable-text="orden.ref"
                                                                       onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
                                                             </td>
@@ -80,6 +82,8 @@
                                                             <td>
                                                                 <span data-miid="{{ lineas._id }}"
                                                                       data-fetxa="lineas.fetxa"
+                                                                      data-turno="2"
+                                                                      data-linea="{{ lineas.linea }}"
                                                                       editable-text="orden.ref"
                                                                       onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
                                                             </td>
@@ -101,6 +105,8 @@
                                                             <td>
                                                                 <span data-miid="{{ lineas._id }}"
                                                                       data-fetxa="lineas.fetxa"
+                                                                      data-turno="3"
+                                                                      data-linea="{{ lineas.linea }}"
                                                                       editable-text="orden.ref"
                                                                       onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
                                                             </td>
@@ -118,8 +124,11 @@
                                     <td>
                                         <table>
                                             <tr>
-                                                <td><span data-miid="{{ lineas._id }}" data-fetxa="{{nireindex}}"
-                                                          data-turno="1" editable-text="orden.ref"
+                                                <td><span data-miid="{{ lineas._id }}"
+                                                          data-fetxa="{{nireindex}}"
+                                                          data-turno="1"
+                                                          data-linea="{{ lineas.linea }}"
+                                                          editable-text="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span></td>
                                             </tr>
                                         </table>
@@ -127,8 +136,11 @@
                                     <td>
                                         <table>
                                             <tr>
-                                                <td><span data-miid="{{ lineas._id }}" data-fetxa="{{nireindex}}"
-                                                          data-turno="2" editable-text="orden.ref"
+                                                <td><span data-miid="{{ lineas._id }}"
+                                                          data-fetxa="{{nireindex}}"
+                                                          data-turno="2"
+                                                          data-linea="{{ lineas.linea }}"
+                                                          editable-text="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span></td>
                                             </tr>
                                         </table>
@@ -136,8 +148,11 @@
                                     <td>
                                         <table>
                                             <tr>
-                                                <td><span data-miid="{{ lineas._id }}" data-fetxa="{{nireindex}}"
-                                                          data-turno="3" editable-text="orden.ref"
+                                                <td><span data-miid="{{ lineas._id }}"
+                                                          data-fetxa="{{nireindex}}"
+                                                          data-turno="3"
+                                                          data-linea="{{ lineas.linea }}"
+                                                          editable-text="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span></td>
                                             </tr>
                                         </table>
