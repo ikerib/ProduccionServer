@@ -1,0 +1,262 @@
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div id="linea1" class="row">
+    <div class="col-md-12">
+        <div class="col-md-1">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-success" ng-click="aldatuastea(-7)"><span
+                        class="glyphicon glyphicon-chevron-left"></span></button>
+                <button class="btn btn-default" datepicker-popup="{{format}}" name="dt" ng-model="dt"
+                        is-open="datepickers.dt" datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                        ng-click="open($event,'dt')" ng-change="selectDate(dt)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+        </div>
+        <div class="col-md-10 scrolla">
+
+            <div id="scroller">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-center" ng-model="eguna1">{{ eguna1 | date : 'yyyy/MM/dd'}}</th>
+                        <!-- <th class="text-center">&nbsp;</th> -->
+                        <th class="text-center" ng-model="eguna2">{{ eguna2 | date : 'yyyy/MM/dd'}}</th>
+                        <!-- <th class="text-center">&nbsp;</th> -->
+                        <th class="text-center" ng-model="eguna3">{{ eguna3 | date : 'yyyy/MM/dd'}}</th>
+                        <!-- <th class="text-center">&nbsp;</th> -->
+                        <th class="text-center" ng-model="eguna4">{{ eguna4 | date : 'yyyy/MM/dd'}}</th>
+                        <!-- <th class="text-center">&nbsp;</th> -->
+                        <th class="text-center" ng-model="eguna5">{{ eguna5 | date : 'yyyy/MM/dd'}}</th>
+                        <!-- <th class="text-center">&nbsp;</th> -->
+                        <th class="text-center" ng-model="eguna6">{{ eguna6 | date : 'yyyy/MM/dd'}}</th>
+                        <!-- <th class="text-center">&nbsp;</th> -->
+                        <th class="text-center" ng-model="eguna7">{{ eguna7 | date : 'yyyy/MM/dd'}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr >
+                        <td class="tdlinea">Linea:11</td>
+                        <!--<td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">-->
+                        <td  ng-repeat="lineas in datuak">
+                            <table class="table text-center table-condensed">
+                                <thead>
+                                <th>Mañana</th>
+                                <th>Tarde</th>
+                                <th>Noche</th>
+                                </thead>
+                                <tbody>
+                                <tr >
+                                    <td>
+                                        <table>
+                                            <tr ng-repeat="turnos in lineas.turnoak">
+                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                    <table>
+                                                        <tbody>
+                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
+                                                            <td>
+                                                                <span data-miid="{{ lineas._id }}"
+                                                                      data-fetxa="lineas.fetxa"
+                                                                      data-turno="1"
+                                                                      data-linea="{{ lineas.linea }}"
+                                                                      editable-text="orden.ref"
+                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr ng-repeat="turnos in lineas.turnoak">
+                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                    <table>
+                                                        <tbody>
+                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
+                                                            <td>
+                                                                <span data-miid="{{ lineas._id }}"
+                                                                      data-fetxa="lineas.fetxa"
+                                                                      data-turno="2"
+                                                                      data-linea="{{ lineas.linea }}"
+                                                                      editable-text="orden.ref"
+                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr ng-repeat="turnos in lineas.turnoak">
+                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                    <table>
+                                                        <tbody>
+                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
+                                                            <td>
+                                                                <span data-miid="{{ lineas._id }}"
+                                                                      data-fetxa="lineas.fetxa"
+                                                                      data-turno="3"
+                                                                      data-linea="{{ lineas.linea }}"
+                                                                      editable-text="orden.ref"
+                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td><span data-miid="{{ lineas._id }}"
+                                                          data-fetxa="{{nireindex}}"
+                                                          data-turno="1"
+                                                          data-linea="{{ lineas.linea }}"
+                                                          editable-text="orden.ref"
+                                                          onbeforesave="addData($data, this)">+</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td><span data-miid="{{ lineas._id }}"
+                                                          data-fetxa="{{nireindex}}"
+                                                          data-turno="2"
+                                                          data-linea="{{ lineas.linea }}"
+                                                          editable-text="orden.ref"
+                                                          onbeforesave="addData($data, this)">+</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td><span data-miid="{{ lineas._id }}"
+                                                          data-fetxa="{{nireindex}}"
+                                                          data-turno="3"
+                                                          data-linea="{{ lineas.linea }}"
+                                                          editable-text="orden.ref"
+                                                          onbeforesave="addData($data, this)">+</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- lineas -->
+                    <tr ng-show="!datuak.length || ((datuak.length)  && (datuak.linea!=1))">
+                        <td class="tdlinea">Linea:1</td>
+                        <td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">
+                            <table class="table text-center table-condensed">
+                                <thead>
+                                <th>Mañana</th>
+                                <th>Tarde</th>
+                                <th>Noche</th>
+                                </thead>
+                                <tbody>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span data-berria="1" data-miid="1" data-fetxa="{{nireindex}}" data-turno="1"
+                                                      editable-text="orden.ref"
+                                                      onbeforesave="sartu($data, this)">+</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span data-miid="1" data-fetxa="{{nireindex}}" data-turno="2"
+                                                      editable-text="orden.ref"
+                                                      onbeforesave="sartu($data, this)">+</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span data-miid="1" data-fetxa="{{nireindex}}" data-turno="3"
+                                                      editable-text="orden.ref"
+                                                      onbeforesave="sartu($data, this)">+</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr ng-show="!datuak.length">
+                        <td class="tdlinea">Linea:2</td>
+                        <td data-ng-repeat="nireindex in [0,1,2,3,4,5,6]">
+                            <table class="table text-center table-condensed">
+                                <thead>
+                                <th>Mañana</th>
+                                <th>Tarde</th>
+                                <th>Noche</th>
+                                </thead>
+                                <tbody>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span data-miid="2" data-fetxa="{{nireindex}}" data-turno="1"
+                                                      editable-text="orden.ref"
+                                                      onbeforesave="sartu($data, this)">+</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span data-miid="2" data-fetxa="{{nireindex}}" data-turno="2"
+                                                      editable-text="orden.ref"
+                                                      onbeforesave="sartu($data, this)">+</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><span data-miid="2" data-fetxa="{{nireindex}}" data-turno="3"
+                                                      editable-text="orden.ref"
+                                                      onbeforesave="sartu($data, this)">+</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- scroller -->
+
+
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-success" ng-click="aldatuastea(7)"><span
+                        class="glyphicon glyphicon-chevron-right"></span></button>
+              </span>
+            </div>
+        </div>
+    </div>
+</div>

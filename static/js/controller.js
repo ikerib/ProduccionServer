@@ -227,6 +227,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         var results = [];
         for (var i = $scope.datuak.length; i--;) {
             var d = $scope.datuak[i];
+            d.milinea= 1;
             results.push($http.post('/saveplanificacion', d));
         }
 
@@ -238,6 +239,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         var results = [];
         for (var i = $scope.datuak.length; i--;) {
             var d = $scope.datuak[i];
+            d.milinea= 1;
             results.push($http.post('/saveplanificacion', d));
         }
 

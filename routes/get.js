@@ -37,33 +37,72 @@ exports.all = function(req, res){
                     "fetxa": {$gte: new Date('2014-01-01T14:56:59.301Z') }
                 }).toArray(function(err, items){
                     // Aste osoa bueltatuko dugu
-                    for ( k=0; k < 7; k++ ) {
+                    for (var k=0; k < 7; k++ ) {
                         var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
                         var topatua = false;
+                        resul[k]=[];
 
-                        for ( i=0; i < items.length; i++ ) {
+                        for (var i=0; i < items.length; i++ ) {
 
                             var fec = moment( items[i].fetxa).format('YYYY-MM-DD');
 
                             if ( fec === eguna ) {
                                 topatua=true;
                                 items[i].fetxa = fec;
-                                resul[k] = items[i];
-                                break;
+                                resul[k].push( items[i]);
                             }
 
                         }
 
                         if ( topatua == false ) {
 
-                            resul[k] = {
-                                fetxa: eguna
-                            }
-
+                            resul[k].push({
+                                fetxa: eguna,
+                                linea:0
+                            });
                         }
                     }
 
-                    res.json(resul);
+                    var resultado = [];
+                    // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
+                    for ( var i=0; i < resul.length; i++ ) {
+
+                        var tmp = resul[i][0];
+
+                        var row = {
+                            fetxa: tmp.fetxa,
+                            _id:'',
+                            linea1: [],
+                            linea2: []
+                        };
+
+
+                        var aurkitua1 = false;
+                        var aurkitua2 = false;
+
+                        if ( tmp.linea == 1 ) {
+                            aurkitua1 = true;
+                            row.linea1 = tmp.turnoak;
+                            row._id = tmp._id;
+                        } else if ( tmp.linea == 2) {
+                            aurkitua2 = true;
+                            row.linea2 = tmp.turnoak;
+                            row._id = tmp._id;
+                        }
+
+                        if ( aurkitua1 == false ) {
+                            row.linea1 = [];
+                        }
+                        if ( aurkitua2 == false ) {
+                            row.linea2 = [];
+                        }
+
+                        resultado.push(row);
+
+                    }
+
+
+                    res.json(resultado);
                     db.close();
                 })
 
@@ -86,9 +125,16 @@ exports.save = function(req, res){
             var BSON = mongo.BSONPure;
             var o_id = new BSON.ObjectID(data._id);
 
-            db.collection('planificacion').update({'_id': o_id, fetxa: new Date(data.fetxa)}, { $set :{ turnoak: data.turnoak } }, {safe:true, multi:false, upsert:false}, function(e, result){
+            var newData;
+            if ( data.milinea == 1 ) {
+                newData = data.linea1;
+            } else {
+                newData = data.linea2;
+            }
+
+            db.collection('planificacion').update({'_id': o_id, fetxa: new Date(data.fetxa)}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
-                res.send((result===1)?{msg:'success'}:{msg:'error'})
+                res.send((result===1)?{msg:'success'}:{msg:'error'+e})
                 db.close();
             })
 
