@@ -67,35 +67,34 @@ exports.all = function(req, res){
                     // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
                     for ( var i=0; i < resul.length; i++ ) {
 
-                        var tmp = resul[i][0];
-
+                        var aurkitua1 = false;
+                        var aurkitua2 = false;
                         var row = {
-                            fetxa: tmp.fetxa,
+                            fetxa: '',
                             _id:'',
                             linea1: [],
                             linea2: []
                         };
 
+                        for ( var k=0; k < resul[i].length; k++) {
+                            var tmp = resul[i][k];
 
-                        var aurkitua1 = false;
-                        var aurkitua2 = false;
+                            row.fetxa = tmp.fetxa;
 
-                        if ( tmp.linea == 1 ) {
-                            aurkitua1 = true;
-                            row.linea1 = tmp.turnoak;
-                            row._id = tmp._id;
-                        } else if ( tmp.linea == 2) {
-                            aurkitua2 = true;
-                            row.linea2 = tmp.turnoak;
-                            row._id = tmp._id;
+                            if ( tmp.linea == 1 ) {
+                                aurkitua1 = true;
+                                row.linea1[0] = tmp.turnoak;
+                                row.linea1[0]._id = tmp._id.toString();
+                            } else if ( tmp.linea == 2) {
+                                aurkitua2 = true;
+                                row.linea2[0] = tmp.turnoak;
+                                row.linea2[0]._id = tmp._id.toString();
+                            }
+
                         }
 
-                        if ( aurkitua1 == false ) {
-                            row.linea1 = [];
-                        }
-                        if ( aurkitua2 == false ) {
-                            row.linea2 = [];
-                        }
+                        if ( aurkitua1 == false ) { row.linea1 = []; }
+                        if ( aurkitua2 == false ) { row.linea2 = []; }
 
                         resultado.push(row);
 
@@ -125,16 +124,14 @@ exports.save = function(req, res){
             var BSON = mongo.BSONPure;
             var o_id = new BSON.ObjectID(data._id);
 
-            var newData;
-           // if ( data.milinea == 1 ) {
-                newData = data.linea1;
-//
+               db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: data } }, {safe:true, multi:false, upsert:false}, function(e, result){
+                   if (e) console.log(e)
+                   res.send((result===1)?{msg:'success'}:{msg:'error'+e})
+                   db.close();
+               })
 
-            db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
-                if (e) console.log(e)
-                res.send((result===1)?{msg:'success'}:{msg:'error'+e})
-                db.close();
-            })
+
+
 
         } else {
             onErr(err, function(){

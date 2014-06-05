@@ -223,14 +223,15 @@ produccionApp.controller('produccionController', function ($scope, $http) {
     $scope.updateUser = function(data, l) {
 
         var miid = l.$editable.attrs.miid;
-
+        var milinea = l.$editable.attrs.linea;
         var results = [];
         for (var i = $scope.datuak.length; i--;) {
 
             var d = $scope.datuak[i];
 
             if (d._id === miid ) {
-                d.milinea= 1;
+
+                d.milinea= milinea;
                 results.push($http.post('/saveplanificacion', d));
             }
 
@@ -244,25 +245,61 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         var results = [];
         for (var i = $scope.datuak.length; i--;) {
             var d = $scope.datuak[i];
-            d.milinea= 1;
+//            d.milinea= 1;
             results.push($http.post('/saveplanificacion', d));
         }
 
     };
 
-    $scope.updateDataById = function(miid) {
-        var results = [];
-        for (var i = $scope.datuak.length; i--;) {
+    $scope.updateDataById = function(miid, linea) {
 
-            var d = $scope.datuak[i];
+        for ( var i=0; i < $scope.datuak.length; i++) {
 
-            if (d._id === miid ) {
-//                d.milinea= 1;
-                results.push($http.post('/saveplanificacion', d));
+            if ( linea === "1" ) {
+
+                var t = $scope.datuak[i];
+
+                for ( var k=0; t.linea1.length; k++ ) {
+
+                    var d = t.linea1[k];
+                    if ( d === undefined) { break;}
+                    if ( d._id === miid ) {
+                        $http.post('/saveplanificacion', d);
+                    }
+
+                }
+
+            } else {
+                var t = $scope.datuak[i];
+
+                for ( var k=0; t.linea2.length; k++ ) {
+
+                    var d = t.linea2[k];
+                    if ( d === undefined) { break;}
+                    if ( d._id === miid ) {
+                        $http.post('/saveplanificacion', d);
+                    }
+
+                }
             }
 
         }
+
+
+
     };
+
+//    $scope.updateDataById = function(miid, linea) {
+//        for (var i = $scope.datuak.length; i--;) {
+//
+//            var d = $scope.datuak[i];
+//
+//            if (d._id === miid ) {
+//                $http.post('/saveplanificacion', d);
+//            }
+//
+//        }
+//    };
 
     $scope.addData = function(midata, l) {
         var miid = l.$editable.attrs.miid;
@@ -279,38 +316,129 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
         for (i=0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
-            if ( (temp._id === miid) ) {
-                eguneratuSartu = true;
 
-                if ( milinea == "1") {
-                    var aurkitua = false;
-                    for ( var k=0; k < temp.linea1.length; k++ ) {
+            if ( milinea == "1") {
+                if ( temp.linea1.length > 0 ) {
 
-                        var t = temp.linea1[k];
+                    for ( var k=0; k < temp.linea1.length; k++) {
 
-                        if ( t.turno === parseInt(miturno) ) {
-                            aurkitua=true;
-                            if ( t.ordenes.length > 0) {
-                                t.ordenes.push ({
-                                    ref: midata
+                        if ( temp.linea1[k]._id === miid) {
+                            eguneratuSartu = true;
+                            var t = temp.linea1[k];
+
+                            if ( t.turno === parseInt(miturno) ) {
+                                aurkitua=true;
+                                if ( t.ordenes.length > 0) {
+                                    t.ordenes.push ({
+                                        ref: midata
+                                    });
+                                }
+                            } else {
+                                temp.linea1.push({
+                                    _id:miid,
+                                    turno : parseInt(miturno),
+                                    ordenes:[{
+                                        ref: midata
+                                    }]
                                 });
                             }
+
                         }
 
                     }
-                    if ( aurkitua == false ) {
-                        temp.linea1.push({
-                            turno : parseInt(miturno),
-                            ordenes:[{
-                                ref: midata
-                            }]
-                        });
+
+
+                }
+            } else {
+                if ( temp.linea2.length > 0 ) {
+
+                    for ( var k=0; k < temp.linea21.length; k++) {
+
+                        if ( temp.linea2[k]._id === miid) {
+                            eguneratuSartu = true;
+                            var t = temp.linea2[k];
+
+                            if ( t.turno === parseInt(miturno) ) {
+                                aurkitua=true;
+                                if ( t.ordenes.length > 0) {
+                                    t.ordenes.push ({
+                                        ref: midata
+                                    });
+                                }
+                            }  else {
+                                temp.linea2.push({
+                                    _id: miid,
+                                    turno : parseInt(miturno),
+                                    ordenes:[{
+                                    ref: midata
+                                }]
+                            });
+                        }
+
+                        }
 
                     }
-                } else {
+
 
                 }
             }
+
+//            if ( (temp._id === miid) ) {
+//                eguneratuSartu = true;
+//
+//                if ( milinea == "1") {
+//                    var aurkitua = false;
+//                    for ( var k=0; k < temp.linea1.length; k++ ) {
+//
+//                        var t = temp.linea1[k];
+//
+//                        if ( t.turno === parseInt(miturno) ) {
+//                            aurkitua=true;
+//                            if ( t.ordenes.length > 0) {
+//                                t.ordenes.push ({
+//                                    ref: midata
+//                                });
+//                            }
+//                        }
+//
+//                    }
+//                    if ( aurkitua == false ) {
+//                        temp.linea1.push({
+//                            turno : parseInt(miturno),
+//                            ordenes:[{
+//                                ref: midata
+//                            }]
+//                        });
+//
+//                    }
+//                } else {
+//                    var aurkitua = false;
+//                    for ( var k=0; k < temp.linea2.length; k++ ) {
+//
+//                        var t = temp.linea2[k];
+//
+//                        if ( t.turno === parseInt(miturno) ) {
+//                            aurkitua=true;
+//                            if ( t.ordenes.length > 0) {
+//                                t.ordenes.push ({
+//                                    ref: midata
+//                                });
+//                            }
+//                        }
+//
+//                    }
+//                    if ( aurkitua == false ) {
+//                        temp.linea2.push({
+//                            turno : parseInt(miturno),
+//                            ordenes:[{
+//                                ref: midata
+//                            }]
+//                        });
+//
+//                    }
+//
+//                }
+//            }
         }
 
         if ( eguneratuSartu == false ) {
@@ -328,7 +456,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
             });
 
         } else {
-            $scope.updateDataById(miid);
+            $scope.updateDataById(miid, milinea);
         }
 
     };
