@@ -69,7 +69,16 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr><td>+++</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        <span data-miid="{{ egunak._id }}"
+                                                                data-fetxa="{{egunak.fetxa}}"
+                                                                data-turno="1"
+                                                                data-linea="1"
+                                                                editable-text="orden.ref"
+                                                                onbeforesave="addData($data, this)">+</span>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                         <td>
@@ -93,7 +102,16 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr><td>+++</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        <span data-miid="{{ egunak._id }}"
+                                                            data-fetxa="{{egunak.fetxa}}"
+                                                            data-turno="2"
+                                                            data-linea="1"
+                                                            editable-text="orden.ref"
+                                                            onbeforesave="addData($data, this)">+</span>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                         <td>
@@ -117,14 +135,16 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr><td>
-                                                    <span
+                                                <tr>
+                                                    <td>
+                                                        <span data-miid="{{ egunak._id }}"
                                                           data-fetxa="{{egunak.fetxa}}"
                                                           data-turno="3"
                                                           data-linea="1"
                                                           editable-text="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span>
-                                                </td></tr>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>

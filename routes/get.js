@@ -126,20 +126,9 @@ exports.save = function(req, res){
             var o_id = new BSON.ObjectID(data._id);
 
             var newData;
-            if ( data.milinea == 1 ) {
+           // if ( data.milinea == 1 ) {
                 newData = data.linea1;
-            } else {
-                newData = data.linea2;
-            }
-
-            console.log(newData);
-            console.log("---------------");
-
-//            db.collection('planificacion').find({
-//                '_id': data._id
-//            }).toArray(function(err, items) {
-//                console.log(items);
-//            });
+//
 
             db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
@@ -171,6 +160,7 @@ exports.sartu = function (req, res) {
                    }]
                 }]
             }, function() {
+                res.send(200);
                 db.close();
             });
 

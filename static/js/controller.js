@@ -250,8 +250,26 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
     };
 
+    $scope.updateDataById = function(miid) {
+        var results = [];
+        for (var i = $scope.datuak.length; i--;) {
+
+            var d = $scope.datuak[i];
+
+            if (d._id === miid ) {
+//                d.milinea= 1;
+                results.push($http.post('/saveplanificacion', d));
+            }
+
+        }
+    };
+
     $scope.addData = function(midata, l) {
         var miid = l.$editable.attrs.miid;
+        if (miid === "") {
+            $scope.sartu(midata, l);
+            return 0;
+        }
         var milinea = l.$editable.attrs.linea;
         var turno = l.$editable.attrs.turno;
         var fetxa = moment(l.$editable.attrs.fetxa,"YYYY-MM-DD").toISOString();
@@ -261,36 +279,36 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
         for (i=0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
-            if ( (temp._id === miid) && ( temp.fetxa === fetxa ) ) {
+            if ( (temp._id === miid) ) {
                 eguneratuSartu = true;
-                if ( "turnoak" in temp ) {
+
+                if ( milinea == "1") {
                     var aurkitua = false;
-                    for ( k=0; k< temp.turnoak.length; k++) {
-                        var mt = temp.turnoak[k];
-                        if ( mt.turno === parseInt(miturno) ) {
+                    for ( var k=0; k < temp.linea1.length; k++ ) {
+
+                        var t = temp.linea1[k];
+
+                        if ( t.turno === parseInt(miturno) ) {
                             aurkitua=true;
-                            if ( mt.ordenes.length > 0) {
-                                mt.ordenes.push ({
+                            if ( t.ordenes.length > 0) {
+                                t.ordenes.push ({
                                     ref: midata
                                 });
                             }
                         }
+
                     }
                     if ( aurkitua == false ) {
-                        temp.turnoak.push({
+                        temp.linea1.push({
                             turno : parseInt(miturno),
                             ordenes:[{
                                 ref: midata
                             }]
                         });
+
                     }
                 } else {
-                    temp.turnoak =[{
-                        turno : parseInt(miturno),
-                        ordenes: {
-                            ref: midata
-                        }
-                    }];
+
                 }
             }
         }
@@ -303,53 +321,38 @@ produccionApp.controller('produccionController', function ($scope, $http) {
                 turno: parseInt(miturno),
                 ref: midata
             };
-            var results = [];
-            results.push($http.post('/sartu', d));
+
+            $http.post('/sartu', d).success(function() {
+//                console.log("Success");
+                $scope.getDatuak();
+            });
+
+        } else {
+            $scope.updateDataById(miid);
         }
 
-
-//        $scope.updateData();
     };
 
     $scope.sartu = function(midata, l) {
         var fetxa = l.$editable.attrs.fetxa;
         var miturno = l.$editable.attrs.turno;
         var milinea = l.$editable.attrs.miid;
-        var mifec;
-
-        switch (fetxa) {
-            case "0":
-                mifec = $scope.eguna1;
-                break;
-            case "1":
-                mifec = $scope.eguna2;
-                break;
-            case "2":
-                mifec = $scope.eguna3;
-                break;
-            case "3":
-                mifec = $scope.eguna4;
-                break;
-            case "4":
-                mifec = $scope.eguna5;
-                break;
-            case "5":
-                mifec = $scope.eguna6;
-                break;
-            case "6":
-                mifec = $scope.eguna7;
-                break;
+        if ( milinea === ""){
+            milinea = l.$editable.attrs.linea;
         }
-
 
         var d = {
             linea: parseInt(milinea),
-            fetxa: moment(mifec,"YYYY/MM/DD").toISOString(),
+            fetxa: moment(fetxa,"YYYY-MM-DD").toISOString(),
             turno: parseInt(miturno),
             ref: midata
             };
-        var results = [];
-        results.push($http.post('/sartu', d));
+
+
+        $http.post('/sartu', d).success(function() {
+//            console.log("Success");
+            $scope.getDatuak();
+        });
 
     };
 
