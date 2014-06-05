@@ -57,7 +57,7 @@
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
                                                                 <td>
                                                                 <span data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="egunak.fetxa"
+                                                                      data-fetxa="{{egunak.fetxa}}"
                                                                       data-turno="1"
                                                                       data-linea="1"
                                                                       editable-text="orden.ref"
@@ -81,7 +81,7 @@
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
                                                                 <td>
                                                                 <span data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="egunak.fetxa"
+                                                                      data-fetxa="{{egunak.fetxa}}"
                                                                       data-turno="2"
                                                                       data-linea="1"
                                                                       editable-text="orden.ref"
@@ -105,7 +105,7 @@
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
                                                                 <td>
                                                                 <span data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="egunak.fetxa"
+                                                                      data-fetxa="{{egunak.fetxa}}"
                                                                       data-turno="3"
                                                                       data-linea="1"
                                                                       editable-text="orden.ref"
@@ -117,7 +117,14 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr><td>+++</td></tr>
+                                                <tr><td>
+                                                    <span
+                                                          data-fetxa="{{egunak.fetxa}}"
+                                                          data-turno="3"
+                                                          data-linea="1"
+                                                          editable-text="orden.ref"
+                                                          onbeforesave="addData($data, this)">+</span>
+                                                </td></tr>
                                             </table>
                                         </td>
                                     </tr>

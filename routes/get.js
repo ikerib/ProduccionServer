@@ -132,7 +132,16 @@ exports.save = function(req, res){
                 newData = data.linea2;
             }
 
-            db.collection('planificacion').update({'_id': o_id, fetxa: new Date(data.fetxa)}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
+            console.log(newData);
+            console.log("---------------");
+
+//            db.collection('planificacion').find({
+//                '_id': data._id
+//            }).toArray(function(err, items) {
+//                console.log(items);
+//            });
+
+            db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
                 if (e) console.log(e)
                 res.send((result===1)?{msg:'success'}:{msg:'error'+e})
                 db.close();

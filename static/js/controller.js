@@ -226,9 +226,14 @@ produccionApp.controller('produccionController', function ($scope, $http) {
 
         var results = [];
         for (var i = $scope.datuak.length; i--;) {
+
             var d = $scope.datuak[i];
-            d.milinea= 1;
-            results.push($http.post('/saveplanificacion', d));
+
+            if (d._id === miid ) {
+                d.milinea= 1;
+                results.push($http.post('/saveplanificacion', d));
+            }
+
         }
 
 //        return results;
@@ -249,7 +254,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         var miid = l.$editable.attrs.miid;
         var milinea = l.$editable.attrs.linea;
         var turno = l.$editable.attrs.turno;
-        var fetxa = moment($scope.hemanEguna(l.$editable.attrs.fetxa),"YYYY/MM/DD").toISOString();
+        var fetxa = moment(l.$editable.attrs.fetxa,"YYYY-MM-DD").toISOString();
         var miturno = l.$editable.attrs.turno;
 
         var eguneratuSartu = false;
@@ -303,7 +308,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         }
 
 
-        $scope.updateData();
+//        $scope.updateData();
     };
 
     $scope.sartu = function(midata, l) {
