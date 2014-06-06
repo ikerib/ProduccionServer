@@ -79,7 +79,7 @@ server.get('/', function(req,res){
   });
 });
 
-server.get('/planificacion/:desde/:hasta', get.all);
+server.get('/planificacion/:linea/:desde/:hasta', get.all);
 
 server.post('/saveplanificacion', get.save);
 
