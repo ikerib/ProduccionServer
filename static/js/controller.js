@@ -589,7 +589,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http) {
             var d = $scope.datuak[i];
 
             if (d._id === miid ) {
-                d.milinea= 1;
+                d.milinea= 2;
                 results.push($http.post('/saveplanificacion', d));
             }
 

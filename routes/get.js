@@ -149,7 +149,11 @@ exports.save = function(req, res){
     var o_id = new BSON.ObjectID(data._id);
 
     var newData;
-    newData = data.linea1;
+    if ( data.milinea === 1) {
+        newData = data.linea1;
+    } else {
+        newData = data.linea2;
+    }
 
     db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
         if (e) console.log(e)
