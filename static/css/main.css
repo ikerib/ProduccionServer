@@ -15,3 +15,46 @@ td.tdlinea {
 .sintopborde {
 	border-top: none !important;
 }
+
+.item-wrapper a{
+    display: inline !important;
+}
+
+.item-wrapper{
+    display: inline !important;
+    position: relative !important;
+}
+
+.item-wrapper form {
+    position: absolute !important;
+    top: -53px !important;
+    background: #FFF !important;
+    border: 1px solid #AAA !important;
+    border-radius: 5px !important;
+    padding: 7px !important;
+    width: 188px !important;
+    display: inline-block !important;
+    left: 50% !important;
+    margin-left: -110px !important;
+    z-index: 101 !important;
+}
+
+.item-wrapper form:before{
+    content:"" !important;
+    width: 0 !important;
+    height: 0 !important;
+    border-left: 10px solid transparent !important;
+    border-right: 10px solid transparent !important;
+    border-top: 10px solid #AAA !important;
+    position:absolute !important;
+    bottom:-10px !important;
+    left:100px !important;
+}
+
+.item-wrapper input {
+    width: 90px !important;
+}
+
+.item-wrapper button {
+    margin-left: 1px !important;
+}
