@@ -51,17 +51,19 @@
                                         <td>
                                             <table>
                                                 <tr ng-repeat="turnos in egunak.linea1">
-                                                    <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                    <td>
                                                         <table>
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
-                                                                <td><div class="item-wrapper">
-                                                                <a href="#" data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="{{egunak.fetxa}}"
-                                                                      data-turno="1"
-                                                                      data-linea="1"
-                                                                      editable-text="orden.ref"
-                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</a></div>
+                                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                    <div class="item-wrapper">
+                                                                        <a href="#" data-miid="{{ egunak._id }}"
+                                                                            data-fetxa="{{egunak.fetxa}}"
+                                                                            data-turno="1"
+                                                                            data-linea="1"
+                                                                            editable-text="orden.ref"
+                                                                            onbeforesave="updateUser($data, this)">{{ orden.ref }}</a>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <!--<tr><td ng-if="turnos.turno==1">+</td></tr>-->
@@ -84,17 +86,19 @@
                                         <td>
                                             <table>
                                                 <tr ng-repeat="turnos in egunak.linea1">
-                                                    <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                    <td>
                                                         <table>
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
-                                                                <td><div class="item-wrapper">
-                                                                <a href="#" data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="{{egunak.fetxa}}"
-                                                                      data-turno="2"
-                                                                      data-linea="1"
-                                                                      editable-text="orden.ref"
-                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</a></div>
+                                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                    <div class="item-wrapper">
+                                                                        <a href="#" data-miid="{{ egunak._id }}"
+                                                                              data-fetxa="{{egunak.fetxa}}"
+                                                                              data-turno="2"
+                                                                              data-linea="1"
+                                                                              editable-text="orden.ref"
+                                                                              onbeforesave="updateUser($data, this)">{{ orden.ref }}</a>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <!--<tr><td ng-if="turnos.turno==2">+</td></tr>-->
@@ -117,17 +121,19 @@
                                         <td>
                                             <table>
                                                 <tr ng-repeat="turnos in egunak.linea1">
-                                                    <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                    <td>
                                                         <table>
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
-                                                                <td><div class="item-wrapper">
-                                                                <a href="#" data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="{{egunak.fetxa}}"
-                                                                      data-turno="3"
-                                                                      data-linea="1"
-                                                                      editable-text="orden.ref"
-                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</a></div>
+                                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                    <div class="item-wrapper">
+                                                                        <a href="#" data-miid="{{ egunak._id }}"
+                                                                              data-fetxa="{{egunak.fetxa}}"
+                                                                              data-turno="3"
+                                                                              data-linea="1"
+                                                                              editable-text="orden.ref"
+                                                                              onbeforesave="updateUser($data, this)">{{ orden.ref }}</a>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <!--<tr><td ng-if="turnos.turno==3">+</td></tr>-->
@@ -169,17 +175,19 @@
                                     <td>
                                         <table>
                                             <tr ng-repeat="turnos in egunak.linea2">
-                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                <td>
                                                     <table>
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
-                                                            <td><div class="item-wrapper">
-                                                                <a href="#" data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="{{egunak.fetxa}}"
-                                                                      data-turno="1"
-                                                                      data-linea="2"
-                                                                      editable-text="orden.ref"
-                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</a></div>
+                                                            <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                <div class="item-wrapper">
+                                                                    <a href="#" data-miid="{{ egunak._id }}"
+                                                                          data-fetxa="{{egunak.fetxa}}"
+                                                                          data-turno="1"
+                                                                          data-linea="2"
+                                                                          editable-text="orden.ref"
+                                                                          onbeforesave="updateUser($data, this)">{{ orden.ref }}</a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <!--<tr><td ng-if="turnos.turno==1">+</td></tr>-->
@@ -202,17 +210,19 @@
                                     <td>
                                         <table>
                                             <tr ng-repeat="turnos in egunak.linea2">
-                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                <td>
                                                     <table>
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
-                                                            <td><div class="item-wrapper">
-                                                                <a href="#" data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="{{egunak.fetxa}}"
-                                                                      data-turno="2"
-                                                                      data-linea="2"
-                                                                      editable-text="orden.ref"
-                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</a></div>
+                                                            <td  style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                <div class="item-wrapper">
+                                                                    <a href="#" data-miid="{{ egunak._id }}"
+                                                                          data-fetxa="{{egunak.fetxa}}"
+                                                                          data-turno="2"
+                                                                          data-linea="2"
+                                                                          editable-text="orden.ref"
+                                                                          onbeforesave="updateUser($data, this)">{{ orden.ref }}</a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <!--<tr><td ng-if="turnos.turno==2">+</td></tr>-->
@@ -235,17 +245,19 @@
                                     <td>
                                         <table>
                                             <tr ng-repeat="turnos in egunak.linea2">
-                                                <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                <td>
                                                     <table>
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
-                                                            <td><div class="item-wrapper">
-                                                                <a href="#" data-miid="{{ egunak._id }}"
-                                                                      data-fetxa="{{egunak.fetxa}}"
-                                                                      data-turno="3"
-                                                                      data-linea="2"
-                                                                      editable-text="orden.ref"
-                                                                      onbeforesave="updateUser($data, this)">{{ orden.ref }}</a></div>
+                                                            <td style="background-color: {{ mysettings | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ mysettings | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                <div class="item-wrapper">
+                                                                    <a href="#" data-miid="{{ egunak._id }}"
+                                                                          data-fetxa="{{egunak.fetxa}}"
+                                                                          data-turno="3"
+                                                                          data-linea="2"
+                                                                          editable-text="orden.ref"
+                                                                          onbeforesave="updateUser($data, this)">{{ orden.ref }}</a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <!--<tr><td ng-if="turnos.turno==3">+</td></tr>-->

@@ -99,11 +99,11 @@ produccionApp.controller('produccionController', function ($scope, $http){
         $scope.eguna7 = moment(fetxa,'YYYY/MM/DD').add('days', 6).format("YYYY/MM/DD");
         $scope.dt = $scope.eguna1;
         $scope.dtSecond = $scope.eguna7;
+        $scope.$broadcast ('eguneratuDatuak');
     };
     $scope.eratufetxak(fetxa);
 
     $scope.aldatuastea = function (z) {
-        console.log(z);
         if (z < 0) {
             z = z * -1;
             var mifec = moment($scope.dt).format('YYYY/MM/DD');
@@ -395,7 +395,9 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
 
     };
 
-
+    $scope.$on('eguneratuDatuak', function(e) {
+        $scope.getDatuak();
+    });
 });
 
 produccionApp.controller('linea2Controller', function ($scope, $http) {
@@ -541,6 +543,10 @@ produccionApp.controller('linea2Controller', function ($scope, $http) {
         });
 
     };
+
+    $scope.$on('eguneratuDatuak', function(e) {
+        $scope.getDatuak();
+    });
 
 });
 
