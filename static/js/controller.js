@@ -224,6 +224,7 @@ produccionApp.controller('produccionController', function ($scope, $http){
         { ref: '3CI00002', backcolor: '#5cb85c', forecolor: '#000000' }
     ];
 });
+
 produccionApp.controller('linea1Controller', function ($scope, $http) {
 
     $scope.getDatuak = function() {
@@ -370,6 +371,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
 
 
 });
+
 produccionApp.controller('linea2Controller', function ($scope, $http) {
 
     $scope.getDatuak = function() {
@@ -516,7 +518,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http) {
 
 });
 
-produccionApp.controller('settingController', function ($scope, Data) {
+produccionApp.controller('settingController', function ($scope, $http) {
     $scope.mysettings = [
       { ref: '3CI00001', backcolor: '#000000', forecolor: '#ffffff' },
       { ref: '3CI00002', backcolor: '#5cb85c', forecolor: '#000000' }
