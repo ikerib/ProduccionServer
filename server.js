@@ -85,23 +85,11 @@ server.post('/saveplanificacion', get.save);
 
 server.post('/sartu', get.sartu);
 
-server.get('/json', function(req,res){
-    var file = __dirname + '/static/data.json';
-    var that = this;
-    fs.readFile(file, 'utf8', function (err, data) {
-        if (err) {
-            console.log('Error: ' + err);
-            return;
-        }
+//Settings
 
-        data = JSON.parse(data);
-
-        res.writeHead('Content-Type', 'application/json');
-        res.end(JSON.stringify(data));
-
-    });
-
-});
+server.get('/getsettings', get.getsettings);
+server.post('/insertsetting', get.insertSetting);
+server.post('/updatesetting', get.updateSetting);
 
 
 //A Route for Creating a 500 Error (Useful to keep around)

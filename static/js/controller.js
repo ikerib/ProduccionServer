@@ -245,10 +245,16 @@ produccionApp.controller('produccionController', function ($scope, $http){
         }
     };
 
-    $scope.mysettings = [
-        { ref: '3CI00001', backcolor: '#000000', forecolor: '#ffffff' },
-        { ref: '3CI00002', backcolor: '#5cb85c', forecolor: '#000000' }
-    ];
+    $scope.getusers = function() {
+        $http.get('/getsettings').success(function(data){
+            $scope.users=data;
+        }).error(function(){
+            console.log("error al obtener datos");
+            return;
+        });
+    };
+    $scope.getusers();
+
 });
 
 produccionApp.controller('linea1Controller', function ($scope, $http) {
@@ -318,7 +324,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
 
         var eguneratuSartu = false;
 
-        for (i=0; i < $scope.datuak.length; i++) {
+        for (var i=0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
             if ( (temp._id === miid) ) {
                 eguneratuSartu = true;
@@ -398,6 +404,10 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
     $scope.$on('eguneratuDatuak', function(e) {
         $scope.getDatuak();
     });
+
+    $scope.set_color = function (kolorea) {
+            return { color: kolorea }
+    }
 });
 
 produccionApp.controller('linea2Controller', function ($scope, $http) {
@@ -548,13 +558,90 @@ produccionApp.controller('linea2Controller', function ($scope, $http) {
         $scope.getDatuak();
     });
 
+    $scope.set_color = function (kolorea) {
+        return { color: kolorea }
+    }
+
 });
 
 produccionApp.controller('settingController', function ($scope, $http) {
-    $scope.mysettings = [
-      { ref: '3CI00001', backcolor: '#000000', forecolor: '#ffffff' },
-      { ref: '3CI00002', backcolor: '#5cb85c', forecolor: '#000000' }
-    ];
+
+    $scope.getusers = function() {
+        $http.get('/getsettings').success(function(data){
+            $scope.users=data;
+        }).error(function(){
+            console.log("error al obtener datos");
+            return;
+        });
+    };
+    $scope.getusers();
+
+    // filter users to show
+    $scope.filterUser = function(user) {
+        return user.isDeleted !== true;
+    };
+
+    // mark user as deleted
+    $scope.deleteUser = function(id) {
+        var filtered = $filter('filter')($scope.users, {id: id});
+        if (filtered.length) {
+            filtered[0].isDeleted = true;
+        }
+    };
+
+    // add user
+    $scope.addUser = function() {
+        $scope.users.push({
+            id: $scope.users.length+1,
+            ref: '',
+            backcolor: "#000000",
+            forecolor: "#ffffff"
+        });
+    };
+
+    // cancel all changes
+    $scope.cancel = function() {
+        for (var i = $scope.users.length; i--;) {
+            var user = $scope.users[i];
+            // undelete
+            if (user.isDeleted) {
+                delete user.isDeleted;
+            }
+            // remove new
+            if (user.isNew) {
+                $scope.users.splice(i, 1);
+            }
+        };
+    };
+
+    // save edits
+    $scope.saveTable = function() {
+
+        for (var i = $scope.users.length; i--;) {
+            var user = $scope.users[i];
+            // actually delete user
+            if (user.isDeleted) {
+                $scope.users.splice(i, 1);
+            }
+
+            if ( user.backcolor===null) {
+                user.backcolor = "#000000";
+            }
+            if ( user.forecolor===null) {
+                user.forecolor = "#ffffff";
+            }
+
+
+            if ( user._id)
+            {
+                $http.post('/updatesetting', user);
+            }   else {
+                $http.post('/insertsetting', user);
+            }
+            $scope.getusers();
+        }
+
+    };
 });
 
 produccionApp.filter('searchBy', function() {

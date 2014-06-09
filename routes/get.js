@@ -55,6 +55,10 @@ exports.all = function(req, res){
         });
     }
 
+
+    desde = moment(req.params.desde, "YYYY-MM-DD").toISOString();
+    hasta = moment(req.params.hasta, "YYYY-MM-DD").toISOString();
+
     db.collection('planificacion').find( {
         $and: [
             { linea: milinea },
@@ -199,3 +203,91 @@ exports.sartu = function (req, res) {
 
 };
 
+
+//Settings
+
+exports.getsettings = function(req, res){
+
+    if (!db.serverConfig.isConnected()) {
+        db.open(function(err, db) {
+            if(!err) {
+
+            } else {
+                onErr(err, function(){
+                    console.log(err);
+                    db.close();
+                });
+            }
+        });
+    }
+
+    db.collection('settings').find({}).toArray(function(err, items){
+        if(!err) {
+            res.json(items);
+        } else {
+            onErr(err, function(){
+                console.log(err);
+                db.close();
+            });
+        }
+    })
+
+
+};
+
+exports.insertSetting = function (req, res) {
+
+    if (!db.serverConfig.isConnected()) {
+        db.open(function(err, db) {
+            if(!err) {
+
+            } else {
+                onErr(err, function(){
+                    console.log(err);
+                    db.close();
+                });
+            }
+        });
+    }
+
+    var data = req.body;
+
+    db.collection('settings').insert({
+        ref: data.ref,
+        backcolor: data.backcolor,
+        forecolor: data.forecolor
+    }, function() {
+        res.send(200);
+    });
+
+};
+
+exports.updateSetting = function(req, res){
+
+    if (!db.serverConfig.isConnected()) {
+        db.open(function(err, db) {
+            if(!err) {
+
+            } else {
+                onErr(err, function(){
+                    console.log(err);
+                    db.close();
+                });
+            }
+        });
+    }
+
+    var data = req.body;
+    var BSON = mongo.BSONPure;
+    var o_id = new BSON.ObjectID(data._id);
+
+    db.collection('settings').update({'_id': o_id}, { $set :{
+        ref: data.ref,
+        backcolor: data.backcolor,
+        forecolor: data.forecolor
+    } }, {safe:true, multi:false, upsert:false}, function(e, result){
+        if (e) console.log(e)
+        res.send((result===1)?{msg:'success'}:{msg:'error'+e})
+    })
+
+};
