@@ -138,37 +138,42 @@ exports.all = function(req, res){
 
 };
 
-exports.save = function(req, res){
+exports.save = function(io) {
+    return function(req, res){
 
-    if (!db.serverConfig.isConnected()) {
-        db.open(function(err, db) {
-            if(!err) {
+        if (!db.serverConfig.isConnected()) {
+            db.open(function(err, db) {
+                if(!err) {
 
-            } else {
-                onErr(err, function(){
-                    console.log(err);
-                    db.close();
-                });
-            }
-        });
+                } else {
+                    onErr(err, function(){
+                        console.log(err);
+                        db.close();
+                    });
+                }
+            });
+        }
+
+        var data = req.body;
+        var BSON = mongo.BSONPure;
+        var o_id = new BSON.ObjectID(data._id);
+
+        var newData;
+        if ( data.milinea === 1) {
+            newData = data.linea1;
+        } else {
+            newData = data.linea2;
+        }
+
+        db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
+            if (e) console.log(e)
+
+            io.sockets.emit("bidSuccess", {product_id: product_id, bid: bid});
+
+            res.send((result===1)?{msg:'success'}:{msg:'error'+e})
+
+        })
     }
-
-    var data = req.body;
-    var BSON = mongo.BSONPure;
-    var o_id = new BSON.ObjectID(data._id);
-
-    var newData;
-    if ( data.milinea === 1) {
-        newData = data.linea1;
-    } else {
-        newData = data.linea2;
-    }
-
-    db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
-        if (e) console.log(e)
-        res.send((result===1)?{msg:'success'}:{msg:'error'+e})
-    })
-
 };
 
 exports.sartu = function (req, res) {

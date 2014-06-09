@@ -270,6 +270,12 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
     };
     $scope.getDatuak();
 
+//    socket.on('msg', function(data) { // Listening in Socket in Angular Controller
+//        console.log(data);
+//        $scope.getDatuak();
+//    });
+
+
     $scope.updateUser = function(data, l) {
 
         var miid = l.$editable.attrs.miid;

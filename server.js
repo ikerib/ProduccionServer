@@ -53,8 +53,9 @@ var io = io.listen(server);
 io.sockets.on('connection', function(socket){
   console.log('Client Connected');
   socket.on('message', function(data){
-    socket.broadcast.emit('server_message',data);
-    socket.emit('server_message',data);
+//    socket.broadcast.emit('server_message',data);
+//    socket.emit('server_message',data);
+      console.log(data);
   });
   socket.on('disconnect', function(){
     console.log('Client Disconnected.');
@@ -81,7 +82,7 @@ server.get('/', function(req,res){
 
 server.get('/planificacion/:linea/:desde/:hasta', get.all);
 
-server.post('/saveplanificacion', get.save);
+server.post('/saveplanificacion', get.save(io));
 
 server.post('/sartu', get.sartu);
 
