@@ -55,74 +55,79 @@ exports.all = function(req, res){
         });
     }
 
-    db.collection('planificacion').find( { $and: [{ linea: milinea },{"fetxa": {$gte: new Date('2014-01-01T14:56:59.301Z') } }]}).toArray(function(err, items){
-        // Aste osoa bueltatuko dugu
-        for (var k=0; k < 7; k++ ) {
-            var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
-            var topatua = false;
-            resul[k]=[];
+    db.collection('planificacion').find( {
+        $and: [
+            { linea: milinea },
+            { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
+            ]
+        }).toArray(function(err, items){
+            // Aste osoa bueltatuko dugu
+            for (var k=0; k < 7; k++ ) {
+                var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
+                var topatua = false;
+                resul[k]=[];
 
-            for (var i=0; i < items.length; i++ ) {
+                for (var i=0; i < items.length; i++ ) {
 
-                var fec = moment( items[i].fetxa).format('YYYY-MM-DD');
+                    var fec = moment( items[i].fetxa).format('YYYY-MM-DD');
 
-                if ( fec === eguna ) {
-                    topatua=true;
-                    items[i].fetxa = fec;
-                    resul[k].push( items[i]);
+                    if ( fec === eguna ) {
+                        topatua=true;
+                        items[i].fetxa = fec;
+                        resul[k].push( items[i]);
+                    }
+
                 }
 
+                if ( topatua == false ) {
+
+                    resul[k].push({
+                        fetxa: eguna,
+                        linea:0
+                    });
+                }
             }
 
-            if ( topatua == false ) {
+            var resultado = [];
+            // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
+            for ( var i=0; i < resul.length; i++ ) {
 
-                resul[k].push({
-                    fetxa: eguna,
-                    linea:0
-                });
-            }
-        }
+                var tmp = resul[i][0];
 
-        var resultado = [];
-        // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
-        for ( var i=0; i < resul.length; i++ ) {
-
-            var tmp = resul[i][0];
-
-            var row = {
-                fetxa: tmp.fetxa,
-                _id:'',
-                linea1: [],
-                linea2: []
-            };
+                var row = {
+                    fetxa: tmp.fetxa,
+                    _id:'',
+                    linea1: [],
+                    linea2: []
+                };
 
 
-            var aurkitua1 = false;
-            var aurkitua2 = false;
+                var aurkitua1 = false;
+                var aurkitua2 = false;
 
-            if ( tmp.linea == 1 ) {
-                aurkitua1 = true;
-                row.linea1 = tmp.turnoak;
-                row._id = tmp._id;
-            } else if ( tmp.linea == 2) {
-                aurkitua2 = true;
-                row.linea2 = tmp.turnoak;
-                row._id = tmp._id;
-            }
+                if ( tmp.linea == 1 ) {
+                    aurkitua1 = true;
+                    row.linea1 = tmp.turnoak;
+                    row._id = tmp._id;
+                } else if ( tmp.linea == 2) {
+                    aurkitua2 = true;
+                    row.linea2 = tmp.turnoak;
+                    row._id = tmp._id;
+                }
 
-            if ( aurkitua1 == false ) {
-                row.linea1 = [];
-            }
-            if ( aurkitua2 == false ) {
-                row.linea2 = [];
+                if ( aurkitua1 == false ) {
+                    row.linea1 = [];
+                }
+                if ( aurkitua2 == false ) {
+                    row.linea2 = [];
+                }
+
+                resultado.push(row);
+
             }
 
-            resultado.push(row);
 
-        }
-
-
-        res.json(resultado);
+            res.json(resultado);
 
     })
 
