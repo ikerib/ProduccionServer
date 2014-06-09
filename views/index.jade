@@ -35,11 +35,13 @@ html.no-js
             span.icon-bar
           a.navbar-brand(href='#') Planificación
         .navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href='#') Home
-            li
-              a(href='#setting') Configuración
+          div(auto-active)
+            ul.nav.navbar-nav
+              li.active
+                a(href='#') Planificación
+
+              li
+                a(href='#/setting') Configuración
         //
           /.navbar-collapse 
     .container(ng-controller='produccionController')
