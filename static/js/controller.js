@@ -17,9 +17,9 @@ produccionApp.config(function($routeProvider) {
       })
 });
 
-produccionApp.factory('produccionAPIservice', function($http) {
-
-
+produccionApp.factory('socket', function() {
+    var socket = io.connect('http://localhost:8081');
+    return socket;
 });
 
 produccionApp.directive('autoActive', ['$location', function ($location) {
@@ -257,7 +257,7 @@ produccionApp.controller('produccionController', function ($scope, $http){
 
 });
 
-produccionApp.controller('linea1Controller', function ($scope, $http) {
+produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
     $scope.getDatuak = function() {
         $http.get('/planificacion/1/'+ moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function(data){
@@ -270,10 +270,9 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
     };
     $scope.getDatuak();
 
-//    socket.on('msg', function(data) { // Listening in Socket in Angular Controller
-//        console.log(data);
-//        $scope.getDatuak();
-//    });
+    socket.on('eguneratu', function(data) { // Listening in Socket in Angular Controller
+        $scope.getDatuak();
+    });
 
 
     $scope.updateUser = function(data, l) {
@@ -416,7 +415,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http) {
     }
 });
 
-produccionApp.controller('linea2Controller', function ($scope, $http) {
+produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 
     $scope.getDatuak = function() {
         $http.get('/planificacion/2/'+ moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function(data){
@@ -428,6 +427,10 @@ produccionApp.controller('linea2Controller', function ($scope, $http) {
 
     };
     $scope.getDatuak();
+
+    socket.on('eguneratu', function(data) { // Listening in Socket in Angular Controller
+        $scope.getDatuak();
+    });
 
     $scope.updateUser = function(data, l) {
 
@@ -570,7 +573,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http) {
 
 });
 
-produccionApp.controller('settingController', function ($scope, $http) {
+produccionApp.controller('settingController', function ($scope, $http, socket) {
 
     $scope.getusers = function() {
         $http.get('/getsettings').success(function(data){
@@ -581,6 +584,10 @@ produccionApp.controller('settingController', function ($scope, $http) {
         });
     };
     $scope.getusers();
+
+    socket.on('eguneratu', function(data) { // Listening in Socket in Angular Controller
+        $scope.getusers();
+    });
 
     // filter users to show
     $scope.filterUser = function(user) {

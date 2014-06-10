@@ -168,7 +168,7 @@ exports.save = function(io) {
         db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
             if (e) console.log(e)
 
-            io.sockets.emit("bidSuccess", {product_id: product_id, bid: bid});
+            io.sockets.emit("eguneratu");
 
             res.send((result===1)?{msg:'success'}:{msg:'error'+e})
 
