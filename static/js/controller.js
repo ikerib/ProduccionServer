@@ -18,7 +18,8 @@ produccionApp.config(function($routeProvider) {
 });
 
 produccionApp.factory('socket', function() {
-    var socket = io.connect('http://localhost:8081');
+    var socket = io.connect('http://192.168.1.1:8081');
+    // var socket = io.connect('http://localhost:8081');
     return socket;
 });
 

@@ -110,4 +110,4 @@ function NotFound(msg){
 }
 
 
-console.log('Listening on http://0.0.0.0:' + port );
+console.log('Listening on http://localhost:' + port );
