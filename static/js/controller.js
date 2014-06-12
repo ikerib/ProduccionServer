@@ -1,23 +1,22 @@
+var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable']);
 
-var produccionApp = angular.module('produccionApp', ['ngRoute','ui.bootstrap','colorpicker.module','xeditable']);
-
-produccionApp.config(function($routeProvider) {
+produccionApp.config(function ($routeProvider) {
     $routeProvider
 
-      // route for the home page
-      .when('/', {
-        templateUrl : 'pages/home.html',
-        controller  : 'produccionController'
-      })
+        // route for the home page
+        .when('/', {
+            templateUrl: 'pages/home.html',
+            controller: 'produccionController'
+        })
 
-      // route for the about page
-      .when('/setting', {
-        templateUrl : 'pages/setting.html',
-        controller  : 'settingController'
-      })
+        // route for the about page
+        .when('/setting', {
+            templateUrl: 'pages/setting.html',
+            controller: 'settingController'
+        })
 });
 
-produccionApp.factory('socket', function() {
+produccionApp.factory('socket', function () {
     var socket = io.connect('http://192.168.1.1:8081');
     // var socket = io.connect('http://localhost:8081');
     return socket;
@@ -49,11 +48,12 @@ produccionApp.directive('autoActive', ['$location', function ($location) {
     }
 }]);
 
-produccionApp.run(function(editableOptions) {
+produccionApp.run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 
-produccionApp.controller('produccionController', function ($scope, $http){
+produccionApp.controller('produccionController', function ($scope, $http) {
+
     $scope.datepickers = {
         dt: false,
         dtSecond: false
@@ -71,19 +71,19 @@ produccionApp.controller('produccionController', function ($scope, $http){
         egunzen = moment(fetxa, "YYYY/MM/DD").day();
         switch (egunzen) {
             case 0: // igandea
-                return moment(fetxa, "YYYY/MM/DD").add('days',1).format("YYYY/MM/DD");
+                return moment(fetxa, "YYYY/MM/DD").add('days', 1).format("YYYY/MM/DD");
             case 1: // astelehena
                 return fetxa;
             case 2: // asteartea
-                return moment(fetxa, "YYYY/MM/DD").subtract('days',1).format("YYYY/MM/DD");
+                return moment(fetxa, "YYYY/MM/DD").subtract('days', 1).format("YYYY/MM/DD");
             case 3: // asteazkena
-                return moment(fetxa, "YYYY/MM/DD").subtract('days',2).format("YYYY/MM/DD");
+                return moment(fetxa, "YYYY/MM/DD").subtract('days', 2).format("YYYY/MM/DD");
             case 4: // osteguna
-                return moment(fetxa, "YYYY/MM/DD").subtract('days',3).format("YYYY/MM/DD");
+                return moment(fetxa, "YYYY/MM/DD").subtract('days', 3).format("YYYY/MM/DD");
             case 5: // Ostirala
-                return moment(fetxa, "YYYY/MM/DD").subtract('days',4).format("YYYY/MM/DD");
+                return moment(fetxa, "YYYY/MM/DD").subtract('days', 4).format("YYYY/MM/DD");
             case 6: // larunbata
-                return moment(fetxa, "YYYY/MM/DD").subtract('days',5).format("YYYY/MM/DD");
+                return moment(fetxa, "YYYY/MM/DD").subtract('days', 5).format("YYYY/MM/DD");
         }
     };
 
@@ -91,16 +91,16 @@ produccionApp.controller('produccionController', function ($scope, $http){
     $scope.dt = fetxa;
 
     $scope.eratufetxak = function (fetxa) {
-        $scope.eguna1 = moment(fetxa,'YYYY/MM/DD').format("YYYY/MM/DD");
-        $scope.eguna2 = moment(fetxa,'YYYY/MM/DD').add('days', 1).format("YYYY/MM/DD");
-        $scope.eguna3 = moment(fetxa,'YYYY/MM/DD').add('days', 2).format("YYYY/MM/DD");
-        $scope.eguna4 = moment(fetxa,'YYYY/MM/DD').add('days', 3).format("YYYY/MM/DD");
-        $scope.eguna5 = moment(fetxa,'YYYY/MM/DD').add('days', 4).format("YYYY/MM/DD");
-        $scope.eguna6 = moment(fetxa,'YYYY/MM/DD').add('days', 5).format("YYYY/MM/DD");
-        $scope.eguna7 = moment(fetxa,'YYYY/MM/DD').add('days', 6).format("YYYY/MM/DD");
+        $scope.eguna1 = moment(fetxa, 'YYYY/MM/DD').format("YYYY/MM/DD");
+        $scope.eguna2 = moment(fetxa, 'YYYY/MM/DD').add('days', 1).format("YYYY/MM/DD");
+        $scope.eguna3 = moment(fetxa, 'YYYY/MM/DD').add('days', 2).format("YYYY/MM/DD");
+        $scope.eguna4 = moment(fetxa, 'YYYY/MM/DD').add('days', 3).format("YYYY/MM/DD");
+        $scope.eguna5 = moment(fetxa, 'YYYY/MM/DD').add('days', 4).format("YYYY/MM/DD");
+        $scope.eguna6 = moment(fetxa, 'YYYY/MM/DD').add('days', 5).format("YYYY/MM/DD");
+        $scope.eguna7 = moment(fetxa, 'YYYY/MM/DD').add('days', 6).format("YYYY/MM/DD");
         $scope.dt = $scope.eguna1;
         $scope.dtSecond = $scope.eguna7;
-        $scope.$broadcast ('eguneratuDatuak');
+        $scope.$broadcast('eguneratuDatuak');
     };
     $scope.eratufetxak(fetxa);
 
@@ -108,73 +108,73 @@ produccionApp.controller('produccionController', function ($scope, $http){
         if (z < 0) {
             z = z * -1;
             var mifec = moment($scope.dt).format('YYYY/MM/DD');
-            if ( moment(mifec).isValid() == false ) {
-                mifec = moment($scope.dt,'YYYY/MM/DD').format('YYYY/MM/DD');
+            if (moment(mifec).isValid() == false) {
+                mifec = moment($scope.dt, 'YYYY/MM/DD').format('YYYY/MM/DD');
             }
             var fetxaberria = moment(mifec).subtract('days', z).format("YYYY/MM/DD");
         } else {
             var mifec = moment($scope.dt).format('YYYY/MM/DD');
-            if ( moment(mifec).isValid() == false ) {
-                mifec = moment($scope.dt,'YYYY/MM/DD');
+            if (moment(mifec).isValid() == false) {
+                mifec = moment($scope.dt, 'YYYY/MM/DD');
             }
-            var fetxaberria = moment(mifec, 'YYYY/MM/DD').add('days',z).format("YYYY/MM/DD");
+            var fetxaberria = moment(mifec, 'YYYY/MM/DD').add('days', z).format("YYYY/MM/DD");
         }
         $scope.eratufetxak(fetxaberria);
     }
 
     $scope.nameFilter = null;
 
-    $scope.checkStatus = function(fec, nireindex) {
+    $scope.checkStatus = function (fec, nireindex) {
 
         fec = moment(fec).format("YYYY/MM/DD");
 
         switch (nireindex) {
             case 0:
-                if ( $scope.eguna1 == fec) {
+                if ($scope.eguna1 == fec) {
                     return true;
                 } else {
                     return false;
                 }
             case 1:
-                if ( $scope.eguna2 == fec) {
+                if ($scope.eguna2 == fec) {
                     return true;
                 } else {
                     return false;
                 }
             case 2:
-                if ( $scope.eguna3 == fec) {
+                if ($scope.eguna3 == fec) {
                     return true;
                 } else {
                     return false;
                 }
             case 3:
-                if ( $scope.eguna4 == fec) {
+                if ($scope.eguna4 == fec) {
                     return true;
                 } else {
                     return false;
                 }
             case 4:
-                if ( $scope.eguna5 == fec) {
+                if ($scope.eguna5 == fec) {
                     return true;
                 } else {
                     return false;
                 }
             case 5:
-                if ( $scope.eguna6 == fec) {
+                if ($scope.eguna6 == fec) {
                     return true;
                 } else {
                     return false;
                 }
             case 6:
-                if ( $scope.eguna7 == fec) {
+                if ($scope.eguna7 == fec) {
                     return true;
                 } else {
                     return false;
                 }
         }
-        var nirefec = "eguna"+nireindex;
+        var nirefec = "eguna" + nireindex;
         var esanfec = $scope.nirefec;
-        console.log(esanfec);
+
     };
 
 
@@ -187,11 +187,9 @@ produccionApp.controller('produccionController', function ($scope, $http){
     $scope.today();
 
     $scope.showWeeks = true;
-
     $scope.toggleWeeks = function () {
         $scope.showWeeks = !$scope.showWeeks;
     };
-
     $scope.clear = function () {
         $scope.dt = null;
     };
@@ -200,12 +198,10 @@ produccionApp.controller('produccionController', function ($scope, $http){
     $scope.disabled = function (date, mode) {
         return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
     };
-
     $scope.toggleMin = function () {
         $scope.minDate = ( $scope.minDate ) ? null : new Date();
     };
     $scope.toggleMin();
-
     $scope.open = function ($event, which) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -213,14 +209,14 @@ produccionApp.controller('produccionController', function ($scope, $http){
         $scope.datepickers[which] = true;
     };
 
-    $scope.selectDate = function(dt) {
+    $scope.selectDate = function (dt) {
         console.log(dt);
         var fetxa = $scope.lortuastelehena(moment(dt).format("YYYY/MM/DD"));
         $scope.dt = fetxa;
         $scope.eratufetxak(fetxa);
     }
 
-    $scope.hemanEguna = function(numeguna){
+    $scope.hemanEguna = function (numeguna) {
         switch (numeguna) {
             case "0":
                 return $scope.eguna1;
@@ -246,10 +242,10 @@ produccionApp.controller('produccionController', function ($scope, $http){
         }
     };
 
-    $scope.getusers = function() {
-        $http.get('/getsettings').success(function(data){
-            $scope.users=data;
-        }).error(function(){
+    $scope.getusers = function () {
+        $http.get('/getsettings').success(function (data) {
+            $scope.users = data;
+        }).error(function () {
             console.log("error al obtener datos");
             return;
         });
@@ -260,10 +256,10 @@ produccionApp.controller('produccionController', function ($scope, $http){
 
 produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
-    $scope.getDatuak = function() {
-        $http.get('/planificacion/1/'+ moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function(data){
-            $scope.datuak=data;
-        }).error(function(){
+    $scope.getDatuak = function () {
+        $http.get('/planificacion/1/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function (data) {
+            $scope.datuak = data;
+        }).error(function () {
             console.log("error al obtener datos");
             return;
         });
@@ -271,12 +267,12 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
     };
     $scope.getDatuak();
 
-    socket.on('eguneratu', function(data) { // Listening in Socket in Angular Controller
+    socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
         $scope.getDatuak();
     });
 
 
-    $scope.updateUser = function(data, l) {
+    $scope.updateUser = function (data, l) {
 
         var miid = l.$editable.attrs.miid;
 
@@ -284,8 +280,8 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
             var d = $scope.datuak[i];
 
-            if (d._id === miid ) {
-                d.milinea= 1;
+            if (d._id === miid) {
+                d.milinea = 1;
                 $http.post('/saveplanificacion', d);
             }
 
@@ -293,31 +289,31 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
     };
 
-    $scope.updateData = function() {
+    $scope.updateData = function () {
 
         for (var i = $scope.datuak.length; i--;) {
             var d = $scope.datuak[i];
-            d.milinea= 1;
+            d.milinea = 1;
             $http.post('/saveplanificacion', d);
         }
 
     };
 
-    $scope.updateDataById = function(miid) {
+    $scope.updateDataById = function (miid) {
 
         for (var i = $scope.datuak.length; i--;) {
 
             var d = $scope.datuak[i];
 
-            if (d._id === miid ) {
-                d.milinea= 1;
+            if (d._id === miid) {
+                d.milinea = 1;
                 $http.post('/saveplanificacion', d);
             }
 
         }
     };
 
-    $scope.addData = function(midata, l) {
+    $scope.addData = function (midata, l) {
         var miid = l.$editable.attrs.miid;
         if (miid === "") {
             $scope.sartu(midata, l);
@@ -325,38 +321,40 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
         }
         var milinea = l.$editable.attrs.linea;
         var turno = l.$editable.attrs.turno;
-        var fetxa = moment(l.$editable.attrs.fetxa,"YYYY-MM-DD").toISOString();
+        var fetxa = moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString();
         var miturno = l.$editable.attrs.turno;
 
         var eguneratuSartu = false;
 
-        for (var i=0; i < $scope.datuak.length; i++) {
+        for (var i = 0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
-            if ( (temp._id === miid) ) {
+            if ((temp._id === miid)) {
                 eguneratuSartu = true;
 
-                if ( milinea == "1") {
+                if (milinea == "1") {
                     var aurkitua = false;
-                    for ( var k=0; k < temp.linea1.length; k++ ) {
+                    for (var k = 0; k < temp.linea1.length; k++) {
 
                         var t = temp.linea1[k];
 
-                        if ( t.turno === parseInt(miturno) ) {
-                            aurkitua=true;
-                            if ( t.ordenes.length > 0) {
-                                t.ordenes.push ({
+                        if (t.turno === parseInt(miturno)) {
+                            aurkitua = true;
+                            if (t.ordenes.length > 0) {
+                                t.ordenes.push({
                                     ref: midata
                                 });
                             }
                         }
 
                     }
-                    if ( aurkitua == false ) {
+                    if (aurkitua == false) {
                         temp.linea1.push({
-                            turno : parseInt(miturno),
-                            ordenes:[{
-                                ref: midata
-                            }]
+                            turno: parseInt(miturno),
+                            ordenes: [
+                                {
+                                    ref: midata
+                                }
+                            ]
                         });
 
                     }
@@ -366,7 +364,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
             }
         }
 
-        if ( eguneratuSartu == false ) {
+        if (eguneratuSartu == false) {
 
             var d = {
                 linea: 1,
@@ -375,7 +373,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
                 ref: midata
             };
 
-            $http.post('/sartu', d).success(function() {
+            $http.post('/sartu', d).success(function () {
                 $scope.getDatuak();
             });
 
@@ -385,43 +383,43 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
     };
 
-    $scope.sartu = function(midata, l) {
+    $scope.sartu = function (midata, l) {
         var fetxa = l.$editable.attrs.fetxa;
         var miturno = l.$editable.attrs.turno;
         var milinea = l.$editable.attrs.miid;
-        if ( milinea === ""){
+        if (milinea === "") {
             milinea = l.$editable.attrs.linea;
         }
 
         var d = {
             linea: 1,
-            fetxa: moment(fetxa,"YYYY-MM-DD").toISOString(),
+            fetxa: moment(fetxa, "YYYY-MM-DD").toISOString(),
             turno: parseInt(miturno),
             ref: midata
-            };
+        };
 
 
-        $http.post('/sartu', d).success(function() {
+        $http.post('/sartu', d).success(function () {
             $scope.getDatuak();
         });
 
     };
 
-    $scope.$on('eguneratuDatuak', function(e) {
+    $scope.$on('eguneratuDatuak', function (e) {
         $scope.getDatuak();
     });
 
     $scope.set_color = function (kolorea) {
-            return { color: kolorea }
+        return { color: kolorea }
     }
 });
 
 produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 
-    $scope.getDatuak = function() {
-        $http.get('/planificacion/2/'+ moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function(data){
-            $scope.datuak=data;
-        }).error(function(){
+    $scope.getDatuak = function () {
+        $http.get('/planificacion/2/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function (data) {
+            $scope.datuak = data;
+        }).error(function () {
             console.log("error al obtener datos");
             return;
         });
@@ -429,11 +427,11 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
     };
     $scope.getDatuak();
 
-    socket.on('eguneratu', function(data) { // Listening in Socket in Angular Controller
+    socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
         $scope.getDatuak();
     });
 
-    $scope.updateUser = function(data, l) {
+    $scope.updateUser = function (data, l) {
 
         var miid = l.$editable.attrs.miid;
 
@@ -441,8 +439,8 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 
             var d = $scope.datuak[i];
 
-            if (d._id === miid ) {
-                d.milinea= 2;
+            if (d._id === miid) {
+                d.milinea = 2;
                 $http.post('/saveplanificacion', d);
             }
 
@@ -451,30 +449,30 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 //        return results;
     };
 
-    $scope.updateData = function() {
+    $scope.updateData = function () {
 
         for (var i = $scope.datuak.length; i--;) {
             var d = $scope.datuak[i];
-            d.milinea= 2;
+            d.milinea = 2;
             $http.post('/saveplanificacion', d);
         }
 
     };
 
-    $scope.updateDataById = function(miid) {
+    $scope.updateDataById = function (miid) {
         for (var i = $scope.datuak.length; i--;) {
 
             var d = $scope.datuak[i];
 
-            if (d._id === miid ) {
-                d.milinea= 2;
+            if (d._id === miid) {
+                d.milinea = 2;
                 $http.post('/saveplanificacion', d);
             }
 
         }
     };
 
-    $scope.addData = function(midata, l) {
+    $scope.addData = function (midata, l) {
         var miid = l.$editable.attrs.miid;
         if (miid === "") {
             $scope.sartu(midata, l);
@@ -482,38 +480,40 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
         }
         var milinea = l.$editable.attrs.linea;
         var turno = l.$editable.attrs.turno;
-        var fetxa = moment(l.$editable.attrs.fetxa,"YYYY-MM-DD").toISOString();
+        var fetxa = moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString();
         var miturno = l.$editable.attrs.turno;
 
         var eguneratuSartu = false;
 
-        for (i=0; i < $scope.datuak.length; i++) {
+        for (i = 0; i < $scope.datuak.length; i++) {
             var temp = $scope.datuak[i];
-            if ( (temp._id === miid) ) {
+            if ((temp._id === miid)) {
                 eguneratuSartu = true;
 
-                if ( milinea == "2") {
+                if (milinea == "2") {
                     var aurkitua = false;
-                    for ( var k=0; k < temp.linea2.length; k++ ) {
+                    for (var k = 0; k < temp.linea2.length; k++) {
 
                         var t = temp.linea2[k];
 
-                        if ( t.turno === parseInt(miturno) ) {
-                            aurkitua=true;
-                            if ( t.ordenes.length > 0) {
-                                t.ordenes.push ({
+                        if (t.turno === parseInt(miturno)) {
+                            aurkitua = true;
+                            if (t.ordenes.length > 0) {
+                                t.ordenes.push({
                                     ref: midata
                                 });
                             }
                         }
 
                     }
-                    if ( aurkitua == false ) {
+                    if (aurkitua == false) {
                         temp.linea2.push({
-                            turno : parseInt(miturno),
-                            ordenes:[{
-                                ref: midata
-                            }]
+                            turno: parseInt(miturno),
+                            ordenes: [
+                                {
+                                    ref: midata
+                                }
+                            ]
                         });
 
                     }
@@ -523,7 +523,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
             }
         }
 
-        if ( eguneratuSartu == false ) {
+        if (eguneratuSartu == false) {
 
             var d = {
                 linea: 2,
@@ -532,7 +532,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
                 ref: midata
             };
 
-            $http.post('/sartu', d).success(function() {
+            $http.post('/sartu', d).success(function () {
                 $scope.getDatuak();
             });
 
@@ -542,29 +542,29 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 
     };
 
-    $scope.sartu = function(midata, l) {
+    $scope.sartu = function (midata, l) {
         var fetxa = l.$editable.attrs.fetxa;
         var miturno = l.$editable.attrs.turno;
         var milinea = l.$editable.attrs.miid;
-        if ( milinea === ""){
+        if (milinea === "") {
             milinea = l.$editable.attrs.linea;
         }
 
         var d = {
             linea: 2,
-            fetxa: moment(fetxa,"YYYY-MM-DD").toISOString(),
+            fetxa: moment(fetxa, "YYYY-MM-DD").toISOString(),
             turno: parseInt(miturno),
             ref: midata
         };
 
 
-        $http.post('/sartu', d).success(function() {
+        $http.post('/sartu', d).success(function () {
             $scope.getDatuak();
         });
 
     };
 
-    $scope.$on('eguneratuDatuak', function(e) {
+    $scope.$on('eguneratuDatuak', function (e) {
         $scope.getDatuak();
     });
 
@@ -576,27 +576,27 @@ produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 
 produccionApp.controller('settingController', function ($scope, $http, socket) {
 
-    $scope.getusers = function() {
-        $http.get('/getsettings').success(function(data){
-            $scope.users=data;
-        }).error(function(){
+    $scope.getusers = function () {
+        $http.get('/getsettings').success(function (data) {
+            $scope.users = data;
+        }).error(function () {
             console.log("error al obtener datos");
             return;
         });
     };
     $scope.getusers();
 
-    socket.on('eguneratu', function(data) { // Listening in Socket in Angular Controller
+    socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
         $scope.getusers();
     });
 
     // filter users to show
-    $scope.filterUser = function(user) {
+    $scope.filterUser = function (user) {
         return user.isDeleted !== true;
     };
 
     // mark user as deleted
-    $scope.deleteUser = function(id) {
+    $scope.deleteUser = function (id) {
         var filtered = $filter('filter')($scope.users, {id: id});
         if (filtered.length) {
             filtered[0].isDeleted = true;
@@ -604,9 +604,9 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
     };
 
     // add user
-    $scope.addUser = function() {
+    $scope.addUser = function () {
         $scope.users.push({
-            id: $scope.users.length+1,
+            id: $scope.users.length + 1,
             ref: '',
             backcolor: "#000000",
             forecolor: "#ffffff"
@@ -614,7 +614,7 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
     };
 
     // cancel all changes
-    $scope.cancel = function() {
+    $scope.cancel = function () {
         for (var i = $scope.users.length; i--;) {
             var user = $scope.users[i];
             // undelete
@@ -625,11 +625,12 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
             if (user.isNew) {
                 $scope.users.splice(i, 1);
             }
-        };
+        }
+        ;
     };
 
     // save edits
-    $scope.saveTable = function() {
+    $scope.saveTable = function () {
 
         for (var i = $scope.users.length; i--;) {
             var user = $scope.users[i];
@@ -638,18 +639,17 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
                 $scope.users.splice(i, 1);
             }
 
-            if ( user.backcolor===null) {
+            if (user.backcolor === null) {
                 user.backcolor = "#000000";
             }
-            if ( user.forecolor===null) {
+            if (user.forecolor === null) {
                 user.forecolor = "#ffffff";
             }
 
 
-            if ( user._id)
-            {
+            if (user._id) {
                 $http.post('/updatesetting', user);
-            }   else {
+            } else {
                 $http.post('/insertsetting', user);
             }
             $scope.getusers();
@@ -658,44 +658,61 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
     };
 });
 
-produccionApp.filter('searchBy', function() {
-    return function( array, prop , val ) {
-         // filter has polyfills for older browsers. Check underscore.js if needed
-         return array.filter( function(row) {
-             return row[prop] == val;
-         } )[0];
-         // this returns an array. You can pick the first element with [0]
+produccionApp.filter('searchBy', function () {
+    return function (array, prop, val) {
+        // filter has polyfills for older browsers. Check underscore.js if needed
+        return array.filter(function (row) {
+            return row[prop] == val;
+        })[0];
+        // this returns an array. You can pick the first element with [0]
     }
 });
 
-produccionApp.filter('searchByRefBackcolor', function() {
-  
-  return function( array, prop , val ) {
+produccionApp.filter('searchByRefBackcolor', function () {
 
-    var kk =  array.filter( function(row) {
-             return row[prop] == val;
-         } );
+    return function (array, prop, val) {
+        // miramos si tiene almohadilla
+        if (val === undefined) {
+            return false
+        }
+        var n = val.indexOf("#");
+        if (n > 0) {
+            var miarray = val.split('#');
+            val = miarray[0];
+        }
+        var kk = array.filter(function (row) {
+            return row[prop] == val;
+        });
 
-    if( kk.length > 0 ) {
-      return kk[0].backcolor;
+        if (kk.length > 0) {
+            return kk[0].backcolor;
+        }
+
+        return  null;
     }
-
-    return  null;
-  }
 });
 
-produccionApp.filter('searchByRefForecolor', function() {
-  
-  return function( array, prop , val ) {
+produccionApp.filter('searchByRefForecolor', function () {
 
-    var kk =  array.filter( function(row) {
-             return row[prop] == val;
-         } );
+    return function (array, prop, val) {
+        // miramos si tiene almohadilla
+        if (val === undefined) {
+            return false
+        }
+        var n = val.indexOf("#");
+        if (n > 0) {
+            var miarray = val.split('#');
+            val = miarray[0];
+        }
 
-    if( kk.length > 0 ) {
-      return kk[0].forecolor;
+        var kk = array.filter(function (row) {
+            return row[prop] == val;
+        });
+
+        if (kk.length > 0) {
+            return kk[0].forecolor;
+        }
+
+        return  null;
     }
-
-    return  null;
-  }
 });
