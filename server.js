@@ -86,6 +86,8 @@ server.post('/saveplanificacion', get.save(io));
 
 server.post('/sartu', get.sartu);
 
+server.get('/egutegia', get.egutegia);
+
 //Settings
 
 server.get('/getsettings', get.getsettings);

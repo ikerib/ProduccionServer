@@ -208,6 +208,35 @@ exports.sartu = function (req, res) {
 
 };
 
+exports.egutegia = function(req, res){
+
+    if (!db.serverConfig.isConnected()) {
+        db.open(function(err, db) {
+            if(!err) {
+
+            } else {
+                onErr(err, function(){
+                    console.log(err);
+                    db.close();
+                });
+            }
+        });
+    }
+
+    db.collection('planificacion').find({}).toArray(function(err, items){
+        if(!err) {
+            res.json(items);
+        } else {
+            onErr(err, function(){
+                console.log(err);
+                db.close();
+            });
+        }
+    })
+
+
+
+};
 
 //Settings
 
@@ -296,3 +325,4 @@ exports.updateSetting = function(req, res){
     })
 
 };
+
