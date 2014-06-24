@@ -1,4 +1,4 @@
-var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable']);
+var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable', 'ngSanitize']);
 
 produccionApp.config(function ($routeProvider) {
     $routeProvider
@@ -715,4 +715,21 @@ produccionApp.filter('searchByRefForecolor', function () {
 
         return  null;
     }
+});
+
+produccionApp.filter('formatText', function (){
+    return function(input) {
+        if(!input) return input;
+
+        var output = input
+            //replace possible line breaks.
+            .replace(/(\r\n|\r|\n)/g, '<br/>')
+            .replace('\#','<br/>')
+            //replace tabs
+            .replace(/\t/g, '&nbsp;&nbsp;&nbsp;')
+            //replace spaces.
+            .replace(/ /g, '&nbsp;');
+
+        return output;
+    };
 });

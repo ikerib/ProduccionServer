@@ -38,7 +38,7 @@
                     </thead>
                     <tbody>
                     <tr ng-controller="linea1Controller">
-                        <td class="tdlinea">Linea:11</td>
+                        <td class="tdlinea">Linea:1</td>
                         <td ng-repeat="egunak in datuak">
                             <table class="table text-center table-condensed">
                                 <thead>
@@ -187,7 +187,9 @@
                                                                           data-turno="1"
                                                                           data-linea="2"
                                                                           editable-text="orden.ref"
-                                                                          onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                                          ng-bind-html="orden.ref"
+                                                                          onbeforesave="updateUser($data, this)">{{ orden.ref  }}</span>
+                                                                <!--<span ng-bind-html="orden.ref"></span>-->
 
                                                             </td>
                                                         </tr>
