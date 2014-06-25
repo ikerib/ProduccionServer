@@ -664,6 +664,7 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
 });
 
 produccionApp.controller('egutegiaController', function ($scope, $http, socket) {
+
     $scope.uiConfig = {
         calendar:{
             height: 450,
@@ -678,17 +679,23 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket) 
             eventResize: $scope.alertOnResize
         }
     };
-//    $scope.eventSources = [
-//        {title: 'Long Event',start: new Date('2014-06-04'),end: new Date('2014-06-06')}
-//    ];
     $scope.eventSources = [
-        {title: 'Long Event',start: '2014-06-04',end: '2014-06-06'}
+        {title: 'Long Event',start: new Date('2014-06-04'),end: new Date('2014-06-06')}
     ];
-//    $scope.events = {
-//            title: "XIEEEEE",
-//            start: "2014-06-24",
-//            allday: true
-//    };
+
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    $scope.events = [
+        {title: 'All Day Event',start: new Date(y, m, 1)},
+        {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
+        {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
+        {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
+        {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+        {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+    ];
+
 
 //    $('#calendar').fullCalendar({
 //        theme: true,
@@ -733,6 +740,8 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket) 
 //            $scope.events[i] = {id:data[i].id, title: data[i].task,start: new Date(data[i].start), end: new Date(data[i].end),allDay: false};
 //        }
 //    });
+
+
 });
 
 produccionApp.filter('searchBy', function () {
