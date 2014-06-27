@@ -242,10 +242,14 @@ exports.egutegia = function(req, res){
 // Expertis
 
 exports.expertis = function(req, res) {
-    var cn = 'DRIVER={misqlserver};SERVER=SERVSGBD;UID=usr_elektronika;PWD=ikeriker;DATABASE=testsql';
+//    var cn = 'DRIVER={FreeTDS};SERVER=10.0.0.26;UID=usr_elektronika;PWD=ikeriker;DATABASE=testsql';
+//    var cn = "DRIVER={misqlserver};SERVER=10.0.0.26;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01"
+//    var cn = '"DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01"';
+    var cn = "DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01";
     var Database = require('odbc').Database, db = new Database();
     db.open(cn, function(err){
         if (err) {return console.log(err);}
+        console.log("xieeee");
     });
 }
 
