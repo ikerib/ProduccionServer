@@ -238,8 +238,18 @@ exports.egutegia = function(req, res){
 
 };
 
-//Settings
 
+// Expertis
+
+exports.expertis = function(req, res) {
+    var cn = 'DRIVER={misqlserver};SERVER=SERVSGBD;UID=usr_elektronika;PWD=ikeriker;DATABASE=testsql';
+    var Database = require('odbc').Database, db = new Database();
+    db.open(cn, function(err){
+        if (err) {return console.log(err);}
+    });
+}
+
+//Settings
 exports.getsettings = function(req, res){
 
     if (!db.serverConfig.isConnected()) {

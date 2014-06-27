@@ -88,6 +88,10 @@ server.post('/sartu', get.sartu);
 
 server.get('/egutegia', get.egutegia);
 
+// SQL SERVER
+
+server.get('/expertis', get.expertis);
+
 //Settings
 
 server.get('/getsettings', get.getsettings);
