@@ -242,16 +242,68 @@ exports.egutegia = function(req, res){
 // Expertis
 
 exports.expertis = function(req, res) {
-//    var cn = 'DRIVER={FreeTDS};SERVER=10.0.0.26;UID=usr_elektronika;PWD=ikeriker;DATABASE=testsql';
-//    var cn = "DRIVER={misqlserver};SERVER=10.0.0.26;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01"
-//    var cn = '"DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01"';
     var cn = "DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01";
     var Database = require('odbc').Database, db = new Database();
     db.open(cn, function(err){
         if (err) {return console.log(err);}
-        console.log("xieeee");
+
+        db.query("SELECT [IDArticulo], [NOrden], [QFabricar], [QIniciada], [QFabricada],[IDComponente],[StockFisico]," +
+            "[QNecesaria],[QConsumida],[QPendiente],[IDAlmacenComponente] " +
+            "FROM [XEXPERTIS01].[dbo].[VCIPlanificacionOF]",
+
+            function (err, rows, moreResultSets) {
+                if (err) {
+                    return console.log(err);
+                }
+
+//                console.log(rows);
+
+                res.json(rows);
+
+            //if moreResultSets is truthy, then this callback function will be called
+            //again with the next set of rows.
+        });
+
     });
 }
+
+
+exports.expertisorden = function(req, res) {
+
+    var orden = req.params.orden;
+    var miparam = [];
+    miparam.push(orden);
+
+    var cn = "DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01";
+    var Database = require('odbc').Database, db = new Database();
+    db.open(cn, function(err){
+        if (err) {return console.log(err);}
+
+        db.query("SELECT DISTINCT [IDArticulo], [NOrden], [QFabricar], [QIniciada], [QFabricada]" +
+            "FROM [XEXPERTIS01].[dbo].[VCIPlanificacionOF] " +
+            "WHERE [NOrden] = ? "
+            , miparam,
+
+            function (err, rows, moreResultSets) {
+                if (err) {
+                    return console.log(err);
+                }
+
+//                console.log(rows);
+
+                res.json(rows);
+
+                db.close(function () {
+
+                });
+            });
+
+    });
+}
+
+
+
+
 
 //Settings
 exports.getsettings = function(req, res){

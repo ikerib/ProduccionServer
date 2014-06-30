@@ -91,6 +91,7 @@ server.get('/egutegia', get.egutegia);
 // SQL SERVER
 
 server.get('/expertis', get.expertis);
+server.get('/expertis/orden/:orden', get.expertisorden);
 
 //Settings
 
