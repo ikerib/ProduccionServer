@@ -55,17 +55,17 @@
                                                         <table class="azkentabla">
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
-                                                                <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;">
-                                                                    <!--<div class="item-wrapper">-->
-                                                                        <!--<a href="#" data-miid="{{ egunak._id }}"-->
-                                                                        <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
+                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                             data-fetxa="{{egunak.fetxa}}"
                                                                             data-turno="1"
                                                                             data-linea="1"
                                                                             editable-text="orden.ref"
+                                                                            e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
+                                                                            ng-mouseenter="arraton(orden.ref)"
+                                                                            ng-click="grafikoa()"
                                                                             ng-bind-html="orden.ref"
                                                                             onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
-                                                                    <!--</div>-->
                                                                 </td>
                                                             </tr>
                                                             <!--<tr><td ng-if="turnos.turno==1">+</td></tr>-->
@@ -80,7 +80,6 @@
                                                                 data-turno="1"
                                                                 data-linea="1"
                                                                 editable-text="orden.ref"
-                                                                ng-bind-html="orden.ref"
                                                                 onbeforesave="addData($data, this)">+</span>
                                                     </td>
                                                 </tr>
@@ -93,13 +92,15 @@
                                                         <table class="azkentabla">
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
-                                                                <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
                                                                         <!--<span ng-style="{color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important; }" data-miid="{{ egunak._id }}"-->
                                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                               data-fetxa="{{egunak.fetxa}}"
                                                                               data-turno="2"
                                                                               data-linea="1"
                                                                               editable-text="orden.ref"
+                                                                              e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
+                                                                              ng-mouseenter="arraton(orden.ref)"
                                                                               ng-bind-html="orden.ref"
                                                                               onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
 
@@ -117,7 +118,6 @@
                                                             data-turno="2"
                                                             data-linea="1"
                                                             editable-text="orden.ref"
-                                                            ng-bind-html="orden.ref"
                                                             onbeforesave="addData($data, this)">+</span>
                                                     </td>
                                                 </tr>
@@ -130,13 +130,15 @@
                                                         <table class="azkentabla">
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
-                                                                <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                                <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                               data-fetxa="{{egunak.fetxa}}"
                                                                               data-turno="3"
                                                                               data-linea="1"
                                                                               editable-text="orden.ref"
+                                                                              e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
+                                                                              ng-mouseenter="arraton(orden.ref)"
                                                                               ng-bind-html="orden.ref"
                                                                               onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
 
@@ -154,7 +156,6 @@
                                                           data-turno="3"
                                                           data-linea="1"
                                                           editable-text="orden.ref"
-                                                          ng-bind-html="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span>
                                                     </td>
                                                 </tr>
@@ -186,13 +187,15 @@
                                                     <table class="azkentabla">
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
-                                                            <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                            <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                           data-fetxa="{{egunak.fetxa}}"
                                                                           data-turno="1"
                                                                           data-linea="2"
                                                                           editable-text="orden.ref"
+                                                                          e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
+                                                                          ng-mouseenter="arraton(orden.ref)"
                                                                           ng-bind-html="orden.ref"
                                                                           onbeforesave="updateUser($data, this)">{{ orden.ref  }}</span>
                                                                 <!--<span ng-bind-html="orden.ref"></span>-->
@@ -211,7 +214,6 @@
                                                               data-turno="1"
                                                               data-linea="2"
                                                               editable-text="orden.ref"
-                                                              ng-bind-html="orden.ref"
                                                               onbeforesave="addData($data, this)">+</span>
                                                 </td>
                                             </tr>
@@ -224,13 +226,15 @@
                                                     <table class="azkentabla">
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
-                                                            <td  style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                            <td  style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                           data-fetxa="{{egunak.fetxa}}"
                                                                           data-turno="2"
                                                                           data-linea="2"
                                                                           editable-text="orden.ref"
+                                                                          e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
+                                                                          ng-mouseenter="arraton(orden.ref)"
                                                                           ng-bind-html="orden.ref"
                                                                           onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
 
@@ -248,7 +252,6 @@
                                                           data-turno="2"
                                                           data-linea="2"
                                                           editable-text="orden.ref"
-                                                          ng-bind-html="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span>
                                                 </td>
                                             </tr>
@@ -261,13 +264,15 @@
                                                     <table class="azkentabla">
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
-                                                            <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;">
+                                                            <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                           data-fetxa="{{egunak.fetxa}}"
                                                                           data-turno="3"
                                                                           data-linea="2"
                                                                           editable-text="orden.ref"
+                                                                          e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
+                                                                          ng-mouseenter="arraton(orden.ref)"
                                                                           ng-bind-html="orden.ref"
                                                                           onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
 
@@ -285,7 +290,6 @@
                                                           data-turno="3"
                                                           data-linea="2"
                                                           editable-text="orden.ref"
-                                                          ng-bind-html="orden.ref"
                                                           onbeforesave="addData($data, this)">+</span>
                                                 </td>
                                             </tr>
@@ -315,4 +319,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="row" style="display: none;">
+    <highchart id="chart1" config="chartConfig" class="span10"></highchart>
 </div>

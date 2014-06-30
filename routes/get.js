@@ -59,12 +59,19 @@ exports.all = function(req, res){
     desde = moment(req.params.desde, "YYYY-MM-DD").toISOString();
     hasta = moment(req.params.hasta, "YYYY-MM-DD").toISOString();
 
+    console.log(desde);
+    console.log(hasta);
+    console.log('{ linea: milinea },{ "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }} ]');
+
     db.collection('planificacion').find( {
         $and: [
             { linea: milinea },
             { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
             ]
         }).toArray(function(err, items){
+        if (err) {return console.log(err);}
+        console.log(items);
+
             // Aste osoa bueltatuko dugu
             for (var k=0; k < 7; k++ ) {
                 var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
@@ -289,7 +296,7 @@ exports.expertisorden = function(req, res) {
                     return console.log(err);
                 }
 
-//                console.log(rows);
+//                console.log(rows[0]);
 
                 res.json(rows);
 

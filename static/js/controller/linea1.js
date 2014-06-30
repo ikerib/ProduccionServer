@@ -160,5 +160,32 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
         return { color: kolorea }
     }
 
+    $scope.arraton = function(of) {
+        var miof="";
+        var n = of.indexOf("$");
+        if (n > 0) {
+            var miarray = of.split('$');
+            miof = miarray[1];
+
+            var miurl = '/expertis/orden/' + miof;
+
+            $http.get(miurl).success(function (data) {
+                $scope.arraton = "A Frabricar: " + data[0].QFabricar + " // Iniciada: " + data[0].QIniciada + " // Fabricada: " + data[0].QFabricada;
+            }).error(function () {
+                console.log("error al obtener datos");
+                return;
+            });
+        }
+    }
+
+    $scope.grafikoa = function() {
+        console.log("hemen");
+        $scope.$parent.chartData = [
+            ['jojo', 80]
+        ];
+        $scope.$parent.chartData =
+            ['jojo', 80]
+        ;
+    }
 
 });

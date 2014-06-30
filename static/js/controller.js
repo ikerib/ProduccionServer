@@ -1,4 +1,4 @@
-var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable', 'ngSanitize', 'ui.calendar']);
+var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng']);
 
 produccionApp.config(function ($routeProvider) {
     $routeProvider
@@ -132,3 +132,4 @@ produccionApp.filter('formatText', function (){
         return output;
     };
 });
+
