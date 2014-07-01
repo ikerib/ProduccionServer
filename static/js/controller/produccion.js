@@ -2,7 +2,13 @@
  * Created by ikerib on 30/06/14.
  */
 
-produccionApp.controller('produccionController', function ($scope, $http) {
+produccionApp.controller('produccionController', function ($scope, $http, $cookieStore) {
+
+    $scope.isadmin = false;
+
+    if ( $cookieStore.get('gitekplanificacion') === "1" ) {
+        $scope.isadmin = true;
+    }
 
     $scope.datepickers = {
         dt: false,
@@ -204,7 +210,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
     $scope.getusers();
 
 
-    $scope.chartData = [['A fabricar', 670], ['kaka',154]];
+    $scope.chartData = [['A fabricar', 670], ['Fabricado',154]];
     $scope.chartConfig = {
         chart: {
             plotBackgroundColor: null,
@@ -212,7 +218,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
             plotShadow: false
         },
         title: {
-            text: 'Browser market shares at a specific website, 2014'
+            text: 'Graficos de la OF'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

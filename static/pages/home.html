@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="col-md-10 scrolla">
-
+            <p ng-if="isadmin">Modo de edición activado.</p>
             <div id="scroller">
                 <table class="table table-condensed">
                     <thead>
@@ -64,8 +64,14 @@
                                                                             e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
                                                                             ng-mouseenter="arraton(orden.ref)"
                                                                             ng-click="grafikoa()"
+                                                                            ng-if="isadmin"
                                                                             ng-bind-html="orden.ref"
                                                                             onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                          ng-if="!isadmin"
+                                                                          ng-click="grafikoa()"
+                                                                          ng-bind-html="orden.ref"
+                                                                          >{{ orden.ref }}</span>
                                                                 </td>
                                                             </tr>
                                                             <!--<tr><td ng-if="turnos.turno==1">+</td></tr>-->
@@ -321,6 +327,6 @@
     </div>
 </div>
 
-<div class="row" style="display: none;">
+<div class="row" style="display: visible;">
     <highchart id="chart1" config="chartConfig" class="span10"></highchart>
 </div>

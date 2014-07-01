@@ -1,4 +1,4 @@
-var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng']);
+var produccionApp = angular.module('produccionApp', ['ngRoute', 'ui.bootstrap', 'colorpicker.module', 'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng', 'ngCookies']);
 
 produccionApp.config(function ($routeProvider) {
     $routeProvider
@@ -18,6 +18,11 @@ produccionApp.config(function ($routeProvider) {
         .when('/egutegia', {
             templateUrl:'pages/egutegia.html',
             controller:'egutegiaController'
+        })
+
+        .when('/login', {
+            templateUrl:'pages/login.html',
+            controller:'loginController'
         })
 });
 
