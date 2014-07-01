@@ -59,10 +59,6 @@ exports.all = function(req, res){
     desde = moment(req.params.desde, "YYYY-MM-DD").toISOString();
     hasta = moment(req.params.hasta, "YYYY-MM-DD").toISOString();
 
-    console.log(desde);
-    console.log(hasta);
-    console.log('{ linea: milinea },{ "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }} ]');
-
     db.collection('planificacion').find( {
         $and: [
             { linea: milinea },
@@ -70,7 +66,7 @@ exports.all = function(req, res){
             ]
         }).toArray(function(err, items){
         if (err) {return console.log(err);}
-        console.log(items);
+
 
             // Aste osoa bueltatuko dugu
             for (var k=0; k < 7; k++ ) {
@@ -136,7 +132,6 @@ exports.all = function(req, res){
                 resultado.push(row);
 
             }
-
 
             res.json(resultado);
 
@@ -230,9 +225,40 @@ exports.egutegia = function(req, res){
         });
     }
 
-    db.collection('planificacion').find({}).toArray(function(err, items){
+    var miresp = [];
+
+    desde = moment(req.query.start, "YYYY-MM-DD").toISOString();
+    hasta = moment(req.query.end, "YYYY-MM-DD").toISOString();
+
+    db.collection('planificacion').find( {
+        $and: [
+            { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
+        ]
+    }).toArray(function(err, items){
         if(!err) {
-            res.json(items);
+
+            for (var i=0; i < items.length; i++ ) {
+                if ( items[i].turnoak.length > 0 ) {
+                    var temp = items[i].turnoak;
+                    for ( var j=0; j < temp.length; j++) {
+
+                        if ( temp[j].ordenes.length > 0) {
+                            var mit = temp[j].ordenes;
+                            for ( var k=0; k < mit.length; k++) {
+                                var miobj = {};
+                                miobj.title = mit[k].ref;
+                                miobj.start = moment(items[i].fetxa).format('YYYY-MM-DD');
+                                miresp.push(miobj);
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
+            res.json(miresp);
+
         } else {
             onErr(err, function(){
                 console.log(err);
@@ -240,9 +266,23 @@ exports.egutegia = function(req, res){
             });
         }
     })
-
-
-
+//
+//    miresp.push([
+//        {
+//            title  : 'event111111',
+//            start  : '2014-07-01'
+//        },
+//        {
+//            title  : 'event22222',
+//            start  : '2014-07-05',
+//            end    : '2014-07-07'
+//        },
+//        {
+//            title  : 'event333333',
+//            start  : '2014-07-09T12:30:00',
+//            allDay : false // will make the time show
+//        }
+//    ]);
 };
 
 
@@ -307,9 +347,6 @@ exports.expertisorden = function(req, res) {
 
     });
 }
-
-
-
 
 
 //Settings

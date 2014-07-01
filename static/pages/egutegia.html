@@ -1,4 +1,9 @@
 
 <div class="row">&nbsp;</div>
 
-<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="events"></div>
+<div class="row" ng-controller="egutegiaController">
+    <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+
+    {{ eventSources }}
+</div>
+
