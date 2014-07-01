@@ -48,6 +48,7 @@ produccionApp.controller('produccionController', function ($scope, $http) {
         $scope.eguna5 = moment(fetxa, 'YYYY/MM/DD').add('days', 4).format("YYYY/MM/DD");
         $scope.eguna6 = moment(fetxa, 'YYYY/MM/DD').add('days', 5).format("YYYY/MM/DD");
         $scope.eguna7 = moment(fetxa, 'YYYY/MM/DD').add('days', 6).format("YYYY/MM/DD");
+        $scope.astea = moment(fetxa, 'YYYY/MM/DD').isoWeek();
         $scope.dt = $scope.eguna1;
         $scope.dtSecond = $scope.eguna7;
         $scope.$broadcast('eguneratuDatuak');
