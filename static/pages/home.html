@@ -15,7 +15,6 @@
             </div>
         </div>
         <div class="col-md-10 scrolla">
-            <p ng-if="isadmin">Modo de edición activado.</p>
             <div id="scroller">
                 <table class="table table-condensed">
                     <thead>
@@ -74,12 +73,11 @@
                                                                           >{{ orden.ref }}</span>
                                                                 </td>
                                                             </tr>
-                                                            <!--<tr><td ng-if="turnos.turno==1">+</td></tr>-->
                                                             </tbody>
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr ng-show="isadmin">
                                                     <td>
                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                 data-fetxa="{{egunak.fetxa}}"
@@ -107,8 +105,15 @@
                                                                               editable-text="orden.ref"
                                                                               e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
                                                                               ng-mouseenter="arraton(orden.ref)"
+                                                                              ng-click="grafikoa()"
+                                                                              ng-if="isadmin"
                                                                               ng-bind-html="orden.ref"
                                                                               onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                                        <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                          ng-if="!isadmin"
+                                                                          ng-click="grafikoa()"
+                                                                          ng-bind-html="orden.ref"
+                                                                          >{{ orden.ref }}</span>
 
                                                                 </td>
                                                             </tr>
@@ -117,7 +122,7 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr ng-show="isadmin">
                                                     <td>
                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                             data-fetxa="{{egunak.fetxa}}"
@@ -145,8 +150,15 @@
                                                                               editable-text="orden.ref"
                                                                               e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
                                                                               ng-mouseenter="arraton(orden.ref)"
+                                                                              ng-click="grafikoa()"
+                                                                              ng-if="isadmin"
                                                                               ng-bind-html="orden.ref"
                                                                               onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+                                                                        <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                          ng-if="!isadmin"
+                                                                          ng-click="grafikoa()"
+                                                                          ng-bind-html="orden.ref"
+                                                                          >{{ orden.ref }}</span>
 
                                                                 </td>
                                                             </tr>
@@ -155,7 +167,7 @@
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr ng-show="isadmin">
                                                     <td>
                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                           data-fetxa="{{egunak.fetxa}}"
@@ -202,9 +214,16 @@
                                                                           editable-text="orden.ref"
                                                                           e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
                                                                           ng-mouseenter="arraton(orden.ref)"
+                                                                          ng-click="grafikoa()"
+                                                                            ng-if="isadmin"
                                                                           ng-bind-html="orden.ref"
                                                                           onbeforesave="updateUser($data, this)">{{ orden.ref  }}</span>
                                                                 <!--<span ng-bind-html="orden.ref"></span>-->
+                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                          ng-if="!isadmin"
+                                                                          ng-click="grafikoa()"
+                                                                          ng-bind-html="orden.ref"
+                                                                          >{{ orden.ref }}</span>
 
                                                             </td>
                                                         </tr>
@@ -213,7 +232,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr ng-show="isadmin">
                                                 <td>
                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                               data-fetxa="{{egunak.fetxa}}"
@@ -241,8 +260,16 @@
                                                                           editable-text="orden.ref"
                                                                           e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
                                                                           ng-mouseenter="arraton(orden.ref)"
+                                                                          ng-click="grafikoa()"
+                                                                            ng-if="isadmin"
                                                                           ng-bind-html="orden.ref"
                                                                           onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+
+                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                          ng-if="!isadmin"
+                                                                          ng-click="grafikoa()"
+                                                                          ng-bind-html="orden.ref"
+                                                                          >{{ orden.ref }}</span>
 
                                                             </td>
                                                         </tr>
@@ -251,7 +278,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr ng-show="isadmin">
                                                 <td>
                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                           data-fetxa="{{egunak.fetxa}}"
@@ -279,8 +306,16 @@
                                                                           editable-text="orden.ref"
                                                                           e-form="textBtnForm" ng-dblclick="textBtnForm.$show()"
                                                                           ng-mouseenter="arraton(orden.ref)"
+                                                                          ng-click="grafikoa()"
+                                                                            ng-if="isadmin"
                                                                           ng-bind-html="orden.ref"
                                                                           onbeforesave="updateUser($data, this)">{{ orden.ref }}</span>
+
+                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                          ng-if="!isadmin"
+                                                                          ng-click="grafikoa()"
+                                                                          ng-bind-html="orden.ref"
+                                                                          >{{ orden.ref }}</span>
 
                                                             </td>
                                                         </tr>
@@ -289,7 +324,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr ng-show="isadmin">
                                                 <td>
                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                           data-fetxa="{{egunak.fetxa}}"

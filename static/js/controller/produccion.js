@@ -209,6 +209,15 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     };
     $scope.getusers();
 
+    $scope.dologout = function() {
+        console.log("logout");
+        if ( $scope.isadmin ) {
+            $cookieStore.remove("gitekplanificacion");
+        }
+        window.location.href = "/";
+    }
+    $scope.koo = $cookieStore.get('gitekplanificacion');
+
 
     $scope.chartData = [['A fabricar', 670], ['Fabricado',154]];
     $scope.chartConfig = {

@@ -24,6 +24,10 @@ produccionApp.config(function ($routeProvider) {
             templateUrl:'pages/login.html',
             controller:'loginController'
         })
+
+        .when('/logout', {
+            controller:'logoutController'
+        })
 });
 
 produccionApp.factory('socket', function () {

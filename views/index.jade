@@ -49,7 +49,10 @@ html.no-js
                 a(href='#/egutegia') Egutegia
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='#/login') Login
+                a(href='#')(ng-show='isadmin')(ng-click='dologout()')
+                  span.bg-primary Modo de edición activado.
+                  span  &nbsp; &nbsp;  Logout
+                a(href='#/login')(ng-show='!isadmin') Login
                 //a(ng-click='#/login', class='btn-auth btn-github') Login
 
         //
@@ -86,3 +89,4 @@ html.no-js
     script(src='js/controller/setting.js')
     script(src='js/controller/egutegia.js')
     script(src='js/controller/login.js')
+    script(src='js/controller/logout.js')
