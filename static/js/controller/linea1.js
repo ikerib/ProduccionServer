@@ -2,7 +2,7 @@
  * Created by ikerib on 30/06/14.
  */
 
-produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
+produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket) {
 
     $scope.getDatuak = function () {
         $http.get('/planificacion/1/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function (data) {
@@ -11,7 +11,6 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
             console.log("error al obtener datos");
             return;
         });
-
     };
     $scope.getDatuak();
 
@@ -169,9 +168,11 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
             var miurl = '/expertis/orden/' + miof;
 
-            $http.get(miurl).success(function (data) {
+            $http.get(miurl)
+            .success(function (data) {
                 $scope.arraton = "A Frabricar: " + data[0].QFabricar + " // Iniciada: " + data[0].QIniciada + " // Fabricada: " + data[0].QFabricada;
-            }).error(function () {
+            })
+            .error(function () {
                 console.log("error al obtener datos");
                 return;
             });
@@ -180,39 +181,16 @@ produccionApp.controller('linea1Controller', function ($scope, $http, socket) {
 
     $scope.grafikoa = function() {
 
-        $scope.$parent.chartData = [['A fabricar', 670], ['Fabricado',454]];
+        // $http.jsonp('http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527')
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527";
 
-        $scope.$parent.chartConfig = {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Graficos de la OF'
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Producción',
-                data: $scope.chartData
-            }]
-        }
+        $http.get(url)
+        .success(function(data){
+            console.log(data);
+        })
+        .error(function(data, status, headers, config) {
+            console.log(data);
+        });
 
     }
 

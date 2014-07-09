@@ -20,24 +20,24 @@
                     <thead>
                     <tr>
                         <th>Semana {{ astea }}</th>
-                        <th class="text-center" ng-model="eguna1">{{ eguna1 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna1">{{ eguna1 | date : 'yyyy/MM/dd'}} <br /> Lunes</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna2">{{ eguna2 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna2">{{ eguna2 | date : 'yyyy/MM/dd'}} <br /> Martes</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna3">{{ eguna3 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna3">{{ eguna3 | date : 'yyyy/MM/dd'}} <br /> Miercoles</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna4">{{ eguna4 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna4">{{ eguna4 | date : 'yyyy/MM/dd'}} <br /> Jueves</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna5">{{ eguna5 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna5">{{ eguna5 | date : 'yyyy/MM/dd'}} <br /> Viernes</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna6">{{ eguna6 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna6">{{ eguna6 | date : 'yyyy/MM/dd'}} <br /> Sabado</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna7">{{ eguna7 | date : 'yyyy/MM/dd'}}</th>
+                        <th class="text-center" ng-model="eguna7">{{ eguna7 | date : 'yyyy/MM/dd'}} <br /> Domingo</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-controller="linea1Controller">
-                        <td class="tdlinea">Linea:1</td>
+                        <td class="tdlinea">Siplace</td>
                         <td ng-repeat="egunak in datuak">
                             <table class="table text-center table-condensed">
                                 <thead>
@@ -53,7 +53,7 @@
                                                     <td>
                                                         <table class="azkentabla">
                                                             <tbody>
-                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
+                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1" style="border:1px solid #ccc">
                                                                 <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                             data-fetxa="{{egunak.fetxa}}"
@@ -95,7 +95,7 @@
                                                     <td>
                                                         <table class="azkentabla">
                                                             <tbody>
-                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
+                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2" style="border:1px solid #ccc">
                                                                 <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
                                                                         <!--<span ng-style="{color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important; }" data-miid="{{ egunak._id }}"-->
                                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
@@ -140,7 +140,7 @@
                                                     <td>
                                                         <table class="azkentabla">
                                                             <tbody>
-                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
+                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3" style="border:1px solid #ccc">
                                                                 <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
@@ -188,7 +188,7 @@
                         </td>
                     </tr>
                     <tr ng-controller="linea2Controller">
-                        <td class="tdlinea">Linea:2 </td>
+                        <td class="tdlinea">Assembleon </td>
                         <td ng-repeat="egunak in datuak">
                             <table class="table text-center table-condensed">
                                 <thead>
@@ -204,7 +204,7 @@
                                                 <td>
                                                     <table class="azkentabla">
                                                         <tbody>
-                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1">
+                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1" style="border:1px solid #ccc">
                                                             <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
@@ -250,7 +250,7 @@
                                                 <td>
                                                     <table class="azkentabla">
                                                         <tbody>
-                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2">
+                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2" style="border:1px solid #ccc">
                                                             <td  style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
@@ -296,7 +296,7 @@
                                                 <td>
                                                     <table class="azkentabla">
                                                         <tbody>
-                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3">
+                                                        <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3" style="border:1px solid #ccc">
                                                             <td style="background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip="{{arraton}}">
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
