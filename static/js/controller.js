@@ -83,9 +83,9 @@ produccionApp.filter('searchByRefBackcolor', function () {
         if (val === undefined) {
             return false
         }
-        var n = val.indexOf("#");
+        var n = val.indexOf("<br>");
         if (n > 0) {
-            var miarray = val.split('#');
+            var miarray = val.split('<br>');
             val = miarray[0];
         }
         var kk = array.filter(function (row) {
@@ -107,9 +107,9 @@ produccionApp.filter('searchByRefForecolor', function () {
         if (val === undefined) {
             return false
         }
-        var n = val.indexOf("#");
+        var n = val.indexOf("<br>");
         if (n > 0) {
-            var miarray = val.split('#');
+            var miarray = val.split('<br>');
             val = miarray[0];
         }
 

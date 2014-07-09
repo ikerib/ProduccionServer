@@ -134,7 +134,6 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
     };
 
-
     $scope.today = function () {
         // $scope.dt = new Date();
         $scope.dt = moment($scope.dt).toDate();
@@ -252,10 +251,25 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         }]
     }
 
-    $scope.grafikoa = function() {
+    $scope.grafikoa = function(val) {
 
-        // $http.jsonp('http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527')
-        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527";
+        var of="";
+        val = val.replace("<BR>", "<br>");
+        val = val.replace("<BR />", "<br>");
+        val = val.replace("<br />", "<br>");
+        if (val === undefined) {
+            return false
+        }
+        var n = val.indexOf("<br>");
+        if (n > 0) {
+            var miarray = val.split('<br>');
+            of = miarray[1];
+        }
+
+
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
+
+        console.log(url);
 
         $http.get(url)
         .success(function(data){
@@ -303,7 +317,48 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     }
 
 
+    $scope.arraton = function(val) {
+        var of="";
+        val = val.replace("<BR>", "<br>");
+        val = val.replace("<BR />", "<br>");
+        val = val.replace("<br />", "<br>");
+        if (val === undefined) {
+            return false
+        }
+        var n = val.indexOf("<br>");
+        if (n > 0) {
+            var miarray = val.split('<br>');
+            of = miarray[1];
+        }
 
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
+        $http.get(url)
+        .success(function (data) {
+            $scope.arraton = "A Frabricar: " + data.QFabricar + " // Iniciada: " + data.QIniciada + " // Fabricada: " + data.QFabricada;
+        })
+        .error(function () {
+            console.log("error al obtener datos");
+            return;
+        });
+
+        // var miof="";
+        // var n = of.indexOf("<");
+        // if (n > 0) {
+        //     var miarray = of.split('$');
+        //     miof = miarray[1];
+
+        //     var miurl = '/expertis/orden/' + miof;
+
+        //     $http.get(miurl)
+        //     .success(function (data) {
+        //         $scope.arraton = "A Frabricar: " + data[0].QFabricar + " // Iniciada: " + data[0].QIniciada + " // Fabricada: " + data[0].QFabricada;
+        //     })
+        //     .error(function () {
+        //         console.log("error al obtener datos");
+        //         return;
+        //     });
+        // }
+    }
 
 
 });
