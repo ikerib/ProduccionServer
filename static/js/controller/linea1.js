@@ -179,19 +179,5 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
         }
     }
 
-    $scope.grafikoa = function() {
-
-        // $http.jsonp('http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527')
-        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527";
-
-        $http.get(url)
-        .success(function(data){
-            console.log(data);
-        })
-        .error(function(data, status, headers, config) {
-            console.log(data);
-        });
-
-    }
-
+    
 });

@@ -88,13 +88,7 @@ server.post('/sartu', get.sartu);
 
 server.get('/egutegia', get.egutegia);
 
-// SQL SERVER
-
-server.get('/expertis', get.expertis);
-server.get('/expertis/orden/:orden', get.expertisorden);
-
 //Settings
-
 server.get('/getsettings', get.getsettings);
 server.post('/insertsetting', get.insertSetting);
 server.post('/updatesetting', get.updateSetting);

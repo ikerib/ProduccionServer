@@ -251,4 +251,59 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             data: $scope.chartData
         }]
     }
+
+    $scope.grafikoa = function() {
+
+        // $http.jsonp('http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527')
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of=OF202527";
+
+        $http.get(url)
+        .success(function(data){
+            $scope.chartData = [
+                ['A fabricar', parseFloat(data.QFabricar)], 
+                ['Fabricada',parseFloat(data.QFabricada)],
+                ['Iniciada', parseFloat(data.QIniciada)]
+            ];
+            $scope.chartConfig = {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Graficos del Articulo: ' + data.IDArticulo + ' en la Orden: ' + data.NOrden
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Producción',
+                    data: $scope.chartData
+                }]
+            }
+        })
+        .error(function(data, status, headers, config) {
+            console.log(data);
+        });
+
+    }
+
+
+
+
+
 });

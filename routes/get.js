@@ -266,87 +266,8 @@ exports.egutegia = function(req, res){
             });
         }
     })
-//
-//    miresp.push([
-//        {
-//            title  : 'event111111',
-//            start  : '2014-07-01'
-//        },
-//        {
-//            title  : 'event22222',
-//            start  : '2014-07-05',
-//            end    : '2014-07-07'
-//        },
-//        {
-//            title  : 'event333333',
-//            start  : '2014-07-09T12:30:00',
-//            allDay : false // will make the time show
-//        }
-//    ]);
 };
 
-
-// Expertis
-
-exports.expertis = function(req, res) {
-    var cn = "DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01";
-    var Database = require('odbc').Database, db = new Database();
-    db.open(cn, function(err){
-        if (err) {return console.log(err);}
-
-        db.query("SELECT [IDArticulo], [NOrden], [QFabricar], [QIniciada], [QFabricada],[IDComponente],[StockFisico]," +
-            "[QNecesaria],[QConsumida],[QPendiente],[IDAlmacenComponente] " +
-            "FROM [XEXPERTIS01].[dbo].[VCIPlanificacionOF]",
-
-            function (err, rows, moreResultSets) {
-                if (err) {
-                    return console.log(err);
-                }
-
-//                console.log(rows);
-
-                res.json(rows);
-
-            //if moreResultSets is truthy, then this callback function will be called
-            //again with the next set of rows.
-        });
-
-    });
-}
-
-
-exports.expertisorden = function(req, res) {
-
-    var orden = req.params.orden;
-    var miparam = [];
-    miparam.push(orden);
-
-    var cn = "DSN=misqlserver;UID=usr_elektronika;PWD=ikeriker;DATABASE=XEXPERTIS01";
-    var Database = require('odbc').Database, db = new Database();
-    db.open(cn, function(err){
-        if (err) {return console.log(err);}
-
-        db.query("SELECT DISTINCT [IDArticulo], [NOrden], [QFabricar], [QIniciada], [QFabricada]" +
-            "FROM [XEXPERTIS01].[dbo].[VCIPlanificacionOF] " +
-            "WHERE [NOrden] = ? "
-            , miparam,
-
-            function (err, rows, moreResultSets) {
-                if (err) {
-                    return console.log(err);
-                }
-
-//                console.log(rows[0]);
-
-                res.json(rows);
-
-                db.close(function () {
-
-                });
-            });
-
-    });
-}
 
 
 //Settings
