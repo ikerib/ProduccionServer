@@ -83,6 +83,9 @@ produccionApp.filter('searchByRefBackcolor', function () {
         if (val === undefined) {
             return false
         }
+        val = val.replace("<BR>", "<br>");
+        val = val.replace("<BR />", "<br>");
+        val = val.replace("<br />", "<br>");
         var n = val.indexOf("<br>");
         if (n > 0) {
             var miarray = val.split('<br>');
@@ -107,6 +110,9 @@ produccionApp.filter('searchByRefForecolor', function () {
         if (val === undefined) {
             return false
         }
+        val = val.replace("<BR>", "<br>");
+        val = val.replace("<BR />", "<br>");
+        val = val.replace("<br />", "<br>");
         var n = val.indexOf("<br>");
         if (n > 0) {
             var miarray = val.split('<br>');
