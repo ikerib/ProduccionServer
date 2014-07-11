@@ -162,8 +162,16 @@ exports.save = function(io) {
 
         var newData;
         if ( data.milinea === 1) {
+
+            for (var i=data.linea1[0].ordenes.length; i-->0; ) {
+                if (data.linea1[0].ordenes[i].ref === '') data.linea1[0].ordenes.splice(i, 1);
+            }
             newData = data.linea1;
+
         } else {
+            for (var i=data.linea2[0].ordenes.length; i-->0; ) {
+                if (data.linea2[0].ordenes[i].ref === '') data.linea2[0].ordenes.splice(i, 1);
+            }
             newData = data.linea2;
         }
 
