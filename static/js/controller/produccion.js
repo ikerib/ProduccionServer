@@ -5,7 +5,7 @@
 produccionApp.controller('produccionController', function ($scope, $http, $cookieStore) {
 
     $scope.isadmin = false;
-
+    $scope.arraton="Haz click en OF para refrescar datos.";
     if ( $cookieStore.get('gitekplanificacion') === "1" ) {
         $scope.isadmin = true;
     }
@@ -217,40 +217,6 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     }
     $scope.koo = $cookieStore.get('gitekplanificacion');
 
-
-    $scope.chartData = [['A fabricar', 670], ['Fabricado',154]];
-    $scope.chartConfig = {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
-        title: {
-            text: 'Graficos de la OF'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Producción',
-            data: $scope.chartData
-        }]
-    }
-
     $scope.grafikoa = function(val) {
 
         var of="";
@@ -269,14 +235,15 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
         var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
 
-        console.log(url);
+        // console.log(url);
 
-        $http.get(url)
+        $http.get(url,{cache:false})
         .success(function(data){
+
             $scope.chartData = [
-                ['A fabricar', parseFloat(data.QFabricar)], 
-                ['Fabricada',parseFloat(data.QFabricada)],
-                ['Iniciada', parseFloat(data.QIniciada)]
+                ['A fabricar', parseFloat(data[0].QFabricar)], 
+                ['Fabricada',parseFloat(data[0].QFabricada)],
+                ['Iniciada', parseFloat(data[0].QIniciada)]
             ];
             $scope.chartConfig = {
                 chart: {
@@ -313,9 +280,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         .error(function(data, status, headers, config) {
             console.log(data);
         });
-
     }
-
 
     $scope.arraton = function(val) {
         var of="";
@@ -334,30 +299,15 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
         $http.get(url)
         .success(function (data) {
-            $scope.arraton = "A Frabricar: " + data.QFabricar + " // Iniciada: " + data.QIniciada + " // Fabricada: " + data.QFabricada;
+            $scope.arraton = "A Frabricar: " + parseInt(data.QFabricar) 
+                            + "<br />Iniciada: " + parseInt(data.QIniciada) 
+                            + "<br />Fabricada: " + parseInt(data.QFabricada);
         })
         .error(function () {
             console.log("error al obtener datos");
             return;
         });
 
-        // var miof="";
-        // var n = of.indexOf("<");
-        // if (n > 0) {
-        //     var miarray = of.split('$');
-        //     miof = miarray[1];
-
-        //     var miurl = '/expertis/orden/' + miof;
-
-        //     $http.get(miurl)
-        //     .success(function (data) {
-        //         $scope.arraton = "A Frabricar: " + data[0].QFabricar + " // Iniciada: " + data[0].QIniciada + " // Fabricada: " + data[0].QFabricada;
-        //     })
-        //     .error(function () {
-        //         console.log("error al obtener datos");
-        //         return;
-        //     });
-        // }
     }
 
 
