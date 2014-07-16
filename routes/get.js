@@ -2,29 +2,141 @@
  * Created by ikerib on 27/05/14.
  */
 
-var mongo = require('mongodb'),
-    Server = mongo.Server,
-    Db = mongo.Db;
-var server = new Server('localhost', 27017, {auto_reconnect: true});
-var db = new Db('planificacion', server);
 var moment = require('moment');
-var onErr = function(err,callback){
-    db.close();
-    callback(err);
-};
 var forEach = require('async-foreach').forEach;
 var httpsync = require('httpsync');
 
-db.open(function(err, db) {
-    if(!err) {
+var monk = require('monk');
+var db = monk('localhost:27017/planificacion');
+var c_planificacion = db.get('planificacion');
 
-    } else {
-        onErr(err, function(){
-            console.log(err);
-            db.close();
-        });
-    }
-});
+exports.getlinea1 = function(req,res) {
+
+    var desde = new Date(req.params.desde);
+
+    var hasta = new Date(req.params.hasta);
+    var resul = [];
+
+    var asteaArray = [
+        moment(desde).format('YYYY-MM-DD'),
+        moment(desde).add('days', 1).format('YYYY-MM-DD'),
+        moment(desde).add('days', 2).format('YYYY-MM-DD'),
+        moment(desde).add('days', 3).format('YYYY-MM-DD'),
+        moment(desde).add('days', 4).format('YYYY-MM-DD'),
+        moment(desde).add('days', 5).format('YYYY-MM-DD'),
+        moment(desde).add('days', 6).format('YYYY-MM-DD')
+    ];
+
+    desde = moment(req.params.desde, "YYYY-MM-DD").toISOString();
+    hasta = moment(req.params.hasta, "YYYY-MM-DD").toISOString();
+
+    c_planificacion.find( {
+        $and: [
+            { linea: 1 },
+            { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
+        ]
+    },function(err, items){
+        if (err) {
+            res.json(500, err);
+        }
+        if (items.length === 0) {
+            res.statusCode = 404;
+            return res.send({ error: 'Ez da topatu' });
+        }
+
+        var resul=[];
+
+        for (var k=0; k < 7; k++ ) {
+            var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
+            var topatua = false;
+            resul=[];
+
+            for (var i=0; i < items.length; i++ ) {
+
+                var fec = moment( items[i].fetxa).format('YYYY-MM-DD');
+
+                if ( fec === eguna ) {
+                    topatua=true;
+                    items[i].fetxa = fec;
+                    resul.push( items[i]);
+                }
+
+            }
+
+            if ( topatua == false ) {
+
+                resul[k].push({
+                    fetxa: eguna,
+                    linea:1
+                });
+            }
+        }
+
+        var resultado = [];
+        // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
+
+        forEach(resul, function(resul,callback){
+
+                var tmp = resul[0];
+                var row = {
+                    fetxa: resul.fetxa,
+                    _id:resul._id,
+                    linea1: []
+                };
+
+                var aurkitua1 = false;
+                if ( resul.ordenes.length > 0) {
+
+
+                    aurkitua1 = true;
+                    row.linea1 = resul.ordenes;
+
+                        forEach(resul.ordenes, function(orden, callback) {
+                            var val = orden.ref;
+                            if ( val != "" ) {
+                                var of="";
+                                val = val.replace("<BR>", "<br>");
+                                val = val.replace("<BR />", "<br>");
+                                val = val.replace("<br />", "<br>");
+                                if (val === undefined) {
+                                    return false
+                                }
+                                var n = val.indexOf("<br>");
+                                if (n > 0) {
+                                    var miarray = val.split('<br>');
+                                    tof = miarray[1];
+                                    var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
+                                    var req = httpsync.get({ url : url});
+                                    var res = req.end();
+
+                                    var miresp = res.data.toString();
+                                    var mijson = JSON.parse(miresp);
+                                    mijson.forEach(function(entry) {
+                                        if ( entry.QPendiente < entry.QNecesaria ) {
+                                            orden.badutstock = 1;
+                                        } else {
+                                            orden.badutstock = 0;
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                }
+
+                if ( aurkitua1 == false ) {
+                    row.linea1 = [];
+                }
+
+                resultado.push(row);
+
+        }
+        , function (err){
+            res.json(resultado);
+        }
+        );
+    });
+}
 
 exports.all = function(req, res){
 
@@ -44,30 +156,23 @@ exports.all = function(req, res){
         moment(desde).add('days', 6).format('YYYY-MM-DD')
     ];
 
-    if (!db.serverConfig.isConnected()) {
-        db.open(function(err, db) {
-            if(!err) {
-
-            } else {
-                onErr(err, function(){
-                    console.log(err);
-                    db.close();
-                });
-            }
-        });
-    }
-
-
     desde = moment(req.params.desde, "YYYY-MM-DD").toISOString();
     hasta = moment(req.params.hasta, "YYYY-MM-DD").toISOString();
 
-    db.collection('planificacion').find( {
+
+    c_planificacion.find( {
         $and: [
             { linea: milinea },
             { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
             ]
-        }).toArray(function(err, items){
-        if (err) {return console.log(err);}
+        },function(err, items){
+            if (err) {
+                res.json(500, err);
+            }
+            if (items.length === 0) {
+                res.statusCode = 404;
+                return res.send({ error: 'Ez da topatu' });
+            }
 
             for (var k=0; k < 7; k++ ) {
                 var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
@@ -211,7 +316,7 @@ exports.all = function(req, res){
                     res.json(resultado);
                 }
             );
-    })
+    });
 
 
 };
@@ -272,32 +377,22 @@ exports.save = function(io) {
 
 exports.sartu = function (req, res) {
 
-    if (!db.serverConfig.isConnected()) {
-        db.open(function(err, db) {
-            if(!err) {
-
-            } else {
-                onErr(err, function(){
-                    console.log(err);
-                    db.close();
-                });
-            }
-        });
-    }
-
     var data = req.body;
 
-    db.collection('planificacion').insert({
-        fetxa:new Date(data.fetxa),
-        linea: data.linea,
-        turnoak: [{
-           turno: data.turno,
-           ordenes:[{
-               ref: data.ref
-           }]
-        }]
-    }, function() {
-        res.send(200);
+    var producto = {
+            fetxa:new Date(data.fetxa),
+            linea: data.linea,
+            ordenes:[{
+                ref: data.ref
+            }]
+    };
+
+    c_planificacion.insert(producto, {safe:true}, function(err, result) {
+        if (err) {
+            res.send({'error':'Akatsa bat egonda'});
+        } else {
+            res.send(result);
+        }
     });
 
 };

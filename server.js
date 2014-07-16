@@ -81,6 +81,7 @@ server.get('/', function(req,res){
 });
 
 server.get('/planificacion/:linea/:desde/:hasta', get.all);
+server.get('/planificacionlinea1/:desde/:hasta', get.getlinea1);
 
 server.post('/saveplanificacion', get.save(io));
 

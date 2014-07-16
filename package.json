@@ -12,7 +12,8 @@
     "fs": "0.10.28",
     "moment": "^2.6.0",
     "async-foreach": "0.1.3",
-    "httpsync": "0.0.8"
+    "httpsync": "0.0.8",
+    "monk": "0.9.0"
   },
   "devDependencies": {
     "vows": "0.5.x",
