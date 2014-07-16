@@ -134,7 +134,8 @@ exports.all = function(req, res){
                                         tof = miarray[1];
                                     }
 
-                                    var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+ tof;
+                                    var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
+                                    console.log(url);
                                     var req = httpsync.get({ url : url});
                                     var res = req.end();
 
