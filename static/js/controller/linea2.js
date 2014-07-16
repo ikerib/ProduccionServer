@@ -6,13 +6,14 @@
 produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
 
     $scope.getDatuak = function () {
-        $http.get('/planificacion/2/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD')).success(function (data) {
+        $http.get('/planificacion/2/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
+        .success(function (data) {
             $scope.datuak = data;
-        }).error(function () {
+        })
+        .error(function () {
             console.log("error al obtener datos");
             return;
         });
-
     };
     $scope.getDatuak();
 

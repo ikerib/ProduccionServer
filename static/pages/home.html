@@ -54,8 +54,9 @@
                                                         <table class="azkentabla">
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1" style="border:0px solid #000000">
-                                                                <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">{{orden}}
-                                                                    <span class="badge glyphicon glyphicon-fire">{{orden.badutstock}}</span>
+                                                                <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
+
+                                                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                             data-fetxa="{{egunak.fetxa}}"
                                                                             data-turno="1"
@@ -100,7 +101,7 @@
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2" style="border:0px solid #000000">
                                                                 <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
-                                                                    <span class="badge glyphicon glyphicon-fire">{{orden.badutstock}}</span>
+                                                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
                                                                         <!--<span ng-style="{color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important; }" data-miid="{{ egunak._id }}"-->
                                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                               data-fetxa="{{egunak.fetxa}}"
@@ -146,7 +147,7 @@
                                                             <tbody>
                                                             <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3" style="border:0px solid #000000">
                                                                 <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
-                                                                    <span class="badge glyphicon glyphicon-fire">{{orden.badutstock}}</span>
+                                                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                                                         <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                               data-fetxa="{{egunak.fetxa}}"
@@ -209,7 +210,7 @@
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1" style="border:0px solid #000000">
                                                             <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
-                                                                <span class="badge glyphicon glyphicon-fire">{{orden.badutstock}}</span>
+                                                                <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                           data-fetxa="{{egunak.fetxa}}"
@@ -256,7 +257,7 @@
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==2" style="border:0px solid #000000">
                                                             <td  style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
-                                                                <span class="badge glyphicon glyphicon-fire">{{orden.badutstock}}</span>
+                                                                <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                           data-fetxa="{{egunak.fetxa}}"
@@ -303,7 +304,7 @@
                                                         <tbody>
                                                         <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==3" style="border:0px solid #000000">
                                                             <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
-                                                                <span class="badge glyphicon glyphicon-fire">{{orden.badutstock}}</span>
+                                                                <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
                                                                           data-fetxa="{{egunak.fetxa}}"

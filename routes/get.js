@@ -8,10 +8,15 @@ var mongo = require('mongodb'),
 var server = new Server('localhost', 27017, {auto_reconnect: true});
 var db = new Db('planificacion', server);
 var moment = require('moment');
+//var async = require('async');
+var unirest = require('unirest');
 var onErr = function(err,callback){
     db.close();
     callback(err);
 };
+var forEach = require('async-foreach').forEach;
+var httpsync = require('httpsync');
+//var synchttp = require('synchttp');
 
 db.open(function(err, db) {
     if(!err) {
@@ -67,8 +72,6 @@ exports.all = function(req, res){
         }).toArray(function(err, items){
         if (err) {return console.log(err);}
 
-
-            // Aste osoa bueltatuko dugu
             for (var k=0; k < 7; k++ ) {
                 var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
                 var topatua = false;
@@ -97,17 +100,16 @@ exports.all = function(req, res){
 
             var resultado = [];
             // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
-            for ( var i=0; i < resul.length; i++ ) {
 
-                var tmp = resul[i][0];
+            forEach(resul, function(resul,callback){
 
+                var tmp = resul[0];
                 var row = {
                     fetxa: tmp.fetxa,
                     _id:'',
                     linea1: [],
                     linea2: []
                 };
-
 
                 var aurkitua1 = false;
                 var aurkitua2 = false;
@@ -116,10 +118,86 @@ exports.all = function(req, res){
                     aurkitua1 = true;
                     row.linea1 = tmp.turnoak;
                     row._id = tmp._id;
+
+                    forEach(tmp.turnoak, function(eguna, callbackTurnoak) { //The second argument (callback) is the "task callback" for a specific messageId
+                        if ( eguna.ordenes.length > 0 ) {
+                            forEach(eguna.ordenes, function(orden, callback) {
+                                var val = orden.ref;
+                                if ( val != "" ) {
+                                    var of="";
+                                    val = val.replace("<BR>", "<br>");
+                                    val = val.replace("<BR />", "<br>");
+                                    val = val.replace("<br />", "<br>");
+                                    if (val === undefined) {
+                                        return false
+                                    }
+                                    var n = val.indexOf("<br>");
+                                    if (n > 0) {
+                                        var miarray = val.split('<br>');
+                                        tof = miarray[1];
+                                    }
+
+                                    var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+ tof;
+                                    var req = httpsync.get({ url : url});
+                                    var res = req.end();
+
+                                    var miresp = res.data.toString();
+                                    var mijson = JSON.parse(miresp);
+                                    mijson.forEach(function(entry) {
+                                        if ( entry.QPendiente < entry.QNecesaria ) {
+                                            orden.badutstock = 1;
+                                        } else {
+                                            orden.badutstock = 0;
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+
+
                 } else if ( tmp.linea == 2) {
                     aurkitua2 = true;
                     row.linea2 = tmp.turnoak;
                     row._id = tmp._id;
+
+                    forEach(tmp.turnoak, function(eguna, callbackTurnoak) { //The second argument (callback) is the "task callback" for a specific messageId
+                        if ( eguna.ordenes.length > 0 ) {
+                            forEach(eguna.ordenes, function(orden, callback) {
+                                var val = orden.ref;
+                                if ( val != "" ) {
+                                    var of="";
+                                    val = val.replace("<BR>", "<br>");
+                                    val = val.replace("<BR />", "<br>");
+                                    val = val.replace("<br />", "<br>");
+                                    if (val === undefined) {
+                                        return false
+                                    }
+                                    var n = val.indexOf("<br>");
+                                    if (n > 0) {
+                                        var miarray = val.split('<br>');
+                                        tof = miarray[1];
+                                    }
+
+                                    var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+ tof;
+                                    var req = httpsync.get({ url : url});
+                                    var res = req.end();
+
+                                    var miresp = res.data.toString();
+                                    var mijson = JSON.parse(miresp);
+                                    mijson.forEach(function(entry) {
+                                        if ( entry.QPendiente < entry.QNecesaria ) {
+                                            orden.badutstock = 1;
+                                        } else {
+                                            orden.badutstock = 0;
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+
+
                 }
 
                 if ( aurkitua1 == false ) {
@@ -132,9 +210,10 @@ exports.all = function(req, res){
                 resultado.push(row);
 
             }
-
-            res.json(resultado);
-
+            , function (err){
+                    res.json(resultado);
+                }
+            );
     })
 
 

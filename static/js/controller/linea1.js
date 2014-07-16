@@ -2,75 +2,17 @@
  * Created by ikerib on 30/06/14.
  */
 
-produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket, eskuratudatuak) {
+produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket) {
 
     $scope.getDatuak = function () {
-
-        // $scope.datuak = eskuratudatuak.getNestedDataBetter(moment($scope.dt).format('YYYY-MM-DD'),moment($scope.dtSecond).format('YYYY-MM-DD'));
-        
-        $scope.datuak =eskuratudatuak.getNestedDataBetter(moment($scope.dt).format('YYYY-MM-DD'),moment($scope.dtSecond).format('YYYY-MM-DD'))
-        // .success (function(data) {
-        //     $scope.datuak = data;
-        //     console.log("hau da:");
-        //     console.log(data);
-        // })
-
-        
-        // $http.get('/planificacion/1/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
-        // .success(function (data) {
-            
-            
-        //     for ( var q=0; q < data.length; q++ ) {
-        //         if ( data[q].linea1.length > 0 ) {
-        //             for ( var w=0; w < data[q].linea1.length; w++ ) {
-
-        //                 for ( var e=0; e < data[q].linea1[w].ordenes.length; e++) {
-        //                     var miorden = data[q].linea1[w].ordenes[e];
-        //                     var val = data[q].linea1[w].ordenes[e].ref;
-        //                     if ( val === "") { break; }
-        //                     var of="";
-        //                     val = val.replace("<BR>", "<br>");
-        //                     val = val.replace("<BR />", "<br>");
-        //                     val = val.replace("<br />", "<br>");
-        //                     if (val === undefined) {
-        //                         return false
-        //                     }
-        //                     var n = val.indexOf("<br>");
-        //                     if (n > 0) {
-        //                         var miarray = val.split('<br>');
-        //                         tof = miarray[1];
-        //                     }
-                            
-        //                     var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+ tof;
-        //                     $http.get(url,{cache:false})
-        //                     .success(function(datuak){
-
-        //                         for ( var k=0; k < datuak.length; k++ ) {
-        //                             if ( datuak[k].QPendiente < datuak[k].QNecesaria ) {
-        //                                 miorden.badutstock = 1;
-        //                             } else {
-        //                                 miorden.badutstock = 0;
-        //                             }
-
-        //                         }
-
-        //                     })
-        //                     .error(function(data, status, headers, config) {
-        //                         console.log(data);
-        //                     });
-
-        //                 }    
-        //             }                    
-        //         }
-        //     } 
-
-        //     $scope.datuak = data;
-        //     console.log(data);
-
-        // }).error(function () {
-        //     console.log("error al obtener datos");
-        //     return;
-        // });
+        $http.get('/planificacion/1/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
+        .success(function (data) {
+            $scope.datuak = data;
+        })
+        .error(function () {
+            console.log("error al obtener datos");
+            return;
+        });
     };
     $scope.getDatuak();
 
