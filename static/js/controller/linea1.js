@@ -2,12 +2,14 @@
  * Created by ikerib on 30/06/14.
  */
 
-produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket) {
+produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
 
     $scope.getDatuak = function () {
+        usSpinnerService.spin('spinner-1');
         $http.get('/planificacion/1/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
         .success(function (data) {
             $scope.datuak = data;
+            // usSpinnerService.stop('spinner-1');
         })
         .error(function () {
             console.log("error al obtener datos");

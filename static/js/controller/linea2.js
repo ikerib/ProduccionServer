@@ -3,12 +3,13 @@
  */
 
 
-produccionApp.controller('linea2Controller', function ($scope, $http, socket) {
+produccionApp.controller('linea2Controller', function ($scope, $http, socket, usSpinnerService) {
 
     $scope.getDatuak = function () {
         $http.get('/planificacion/2/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
         .success(function (data) {
             $scope.datuak = data;
+            usSpinnerService.stop('spinner-1');
         })
         .error(function () {
             console.log("error al obtener datos");
