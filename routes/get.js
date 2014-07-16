@@ -8,15 +8,12 @@ var mongo = require('mongodb'),
 var server = new Server('localhost', 27017, {auto_reconnect: true});
 var db = new Db('planificacion', server);
 var moment = require('moment');
-//var async = require('async');
-var unirest = require('unirest');
 var onErr = function(err,callback){
     db.close();
     callback(err);
 };
 var forEach = require('async-foreach').forEach;
 var httpsync = require('httpsync');
-//var synchttp = require('synchttp');
 
 db.open(function(err, db) {
     if(!err) {
