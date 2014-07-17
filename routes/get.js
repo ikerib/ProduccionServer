@@ -46,95 +46,94 @@ exports.getlinea1 = function(req,res) {
 
         var resul=[];
 
-        for (var k=0; k < 7; k++ ) {
-            var eguna = moment(asteaArray[k]).format('YYYY-MM-DD');
+        console.log("Hasi");
+
+        var astea = [0,1,2,3,4,5,6];
+
+        forEach (astea, function(k, callback){
+            var feceguna = moment(asteaArray[k]).format('YYYY-MM-DD');
             var topatua = false;
-            resul=[];
+            resul[k]=[];
+            var eguna = {};
 
-            for (var i=0; i < items.length; i++ ) {
+//            resul[k]["linea"] = 1;
+            eguna.linea = 1;
+//            resul[k]["ordenes"] = new Array();
+            eguna.ordenes = [];
+            console.log("Eguna: " + k);
+            eguna.fetxa = feceguna;
 
-                var fec = moment( items[i].fetxa).format('YYYY-MM-DD');
+            forEach (items, function(item, callback){
+                var fec = moment( item.fetxa).format('YYYY-MM-DD');
+//                resul[k]["fetxa"] = fec;
 
-                if ( fec === eguna ) {
+                var nirea = [];
+                if ( fec === feceguna ) {
                     topatua=true;
-                    items[i].fetxa = fec;
-                    resul.push( items[i]);
+                    item.fetxa = fec;
+                    forEach(item.ordenes, function(orden, callback) {
+                        console.log(orden.ref);
+                        var val = orden.ref;
+                        if ( val != "" ) {
+                            var of="";
+                            val = val.replace("<BR>", "<br>").replace("<BR />", "<br>").replace("<br />", "<br>");
+                            if (val === undefined) { return false }
+                            var n = val.indexOf("<br>");
+                            if (n > 0) {
+                                var miarray = val.split('<br>');
+                                tof = miarray[1];
+                                console.log("Ez amaitu oraindik");
+                                var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
+                                var req = httpsync.get({ url : url});
+                                var res = req.end();
+
+                                var miresp = res.data.toString();
+                                var mijson = JSON.parse(miresp);
+                                mijson.forEach(function(entry) {
+                                    if ( entry.QPendiente < entry.QNecesaria ) {
+                                        orden.badutstock = 1;
+                                    } else {
+                                        orden.badutstock = 0;
+                                    }
+                                });
+                            } else {
+                                orden.badutstock = 0;
+                            }
+                        } else {
+                            orden.badutstock = 0;
+                        }
+
+                        eguna.ordenes.push(orden);
+                    }, function(){
+                        // callback
+
+                    });
+
+                }
+            }, function(){
+                //callback
+                if ( topatua == true ) {
+                    resul[k].push(eguna);
                 }
 
-            }
-
+            })
             if ( topatua == false ) {
 
                 resul[k].push({
-                    fetxa: eguna,
+                    fetxa: feceguna,
                     linea:1
                 });
             }
-        }
-
-        var resultado = [];
-        // Hemen astea daukagu baina bi lineak daude nahastuta, bi lineak interpretatuko ditugu eta bidali
-
-        forEach(resul, function(resul,callback){
-
-                var tmp = resul[0];
-                var row = {
-                    fetxa: resul.fetxa,
-                    _id:resul._id,
-                    linea1: []
-                };
-
-                var aurkitua1 = false;
-                if ( resul.ordenes.length > 0) {
+        }, function(){
+            //callback
+            console.log("amaitu");
+//            res.json(resul);
+        })
 
 
-                    aurkitua1 = true;
-                    row.linea1 = resul.ordenes;
+        console.log(" zergaitik nao hemen?");
+        res.json(resul);
 
-                        forEach(resul.ordenes, function(orden, callback) {
-                            var val = orden.ref;
-                            if ( val != "" ) {
-                                var of="";
-                                val = val.replace("<BR>", "<br>");
-                                val = val.replace("<BR />", "<br>");
-                                val = val.replace("<br />", "<br>");
-                                if (val === undefined) {
-                                    return false
-                                }
-                                var n = val.indexOf("<br>");
-                                if (n > 0) {
-                                    var miarray = val.split('<br>');
-                                    tof = miarray[1];
-                                    var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
-                                    var req = httpsync.get({ url : url});
-                                    var res = req.end();
-
-                                    var miresp = res.data.toString();
-                                    var mijson = JSON.parse(miresp);
-                                    mijson.forEach(function(entry) {
-                                        if ( entry.QPendiente < entry.QNecesaria ) {
-                                            orden.badutstock = 1;
-                                        } else {
-                                            orden.badutstock = 0;
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                }
-
-                if ( aurkitua1 == false ) {
-                    row.linea1 = [];
-                }
-
-                resultado.push(row);
-
-        }
-        , function (err){
-            res.json(resultado);
-        }
-        );
     });
 }
 
