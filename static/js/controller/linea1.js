@@ -28,9 +28,9 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
         for (var i = $scope.datuak.length; i--;) {
 
-            var d = $scope.datuak[i];
+            var d = $scope.datuak[i][0];
 
-            if (d._id === miid) {
+            if (d.id === miid) {
                 d.milinea = 1;
                 $http.post('/saveplanificacion', d);
             }

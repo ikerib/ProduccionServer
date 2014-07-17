@@ -123,54 +123,17 @@ exports.getlinea1 = function(req,res) {
 exports.save = function(io) {
     return function(req, res){
 
-        if (!db.serverConfig.isConnected()) {
-            db.open(function(err, db) {
-                if(!err) {
+        var body = req.body;
+        var id =  body.id;
+        body.fetxa = new Date(body.fetxa),
+        delete body.id;
 
-                } else {
-                    onErr(err, function(){
-                        console.log(err);
-                        db.close();
-                    });
-                }
-            });
-        }
+        c_planificacion.findAndModify({_id: id}, {$set: body}, {multi:false}, function(err, bug){
+            if (err) res.json(500, err);
+            else if (bug) res.json(bug);
+            else res.json(404);
+        });
 
-        var data = req.body;
-        var BSON = mongo.BSONPure;
-        var o_id = new BSON.ObjectID(data._id);
-
-        var newData;
-        if ( data.milinea === 1) {
-
-            for (var k=0; data.linea1.length; k++) {
-                for (var i=data.linea1[k].ordenes.length; i-->0; ) {
-                    if (data.linea1[k].ordenes[i].ref === '') data.linea1[k].ordenes.splice(i, 1);
-                }
-            }
-            newData = data.linea1;
-
-        } else {
-
-            for (var k=0; data.linea2.length; k++) {
-                for (var i=data.linea2[k].ordenes.length; i-->0; ) {
-                    if (data.linea2[k].ordenes[i].ref === '') {
-                        data.linea2[k].ordenes.splice(i, 1);
-                    }
-                }
-            }
-
-            newData = data.linea2;
-        }
-
-        db.collection('planificacion').update({'_id': o_id}, { $set :{ turnoak: newData } }, {safe:true, multi:false, upsert:false}, function(e, result){
-            if (e) console.log(e)
-
-            io.sockets.emit("eguneratu");
-
-            res.send((result===1)?{msg:'success'}:{msg:'error'+e})
-
-        })
     }
 };
 

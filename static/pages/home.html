@@ -39,33 +39,53 @@
                     <tbody>
                     <tr ng-controller="linea1Controller">
                         <td class="tdlinea">Siplace</td>
-                            <td ng-repeat="data in datuak">
-                                <div ng-repeat="ordenes in data"><!-- {{ ordenes.id}} -->
-                                    <div class="kk" ng-repeat="orden in ordenes.ordenes" 
-                                        style=" border:1px solid #000000; padding:3px; 
+                        <td ng-repeat="data in datuak">
+                            <table ng-repeat="ordenes in data">
+                                <tr>
+                                    <td >
+                                        <div class="kk" 
+                                            ng-repeat="orden in ordenes.ordenes" 
+                                            style=" border:1px solid #000000; padding:3px; 
                                                 background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                                 color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
-                                        tooltip-html-unsafe="{{arraton}}"
->
-                                        <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
-                                        <span 
+                                            tooltip-html-unsafe="{{arraton}}">
+                                                <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                                <span 
+                                                    data-miid="{{ ordenes.id }}"
+                                                    data-fetxa="{{ordenes.fetxa}}"
+                                                    data-turno="1"
+                                                    data-linea="1"
+                                                    editable-text="orden.ref"
+                                                    e-form="textBtnForm" 
+                                                    ng-dblclick="textBtnForm.$show()"
+                                                    ng-click="grafikoa(orden.ref); arraton(orden.ref);"
+                                                    ng-if="isadmin"
+                                                    ng-bind-html="orden.ref"
+                                                    onbeforesave="updateUser($data, this)"></span>
+
+                                                <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                                    data-miid="{{ ordenes.id }}"
+                                                    ng-if="!isadmin"
+                                                    ng-click="grafikoa(orden.ref)"
+                                                    ng-bind-html="orden.ref"
+                                                    ></span>
+                                        </div> 
+                                    </td>
+                                </tr>
+                                <tr ng-show="isadmin">
+                                    <td>
+                                        <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
                                             data-miid="{{ ordenes.id }}"
-                                            data-fetxa="{{ordenes.fetxa}}"
-                                            data-turno="1"
+                                            data-fetxa="{{ ordenes.fetxa }}"
                                             data-linea="1"
                                             editable-text="orden.ref"
-                                            e-form="textBtnForm" 
-                                            ng-dblclick="textBtnForm.$show()"
-                                            ng-click="grafikoa(orden.ref); arraton(orden.ref);"
-                                            ng-if="isadmin"
-                                            ng-bind-html="orden.ref"
-                                            onbeforesave="updateUser($data, this)"></span>
-                                    </div>                                            
-                                </div>                                        
-                            </td>
+                                            onbeforesave="addData($data, this)">+</span>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
-                    
                     
                     <tr ng-controller="linea2Controller">
                         <td class="tdlinea">Assembleon </td>
