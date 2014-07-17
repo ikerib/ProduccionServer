@@ -17,7 +17,7 @@
         <span us-spinner spinner-key="spinner-1"></span>
         <div class="col-md-10 scrolla">
             <div id="scroller">
-                <table class="table table-condensed">
+                <table class="table text-center table-condensed">
                     <thead>
                     <tr>
                         <th>Semana {{ astea }}</th>
@@ -37,43 +37,35 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr ng-controller="linea1Controller">
                         <td class="tdlinea">Siplace</td>
-                        <td ng-controller="linea1Controller">
-                            <table >
-                                <tr>
-                                    <td ng-repeat="orden in eguna.ordenes">
-                                        <span  
-                                        ng-if="orden.badutstock == 1" 
-                                        class="badge glyphicon glyphicon-fire">OJO!</span>
+                            <td ng-repeat="data in datuak">
+                                <div ng-repeat="ordenes in data"><!-- {{ ordenes.id}} -->
+                                    <div class="kk" ng-repeat="orden in ordenes.ordenes" 
+                                        style=" border:1px solid #000000; padding:3px; 
+                                                background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                                color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                        tooltip-html-unsafe="{{arraton}}"
+>
+                                        <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
                                         <span 
-                                            data-miid="{{ egunak._id }}"
-                                            data-fetxa="{{egunak.fetxa}}"
+                                            data-miid="{{ ordenes.id }}"
+                                            data-fetxa="{{ordenes.fetxa}}"
                                             data-turno="1"
                                             data-linea="1"
                                             editable-text="orden.ref"
                                             e-form="textBtnForm" 
                                             ng-dblclick="textBtnForm.$show()"
-                                            ng-click="grafikoa(eguna.orden); arraton(eguna.orden);"
+                                            ng-click="grafikoa(orden.ref); arraton(orden.ref);"
                                             ng-if="isadmin"
-                                            ng-bind-html="eguna.orden"
-                                            onbeforesave="updateUser($data, this)"></span>            
-                                    </td>
-                                </tr>
-                                <tr ng-show="isadmin" >
-                                    <td>&nbsp;</td>
-                                    <td ng-repeat="i in [eguna1,eguna2,2,3,4,5,6]">
-                                        <span  data-miid="{{ egunak._id }}"
-                                                data-fetxa="{{i}}"
-                                                data-linea="1"
-                                                editable-text="orden.ref"
-                                                onbeforesave="addData($data, this)">+aaa</span>
-                                    </td>
-                                </tr>
-                            </table>
-                            
+                                            ng-bind-html="orden.ref"
+                                            onbeforesave="updateUser($data, this)"></span>
+                                    </div>                                            
+                                </div>                                        
+                            </td>
                         </td>
                     </tr>
+                    
                     
                     <tr ng-controller="linea2Controller">
                         <td class="tdlinea">Assembleon </td>
@@ -83,17 +75,14 @@
                     </tr>
                     </tbody>
                 </table>
-
             </div>
-            <!-- scroller -->
-
-
         </div>
         <div class="col-md-1">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-success" ng-click="aldatuastea(7)"><span
-                        class="glyphicon glyphicon-chevron-right"></span></button>
+                <button class="btn btn-success" ng-click="aldatuastea(7)">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
               </span>
             </div>
         </div>
@@ -101,7 +90,5 @@
 </div>
 
 <div class="row" style="display: visible;">
-    {{ charData }}
     <highchart id="chart1" config="chartConfig" class="span10"></highchart>
-    }
 </div>
