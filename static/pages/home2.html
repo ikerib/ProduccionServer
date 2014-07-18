@@ -54,28 +54,33 @@
                                                     <td>
                                                         <table class="azkentabla">
                                                             <tbody>
-                                                            <tr ng-repeat="orden in turnos.ordenes" ng-if="turnos.turno==1" style="border:0px solid #000000">
+                                                            <tr ng-repeat="orden in turnos.ordenes" 
+                                                                ng-if="turnos.turno==1" 
+                                                                style="border:0px solid #000000">
+                                                                
                                                                 <td style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" tooltip-html-unsafe="{{arraton}}">
 
-                                                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
-                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
+                                                                    <span   ng-if="orden.badutstock == 1" 
+                                                                            class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                                                    <span   ng-style="set_color('{{ users|searchByRefForecolor:'ref':orden.ref }}')" 
+                                                                            data-miid="{{ egunak._id }}"
                                                                             data-fetxa="{{egunak.fetxa}}"
                                                                             data-turno="1"
                                                                             data-linea="1"
                                                                             editable-text="orden.ref"
                                                                             e-form="textBtnForm" 
                                                                             ng-dblclick="textBtnForm.$show()"
-                                                                            
                                                                             ng-click="grafikoa(orden.ref); arraton(orden.ref);"
                                                                             ng-if="isadmin"
                                                                             ng-bind-html="orden.ref"
                                                                             onbeforesave="updateUser($data, this)"></span>
 
-                                                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" data-miid="{{ egunak._id }}"
-                                                                          ng-if="!isadmin"
-                                                                          ng-click="grafikoa(orden.ref)"
-                                                                          ng-bind-html="orden.ref"
-                                                                          ></span>
+                                                                    <span ng-style="set_color('{{ users|searchByRefForecolor:'ref':orden.ref }}')" 
+                                                                            data-miid="{{ egunak._id }}"
+                                                                            ng-if="!isadmin"
+                                                                            ng-click="grafikoa(orden.ref)"
+                                                                            ng-bind-html="orden.ref"></span>
                                                                 </td>
                                                             </tr>
                                                             </tbody>

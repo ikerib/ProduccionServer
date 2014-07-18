@@ -51,84 +51,45 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.updateDataById = function (miid) {
 
-        for (var i = $scope.datuak.length; i--;) {
+        var milen = $scope.datuak.length;
+
+        for (var i = 0; i < milen; i++) {
 
             var d = $scope.datuak[i];
 
-            if (d._id === miid) {
+            if (d[0].id === miid) {
                 d.milinea = 1;
-                $http.post('/saveplanificacion', d);
+                $http.post('/saveplanificacion', d[0]);
             }
 
         }
     };
 
     $scope.addData = function (midata, l) {
-        console.log("HEMEN!");
         var miid = l.$editable.attrs.miid;
         if (miid === "") {
             $scope.sartu(midata, l);
             return 0;
         }
+
         var milinea = l.$editable.attrs.linea;
-        var turno = l.$editable.attrs.turno;
         var fetxa = moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString();
         var miturno = l.$editable.attrs.turno;
-
-        var eguneratuSartu = false;
+        var aurkitua = false;
 
         for (var i = 0; i < $scope.datuak.length; i++) {
-            var temp = $scope.datuak[i];
-            if ((temp._id === miid)) {
-                eguneratuSartu = true;
-
-                if (milinea == "1") {
-                    var aurkitua = false;
-                    for (var k = 0; k < temp.linea1.length; k++) {
-
-                        var t = temp.linea1[k];
-
-                        if (t.turno === parseInt(miturno)) {
-                            aurkitua = true;
-                            if (t.ordenes.length > 0) {
-                                t.ordenes.push({
-                                    ref: midata
-                                });
-                            }
-                        }
-
-                    }
-                    if (aurkitua == false) {
-                        temp.linea1.push({
-                            turno: parseInt(miturno),
-                            ordenes: [
-                                {
-                                    ref: midata
-                                }
-                            ]
-                        });
-
-                    }
-                } else {
-
+            var temp = $scope.datuak[i][0];
+            if ((temp.id === miid)) {
+                aurkitua = true;
+                if (temp.ordenes.length > 0) {
+                    temp.ordenes.push({
+                        ref: midata
+                    });
                 }
-            }
+            } 
         }
 
-        if (eguneratuSartu == false) {
-
-            var d = {
-                linea: 1,
-                fetxa: fetxa,
-                turno: parseInt(miturno),
-                ref: midata
-            };
-
-            $http.post('/sartu', d).success(function () {
-                $scope.getDatuak();
-            });
-
-        } else {
+        if (aurkitua == true) {
             $scope.updateDataById(miid);
         }
 
