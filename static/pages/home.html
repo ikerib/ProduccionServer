@@ -39,60 +39,62 @@
                     <tbody>
                     <tr ng-controller="linea1Controller">
                         <td class="tdlinea">Siplace</td>
-                        <td ng-repeat="data in datuak">
-                            <table ng-repeat="ordenes in data">
-                                <tr>
-                                    <td >
-                                        <div class="box-of" 
-                                            ng-repeat="orden in ordenes.ordenes" 
-                                            
-                                            style=" border:1px solid #000000; padding:3px; 
-                                                background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
-                                                color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
-                                            tooltip-html-unsafe="{{arraton}}">
-                                                <div class="glyphicon glyphicon-move" 
-                                                    ng-drag="true" 
-                                                    ng-drag-data="orden" 
-                                                    ng-drag-success="onDragComplete($data,$event)"
-                                                    ng-drop="true" 
-                                                    ng-drop-success="onDropComplete($data,$event)"
-                                                    data-orden="{{orden.orden}}"
-                                                ></div>
-                                                <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                        <td class="asteeguna">
+                           <div class="box-of" 
+                                ng-repeat="orden in asteeguna1" 
+                                ng-drop="true" 
+                                ng-drop-success="onDropComplete($index,$data,$event)"
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+                                    <div class="glyphicon glyphicon-move" 
+                                        ng-drag="true" 
+                                        ng-drag-data="orden" 
+                                        ng-drag-success="onDragComplete($data,$event)"
+                                        
+                                        data-orden="{{orden.orden}}"
+                                    ></div>
+                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
 
-                                                <span 
-                                                    data-miid="{{ ordenes.id }}"
-                                                    data-fetxa="{{ordenes.fetxa}}"
-                                                    data-turno="1"
-                                                    data-linea="1"
-                                                    editable-text="orden.ref"
-                                                    e-form="textBtnForm" 
-                                                    ng-dblclick="textBtnForm.$show()"
-                                                    ng-click="grafikoa(orden.ref); arraton(orden.ref);"
-                                                    ng-if="isadmin"
-                                                    ng-bind-html="orden.ref"
-                                                    onbeforesave="updateUser($data, this)"></span>
+                                    <span 
+                                        data-miid="{{ orden.id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="1"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-click="grafikoa(orden.ref); arraton(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
 
-                                                <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
-                                                    data-miid="{{ ordenes.id }}"
-                                                    ng-if="!isadmin"
-                                                    ng-click="grafikoa(orden.ref)"
-                                                    ng-bind-html="orden.ref"
-                                                    ></span>
-                                        </div> 
-                                    </td>
-                                </tr>
-                                <tr ng-show="isadmin">
-                                    <td>
-                                        <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
-                                            data-miid="{{ ordenes.id }}"
-                                            data-fetxa="{{ ordenes.fetxa }}"
-                                            data-linea="1"
-                                            editable-text="orden.ref"
-                                            onbeforesave="addData($data, this)">+</span>
-                                    </td>
-                                </tr>
-                            </table>
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> 
+                        </td>
+                        <td class="asteeguna">
+                           222
+                        </td>
+                        <td class="asteeguna">
+                           333
+                        </td>
+                        <td class="asteeguna">
+                           444
+                        </td>
+                        <td class="asteeguna">
+                           555
+                        </td>
+                        <td class="asteeguna">
+                           666
+                        </td>
+                        <td class="asteeguna">
+                           777
                         </td>
                     </tr>
                     

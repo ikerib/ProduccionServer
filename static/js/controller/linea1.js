@@ -6,15 +6,31 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.getDatuak = function () {
         usSpinnerService.spin('spinner-1');
-        $http.get('/planificacionlinea1/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
-        .success(function (data) {
-            $scope.datuak = data;
-            // usSpinnerService.stop('spinner-1');
-        })
-        .error(function () {
-            console.log("error al obtener datos");
-            return;
-        });
+        var dsd = moment($scope.dt).format('YYYY-MM-DD');
+        var hst = moment($scope.dtSecond).format('YYYY-MM-DD');
+
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna1 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna2 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna3 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna4 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna5 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna6 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna7 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+
     };
     $scope.getDatuak();
 
@@ -127,11 +143,14 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
     }
 
     $scope.onDragComplete = function(data, evt){
-       console.log("drag success, data:", data);
+       // console.log("drag success, data:", data);
+       data.remove();
     }
 
-    $scope.onDropComplete = function(data, evt){
-        console.log("drop success, data:", data);
+    $scope.onDropComplete = function(index, data, evt){
+        console.log(data);
+        console.log(index);
+        
     }
     
 });
