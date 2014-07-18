@@ -43,12 +43,15 @@
                             <table ng-repeat="ordenes in data">
                                 <tr>
                                     <td >
-                                        <div class="kk" 
+                                        <div class="box-of" ng-drag="true" ng-drag-data="orden" ng-drag-success="onDragComplete($data,$event)"
+                                                            ng-drop="true" ng-drop-success="onDropComplete($data,$event)"
                                             ng-repeat="orden in ordenes.ordenes" 
+                                            data-orden="{{orden.orden}}"
                                             style=" border:1px solid #000000; padding:3px; 
                                                 background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                                 color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                             tooltip-html-unsafe="{{arraton}}">
+                                            
                                                 <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                                 <span 

@@ -1,4 +1,5 @@
-var produccionApp = angular.module('produccionApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'colorpicker.module', 'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng', 'ngCookies','angularSpinner']);
+var produccionApp = angular.module('produccionApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'colorpicker.module', 
+        'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng', 'ngCookies','angularSpinner','ngDraggable']);
 
 produccionApp.config(function ($routeProvider) {
     $routeProvider

@@ -81,11 +81,11 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
             var temp = $scope.datuak[i][0];
             if ((temp.id === miid)) {
                 aurkitua = true;
-                if (temp.ordenes.length > 0) {
-                    temp.ordenes.push({
-                        ref: midata
-                    });
-                }
+                temp.ordenes.push({
+                    ref: midata,
+                    orden:temp.ordenes.length
+                });
+                
             } 
         }
 
@@ -126,7 +126,12 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
         return { color: kolorea }
     }
 
+    $scope.onDragComplete = function(data, evt){
+       console.log("drag success, data:", data);
+    }
 
-
+    $scope.onDropComplete = function(data, evt){
+        console.log("drop success, data:", data);
+    }
     
 });
