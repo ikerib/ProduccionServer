@@ -40,18 +40,22 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.updateUser = function (data, l) {
 
+        var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
         var miid = l.$editable.attrs.miid;
+        var milinea = l.$editable.attrs.linea;
+        var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
 
-        for (var i = $scope.datuak.length; i--;) {
+        var d = {
+            id: miid,
+            linea: milinea,
+            fetxa: fetxaformatua,
+            ref: data
+        };
 
-            var d = $scope.datuak[i][0];
+        $http.post('/saveplanificacion', d).success(function () {
+            $scope.getDatuak();
+        });
 
-            if (d.id === miid) {
-                d.milinea = 1;
-                $http.post('/saveplanificacion', d);
-            }
-
-        }
 
     };
 
@@ -83,32 +87,18 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.addData = function (midata, l) {
         var miid = l.$editable.attrs.miid;
-        if (miid === "") {
+        // id ez badauka, insert
+        if (( miid === "" ) || ( miid === undefined )) {
             $scope.sartu(midata, l);
             return 0;
+        } else {
+            var d = {
+                fetxa: moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString(),
+                linea1: l.$editable.attrs.linea,
+                ref: midata
+            }
+            $http.post('/saveplanificacion', d);
         }
-
-        var milinea = l.$editable.attrs.linea;
-        var fetxa = moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString();
-        var miturno = l.$editable.attrs.turno;
-        var aurkitua = false;
-
-        for (var i = 0; i < $scope.datuak.length; i++) {
-            var temp = $scope.datuak[i][0];
-            if ((temp.id === miid)) {
-                aurkitua = true;
-                temp.ordenes.push({
-                    ref: midata,
-                    orden:temp.ordenes.length
-                });
-                
-            } 
-        }
-
-        if (aurkitua == true) {
-            $scope.updateDataById(miid);
-        }
-
     };
 
     $scope.sartu = function (midata, l) {
@@ -144,7 +134,6 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.onDragComplete = function(data, evt){
        // console.log("drag success, data:", data);
-       data.remove();
     }
 
     $scope.onDropComplete = function(index, data, evt){

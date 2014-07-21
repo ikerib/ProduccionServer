@@ -41,7 +41,7 @@ exports.getlinea1 = function(req,res) {
             if ( fec === feceguna ) {
                 topatua=true;
                 var val = orden.ref;
-                if ( val != "" ) {
+                if (( val != "" ) && ( val !== undefined)) {
                     var of="";
                     val = val.replace("<BR>", "<br>").replace("<BR />", "<br>").replace("<br />", "<br>");
                     if (val === undefined) { return false }
@@ -216,9 +216,7 @@ exports.sartu = function (req, res) {
     var producto = {
             fetxa:new Date(data.fetxa),
             linea: data.linea,
-            ordenes:[{
-                ref: data.ref
-            }]
+            ref: data.ref
     };
 
     c_planificacion.insert(producto, {safe:true}, function(err, result) {

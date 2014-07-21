@@ -42,16 +42,17 @@
                         <td class="asteeguna">
                            <div class="box-of" 
                                 ng-repeat="orden in asteeguna1" 
-                                ng-drop="true" 
-                                ng-drop-success="onDropComplete($index,$data,$event)"
+                                data-drop="true" data-jqyoui-options ng-model="asteeguna1" jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
+
                                     <div class="glyphicon glyphicon-move" 
-                                        ng-drag="true" 
-                                        ng-drag-data="orden" 
-                                        ng-drag-success="onDragComplete($data,$event)"
+                                        data-drag="true" 
+                                        data-jqyoui-options="{revert: 'invalid'}" 
+                                        ng-model="asteeguna1" 
+                                        jqyoui-draggable="{animate:true}"
                                         
                                         data-orden="{{orden.orden}}"
                                     ></div>
@@ -77,6 +78,11 @@
                                         ng-bind-html="orden.ref"
                                         ></span>
                             </div> 
+                            <div 
+                                data-fetxa="{{eguna1}}"
+                                data-linea="1"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+aa</div>
                         </td>
                         <td class="asteeguna">
                            222
