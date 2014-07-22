@@ -47,7 +47,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
         var d = {
             id: miid,
-            linea: milinea,
+            linea: parseInt(milinea),
             fetxa: fetxaformatua,
             ref: data
         };
