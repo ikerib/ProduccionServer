@@ -58,3 +58,7 @@ td.tdlinea {
 .item-wrapper button {
     margin-left: 1px !important;
 }
+
+.editable-click, a.editable-click {
+    border-bottom: none !important;
+}

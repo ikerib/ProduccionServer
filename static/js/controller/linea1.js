@@ -12,21 +12,33 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna1 = data;
         }).error(function () { console.log("error al obtener datos");return;});
+
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna2 = data;
         }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna3 = data;
         }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna4 = data;
         }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna5 = data;
         }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna6 = data;
         }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea1/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna7 = data;
         }).error(function () { console.log("error al obtener datos");return;});
@@ -42,12 +54,10 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
         var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
         var miid = l.$editable.attrs.miid;
-        var milinea = l.$editable.attrs.linea;
         var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
-
         var d = {
             id: miid,
-            linea: parseInt(milinea),
+            linea: 1,
             fetxa: fetxaformatua,
             ref: data
         };
@@ -99,7 +109,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
         } else {
             var d = {
                 fetxa: moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString(),
-                linea1: l.$editable.attrs.linea,
+                linea: 1,
                 ref: midata
             }
             $http.post('/saveplanificacion', d);
@@ -108,14 +118,8 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.sartu = function (midata, l) {
         var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
-        var milinea = l.$editable.attrs.miid;
-        if (milinea === "") {
-            milinea = l.$editable.attrs.linea;
-        }
-
-
+        var milinea = 1;
         var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
-
         var d = {
             linea: 1,
             fetxa: fetxaformatua,

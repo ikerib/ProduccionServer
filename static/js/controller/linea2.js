@@ -2,183 +2,152 @@
  * Created by ikerib on 30/06/14.
  */
 
+produccionApp.controller('linea2Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
 
-produccionApp.controller('linea2Controller', function ($scope, $http, socket, usSpinnerService) {
+    $scope.getDatuak = function () {
+        usSpinnerService.spin('spinner-1');
+        var dsd = moment($scope.dt).format('YYYY-MM-DD');
+        var hst = moment($scope.dtSecond).format('YYYY-MM-DD');
 
-//     $scope.getDatuak = function () {
-//         $http.get('/planificacion/2/' + moment($scope.dt).format('YYYY-MM-DD') + '/' + moment($scope.dtSecond).format('YYYY-MM-DD'))
-//         .success(function (data) {
-//             $scope.datuak = data;
-//             usSpinnerService.stop('spinner-1');
-//         })
-//         .error(function () {
-//             console.log("error al obtener datos");
-//             return;
-//         });
-//     };
-//     $scope.getDatuak();
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna1 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
 
-//     socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
-//         $scope.getDatuak();
-//     });
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna2 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna3 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna4 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna5 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna6 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
+        
+        dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
+        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+            $scope.asteeguna7 = data;
+        }).error(function () { console.log("error al obtener datos");return;});
 
-//     $scope.updateUser = function (data, l) {
+    };
+    $scope.getDatuak();
 
-//         var miid = l.$editable.attrs.miid;
+    socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
+        $scope.getDatuak();
+    });
 
-//         for (var i = $scope.datuak.length; i--;) {
+    $scope.updateUser = function (data, l) {
 
-//             var d = $scope.datuak[i];
+        var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
+        var miid = l.$editable.attrs.miid;
+        var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
+        var d = {
+            id: miid,
+            linea: 2,
+            fetxa: fetxaformatua,
+            ref: data
+        };
 
-//             if (d._id === miid) {
-//                 d.milinea = 2;
-//                 $http.post('/saveplanificacion', d);
-//             }
+        if ( d.ref === "" ) {
+            $http.post('/ezabatu', d).success(function () {
+                $scope.getDatuak();
+            });
+        } else {
+            $http.post('/saveplanificacion', d).success(function () {
+                $scope.getDatuak();
+            });
+       }       
 
-//         }
+    };
 
-// //        return results;
-//     };
+    $scope.updateData = function () {
 
-//     $scope.updateData = function () {
+        for (var i = $scope.datuak.length; i--;) {
+            var d = $scope.datuak[i];
+            d.milinea = 2;
+            $http.post('/saveplanificacion', d);
+        }
 
-//         for (var i = $scope.datuak.length; i--;) {
-//             var d = $scope.datuak[i];
-//             d.milinea = 2;
-//             $http.post('/saveplanificacion', d);
-//         }
+    };
 
-//     };
+    $scope.updateDataById = function (miid) {
 
-//     $scope.updateDataById = function (miid) {
-//         for (var i = $scope.datuak.length; i--;) {
+        var milen = $scope.datuak.length;
 
-//             var d = $scope.datuak[i];
+        for (var i = 0; i < milen; i++) {
 
-//             if (d._id === miid) {
-//                 d.milinea = 2;
-//                 $http.post('/saveplanificacion', d);
-//             }
+            var d = $scope.datuak[i];
 
-//         }
-//     };
+            if (d[0].id === miid) {
+                d.milinea = 2;
+                $http.post('/saveplanificacion', d[0]);
+            }
 
-//     $scope.addData = function (midata, l) {
-//         var miid = l.$editable.attrs.miid;
-//         if (miid === "") {
-//             $scope.sartu(midata, l);
-//             return 0;
-//         }
-//         var milinea = l.$editable.attrs.linea;
-//         var turno = l.$editable.attrs.turno;
-//         var fetxa = moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString();
-//         var miturno = l.$editable.attrs.turno;
+        }
+    };
 
-//         var eguneratuSartu = false;
+    $scope.addData = function (midata, l) {
+        var miid = l.$editable.attrs.miid;
+        // id ez badauka, insert
+        if (( miid === "" ) || ( miid === undefined )) {
+            $scope.sartu(midata, l);
+            return 0;
+        } else {
+            var d = {
+                fetxa: moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString(),
+                linea: 2,
+                ref: midata
+            }
+            $http.post('/saveplanificacion', d);
+        }
+    };
 
-//         for (i = 0; i < $scope.datuak.length; i++) {
-//             var temp = $scope.datuak[i];
-//             if ((temp._id === miid)) {
-//                 eguneratuSartu = true;
-
-//                 if (milinea == "2") {
-//                     var aurkitua = false;
-//                     for (var k = 0; k < temp.linea2.length; k++) {
-
-//                         var t = temp.linea2[k];
-
-//                         if (t.turno === parseInt(miturno)) {
-//                             aurkitua = true;
-//                             if (t.ordenes.length > 0) {
-//                                 t.ordenes.push({
-//                                     ref: midata
-//                                 });
-//                             }
-//                         }
-
-//                     }
-//                     if (aurkitua == false) {
-//                         temp.linea2.push({
-//                             turno: parseInt(miturno),
-//                             ordenes: [
-//                                 {
-//                                     ref: midata
-//                                 }
-//                             ]
-//                         });
-
-//                     }
-//                 } else {
-
-//                 }
-//             }
-//         }
-
-//         if (eguneratuSartu == false) {
-
-//             var d = {
-//                 linea: 2,
-//                 fetxa: fetxa,
-//                 turno: parseInt(miturno),
-//                 ref: midata
-//             };
-
-//             $http.post('/sartu', d).success(function () {
-//                 $scope.getDatuak();
-//             });
-
-//         } else {
-//             $scope.updateDataById(miid);
-//         }
-
-//     };
-
-//     $scope.sartu = function (midata, l) {
-//         var fetxa = l.$editable.attrs.fetxa;
-//         var miturno = l.$editable.attrs.turno;
-//         var milinea = l.$editable.attrs.miid;
-//         if (milinea === "") {
-//             milinea = l.$editable.attrs.linea;
-//         }
-
-//         var d = {
-//             linea: 2,
-//             fetxa: moment(fetxa, "YYYY-MM-DD").toISOString(),
-//             turno: parseInt(miturno),
-//             ref: midata
-//         };
+    $scope.sartu = function (midata, l) {
+        var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
+        var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
+        var d = {
+            linea: 2,
+            fetxa: fetxaformatua,
+            ref: midata
+        };
 
 
-//         $http.post('/sartu', d).success(function () {
-//             $scope.getDatuak();
-//         });
+        $http.post('/sartu', d).success(function () {
+            $scope.getDatuak();
+        });
 
-//     };
+    };
 
-//     $scope.$on('eguneratuDatuak', function (e) {
-//         $scope.getDatuak();
-//     });
+    $scope.$on('eguneratuDatuak', function (e) {
+        $scope.getDatuak();
+    });
 
-//     $scope.set_color = function (kolorea) {
-//         return { color: kolorea }
-//     }
+    $scope.set_color = function (kolorea) {
+        return { color: kolorea }
+    }
 
-//     $scope.arraton = function(of) {
-//         var miof="";
-//         var n = of.indexOf("$");
-//         if (n > 0) {
-//             var miarray = of.split('$');
-//             miof = miarray[1];
+    $scope.onDragComplete = function(data, evt){
+       // console.log("drag success, data:", data);
+    }
 
-//             var miurl = '/expertis/orden/' + miof;
-
-//             $http.get(miurl).success(function (data) {
-//                 $scope.arraton = "A Frabricar: " + data[0].QFabricar + " // Iniciada: " + data[0].QIniciada + " // Fabricada: " + data[0].QFabricada;
-//             }).error(function () {
-//                 console.log("error al obtener datos");
-//                 return;
-//             });
-//         }
-//     }
-
+    $scope.onDropComplete = function(index, data, evt){
+        console.log(data);
+        console.log(index);
+        
+    }
+    
 });

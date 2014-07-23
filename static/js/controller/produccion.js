@@ -218,14 +218,13 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     $scope.koo = $cookieStore.get('gitekplanificacion');
 
     $scope.grafikoa = function(val) {
-
+        if ( ( val === "" ) || ( val === undefined ) ) { return false; }
         var of="";
         val = val.replace("<BR>", "<br>");
         val = val.replace("<BR />", "<br>");
         val = val.replace("<br />", "<br>");
-        if (val === undefined) {
-            return false
-        }
+
+        
         var n = val.indexOf("<br>");
         if (n > 0) {
             var miarray = val.split('<br>');
@@ -239,7 +238,9 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
         $http.get(url,{cache:false})
         .success(function(data){
-
+            if ( data === "" ) {
+                return false;
+            }
             $scope.chartData = [
                 ['A fabricar', parseFloat(data[0].QFabricar)], 
                 ['Fabricada',parseFloat(data[0].QFabricada)],
@@ -252,7 +253,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
                     plotShadow: false
                 },
                 title: {
-                    text: 'Graficos del Articulo: ' + data.IDArticulo + ' en la Orden: ' + data.NOrden
+                    text: 'Graficos del Articulo: ' + data[0].IDArticulo + ' en la Orden: ' + data[0].NOrden
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -283,6 +284,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     }
 
     $scope.arraton = function(val) {
+        if ( ( val === "" ) || ( val === undefined ) ) { return false; }
         var of="";
         val = val.replace("<BR>", "<br>");
         val = val.replace("<BR />", "<br>");
@@ -295,19 +297,23 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             var miarray = val.split('<br>');
             of = miarray[1];
         }
-
+        if ( of === "" ) {
+            return false;
+        }
         var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
         $http.get(url)
         .success(function (data) {
-            $scope.arraton = "A Frabricar: " + parseInt(data.QFabricar) 
-                            + "<br />Iniciada: " + parseInt(data.QIniciada) 
-                            + "<br />Fabricada: " + parseInt(data.QFabricada);
+            $scope.arratontooltip = "A Frabricar: " + parseInt(data[0].QFabricar) 
+                            + "<br />Iniciada: " + parseInt(data[0].QIniciada) 
+                            + "<br />Fabricada: " + parseInt(data[0].QFabricada);
+            // $scope.arratontooltip = "A Frabricar: " + data.QFabricar? parseInt(data.QFabricar) :""
+            //                     + "<br />Iniciada: " + data.QIniciada ? parseInt(data.QIniciada) :""
+            //                     + "<br />Fabricada: " + data.QFabricada ?  parseInt(data.QFabricada):"";
         })
         .error(function () {
             console.log("error al obtener datos");
             return;
         });
-
     }
 
 
