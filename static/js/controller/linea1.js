@@ -52,10 +52,15 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
             ref: data
         };
 
-        $http.post('/saveplanificacion', d).success(function () {
-            $scope.getDatuak();
-        });
-
+        if ( d.ref === "" ) {
+            $http.post('/ezabatu', d).success(function () {
+                $scope.getDatuak();
+            });
+        } else {
+            $http.post('/saveplanificacion', d).success(function () {
+                $scope.getDatuak();
+            });
+       }       
 
     };
 

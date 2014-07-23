@@ -66,7 +66,8 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-click="grafikoa(orden.ref); arraton(orden.ref);"
+                                        ng-mouseenter="arraton(orden.ref)"
+                                        ng-click="grafikoa(orden.ref)"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>

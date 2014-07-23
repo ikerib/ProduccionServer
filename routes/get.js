@@ -287,6 +287,16 @@ exports.egutegia = function(req, res){
     })
 };
 
+exports.ezabatu = function(req, res) {
+    var body = req.body;
+    var id =  body.id;
+
+    c_planificacion.remove({_id: id}, function(err, bug){
+        if (err) res.json(500, err);
+        else if (bug) res.json(bug);
+        else res.json(404);
+    });
+}
 
 
 //Settings
