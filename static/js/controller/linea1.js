@@ -55,7 +55,6 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
             $scope.asteeguna7 = data;
         }).error(function () { 
             $scope.asteeguna7 = "";
-        }).then(function(){
             usSpinnerService.stop('spinner-1');
         });
 

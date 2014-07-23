@@ -5,7 +5,7 @@
 produccionApp.controller('linea2Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
 
     $scope.getDatuak = function () {
-        usSpinnerService.spin('spinner-1');
+        // usSpinnerService.spin('spinner-1');
         var dsd = moment($scope.dt).format('YYYY-MM-DD');
         var hst = moment($scope.dtSecond).format('YYYY-MM-DD');
 
@@ -55,8 +55,6 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
             $scope.asteeguna7 = data;
         }).error(function () { 
         	$scope.asteeguna7 = "";
-        }).then(function(){
-        	usSpinnerService.stop('spinner-1');
         });
 
     };
