@@ -11,37 +11,53 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
 
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna1 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna1="";
+        });
 
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna2 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna2 = "";
+        });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna3 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna3 = "";
+        });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna4 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna4 = "";
+        });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna5 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna5 = "";
+        });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna6 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna6 = "";
+        });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna7 = data;
-        }).error(function () { console.log("error al obtener datos");return;});
+        }).error(function () { 
+        	$scope.asteeguna7 = "";
+        }).then(function(){
+        	usSpinnerService.stop('spinner-1');
+        });
 
     };
     $scope.getDatuak();
