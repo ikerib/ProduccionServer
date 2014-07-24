@@ -58,10 +58,17 @@ exports.getlinea1 = function(req,res) {
                         if ( mijson.length === 0 ) {
                             orden.badutstock = 0;
                         } else {
+                            var aurki = false;
                             mijson.forEach(function(entry) {
                                 if ( entry.QPendiente < entry.QNecesaria ) {
                                     orden.badutstock = 1;
-                                    callback()
+                                    aurki = true;
+                                } else {
+                                    orden.badutstock = 0;
+                                }
+                            },function(){
+                                if ( aurki === true ) {
+                                    orden.badutstock = 1;
                                 } else {
                                     orden.badutstock = 0;
                                 }
