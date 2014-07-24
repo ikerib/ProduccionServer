@@ -61,6 +61,7 @@ exports.getlinea1 = function(req,res) {
                             mijson.forEach(function(entry) {
                                 if ( entry.QPendiente < entry.QNecesaria ) {
                                     orden.badutstock = 1;
+                                    callback();
                                 } else {
                                     orden.badutstock = 0;
                                 }
