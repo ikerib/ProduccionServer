@@ -232,13 +232,12 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         }
 
 
-        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
-
-        // console.log(url);
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of.trim();
 
         $http.get(url,{cache:false})
         .success(function(data){
-            if ( data === "" ) {
+
+            if ( (data === "") || (data.length === 0) ) {
                 return false;
             }
             $scope.chartData = [
@@ -300,15 +299,15 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         if ( of === "" ) {
             return false;
         }
-        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of;
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of.trim();
         $http.get(url)
         .success(function (data) {
+            if ( (data === "") || (data.length === 0) ) {
+                return false;
+            }
             $scope.arratontooltip = "A Frabricar: " + parseInt(data[0].QFabricar) 
                             + "<br />Iniciada: " + parseInt(data[0].QIniciada) 
                             + "<br />Fabricada: " + parseInt(data[0].QFabricada);
-            // $scope.arratontooltip = "A Frabricar: " + data.QFabricar? parseInt(data.QFabricar) :""
-            //                     + "<br />Iniciada: " + data.QIniciada ? parseInt(data.QIniciada) :""
-            //                     + "<br />Fabricada: " + data.QFabricada ?  parseInt(data.QFabricada):"";
         })
         .error(function () {
             console.log("error al obtener datos");

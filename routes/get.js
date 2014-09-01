@@ -49,25 +49,38 @@ exports.getlinea1 = function(req,res) {
                     if (n > 0) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
-                        var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
-                        var req = httpsync.get({ url : url});
-                        var res = req.end();
+                        var ofertada = miarray.slice(0,2);
+                        console.log(ofertada);
+                        if (tof.indexOf("of") > -1) {
+                            var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
+                            var req = httpsync.get({ url : url});
+                            var res = req.end();
 
-                        var miresp = res.data.toString();
-                        var mijson = JSON.parse(miresp);
-                        if ( mijson.length === 0 ) {
-                            orden.badutstock = 0;
-                        } else {
-                            var aurki = false;
-                            mijson.forEach(function(entry) {
-                                if ( entry.QPendiente < entry.QNecesaria ) {
-                                    orden.badutstock = 1;
-//                                    console.log(entry);
+                            if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
+                                console.log(res.data.toString());
+                                var miresp = res.data.toString();
+                                var mijson = JSON.parse(miresp);
+                                if ( mijson.length === 0 ) {
+                                    orden.badutstock = 0;
                                 } else {
-//                                    orden.badutstock = 0;
+                                    var aurki = false;
+                                    mijson.forEach(function(entry) {
+                                        if ( entry.QPendiente < entry.QNecesaria ) {
+                                            orden.badutstock = 1;
+                                            console.log(entry);
+                                        } else {
+        //                                    orden.badutstock = 0;
+                                        }
+                                    });
                                 }
-                            });
+                            } else {
+                                orden.badutstock = 0;
+                            }
+                        } else {
+                            console.log("ez du oferta formatu zuzena");
+                            orden.badutstock = 0;
                         }
+
                     } else {
                         orden.badutstock = 0;
                     }
