@@ -62,13 +62,15 @@ td.tdlinea {
 .editable-click, a.editable-click {
     border-bottom: none !important;
 }
-.on-drag-enter{
+/*.on-drag-enter{
     background-color : #aaaaaa;
-}
+}*/
 .on-drag-hover:before {
-  content: 'Drop him gently';
+  background: #fbec88; 
+  border: 1px solid #fad42e; 
+  content: 'soltar aqui';
+  color: #363636;
   display: block;
-  color: white;
   font-size: x-large;
   font-weight: 800;
 }
