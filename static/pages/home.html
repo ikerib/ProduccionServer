@@ -39,27 +39,20 @@
                     <tbody>
                     <tr ng-controller="linea1Controller">
                         <td class="tdlinea">Siplace</td>
-                        <td class="asteeguna">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna1)">
                             <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna1" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna1" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                     tooltip-html-unsafe="{{arratontooltip}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna1" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -88,27 +81,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna2)">
                             <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna2" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna2" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna2" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -137,27 +122,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna3)">
                             <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna3" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna3" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna3" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -186,27 +163,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna4)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna4" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna4" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna4" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -235,27 +204,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna5)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna5" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna5" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna5" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -284,27 +245,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna6)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna6" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna6" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna6" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -333,27 +286,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna7)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna7" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna7" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna7" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -386,27 +331,19 @@
                     
                     <tr ng-controller="linea2Controller">
                         <td class="tdlinea">Assembleon </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna1)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna1" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna1" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                     tooltip-html-unsafe="{{arratontooltip}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna1" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -435,27 +372,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna2)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna2" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna2" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna2" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -484,27 +413,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna3)">
                             <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)" 
                                 ng-repeat="orden in asteeguna3" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna3" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna3" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -533,27 +454,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna4)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna4" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna4" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna4" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -582,27 +495,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna5)">
                             <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)" 
                                 ng-repeat="orden in asteeguna5" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna5" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna5" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -631,27 +536,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna6)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna6" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna6" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna6" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -680,27 +577,19 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna">
-                            <div class="box-of" 
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna7)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna7" 
-                                data-drop="true" 
-                                data-jqyoui-options 
                                 ng-model="asteeguna7" 
-                                jqyoui-droppable
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
                                 tooltip-html-unsafe="{{arraton}}">
 
-                                    <div class="glyphicon glyphicon-move" 
-                                        data-drag="true" 
-                                        data-jqyoui-options="{revert: 'invalid'}" 
-                                        ng-model="asteeguna7" 
-                                        jqyoui-draggable="{animate:true}"
-                                        
-                                        data-orden="{{orden.orden}}"
-                                    ></div>
-                                    <span ng-if="orden.badutstock == 1" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"

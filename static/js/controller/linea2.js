@@ -160,8 +160,39 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
 
     $scope.onDropComplete = function(index, data, evt){
         console.log(data);
-        console.log(index);
-        
+        console.log(index);        
     }
+
+    $scope.onDrop = function($event,$data, linea,eguna){
+        $data.id = $data._id;
+        $data.lineaberria = linea;
+        $data.egunaberria = eguna;
+        $http({
+            url: '/ezabatu',
+            method: "POST",
+            data: $data,
+            headers: {'Content-Type': 'application/json'}
+        })
+        .success(function (data, status, headers, config) {
+            console.log("success");
+            var midata = config.data.ref;
+            var fetxa = config.data.egunaberria + " 11:11:11";
+            var milinea = config.data.lineaberria;
+            var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
+            var d = {
+                linea: milinea,
+                fetxa: fetxaformatua,
+                ref: midata
+            };
+
+            $http.post('/sartu', d).success(function () {
+                console.log("baiiiiii");
+                $scope.getDatuak();
+            
+            });
+        }).error(function (data, status, headers, config) {
+            alert("tssssss!!");
+        });
+    };
     
 });

@@ -315,5 +315,4 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         });
     }
 
-
 });

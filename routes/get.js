@@ -52,7 +52,7 @@ exports.getlinea1 = function(req,res) {
                         var ofertada = miarray.slice(0,2);
                         console.log(ofertada);
                         if (tof.indexOf("of") > -1) {
-                            var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
+                            var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
                             var req = httpsync.get({ url : url});
                             var res = req.end();
 
@@ -128,13 +128,13 @@ exports.getlinea2 = function(req,res) {
                 var val = orden.ref;
                 if (( val != "" ) && ( val !== undefined)) {
                     var of="";
-                    val = val.replace("<BR>", "<br>").replace("<BR />", "<br>").replace("<br />", "<br>");
+                    val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
                     if (val === undefined) { return false }
                     var n = val.indexOf("<br>");
                     if (n > 0) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
-                        var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof;
+                        var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
                         var req = httpsync.get({ url : url});
                         var res = req.end();
 
