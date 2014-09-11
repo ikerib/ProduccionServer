@@ -619,6 +619,298 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                     </tr>
+
+                    <tr ng-controller="linea3Controller">
+                        <td class="tdlinea">Montage y repaso </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna1)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
+                                ng-repeat="orden in asteeguna1" 
+                                ng-model="asteeguna1" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                    tooltip-html-unsafe="{{arratontooltip}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna1}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna2)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
+                                ng-repeat="orden in asteeguna2" 
+                                ng-model="asteeguna2" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna2}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna3)">
+                            <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)" 
+                                ng-repeat="orden in asteeguna3" 
+                                ng-model="asteeguna3" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna3}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna4)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
+                                ng-repeat="orden in asteeguna4" 
+                                ng-model="asteeguna4" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna4}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna5)">
+                            <div class="box-of" 
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)" 
+                                ng-repeat="orden in asteeguna5" 
+                                ng-model="asteeguna5" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna5}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna6)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
+                                ng-repeat="orden in asteeguna6" 
+                                ng-model="asteeguna6" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna6}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna7)">
+                            <div class="box-of"  
+                                ui-draggable="true" 
+                                drag="orden" 
+                                on-drop-success="dropSuccessHandler($event,$index,orden)"
+                                ng-repeat="orden in asteeguna7" 
+                                ng-model="asteeguna7" 
+                                style=" border:1px solid #000000; padding:3px; 
+                                    background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
+                                    color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
+                                tooltip-html-unsafe="{{arraton}}">
+
+                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
+                                    <span 
+                                        data-miid="{{ orden._id }}"
+                                        data-fetxa="{{orden.fetxa}}"
+                                        data-turno="1"
+                                        data-linea="3"
+                                        editable-text="orden.ref"
+                                        e-form="textBtnForm" 
+                                        ng-dblclick="textBtnForm.$show()"
+                                        ng-mouseenter="arraton(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);"
+                                        ng-if="isadmin"
+                                        ng-bind-html="orden.ref"
+                                        onbeforesave="updateUser($data, this)"></span>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
+                                        data-miid="{{ orden.id }}"
+                                        ng-if="!isadmin"
+                                        ng-click="grafikoa(orden.ref)"
+                                        ng-bind-html="orden.ref"
+                                        ></span>
+                            </div> <!-- box-of -->
+                            <div 
+                                data-fetxa="{{eguna7}}"
+                                data-linea="3"
+                                editable-text="orden.ref"
+                                onbeforesave="addData($data, this)">+</div>
+                        </td>
+                    </tr>
+
                     </tbody>
                 </table>
             </div>

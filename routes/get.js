@@ -166,6 +166,76 @@ exports.getlinea2 = function(req,res) {
     });
 }
 
+exports.getlinea3 = function(req,res) {
+
+    var desde = new Date(req.params.desde);
+    var hastatemp = new Date(req.params.desde);
+    var hasta = moment(hastatemp).add('days', 1).format('YYYY-MM-DD');
+
+    desde = moment(req.params.desde, "YYYY-MM-DD").toISOString();
+    hasta = moment(hasta, "YYYY-MM-DD").toISOString();
+
+    c_planificacion.find( {
+        $and: [
+            { linea: 3 },
+            { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
+        ]
+    },function(err, items){
+        if (err) {
+            res.json(500, err);
+        }
+        if (items.length === 0) {
+            res.statusCode = 404;
+            return res.send({ error: 'Ez da topatu' });
+        }
+
+        var feceguna = moment(desde).format('YYYY-MM-DD');
+
+        forEach (items, function(orden, callback){
+            var fec = moment( orden.fetxa).format('YYYY-MM-DD');
+            if ( fec === feceguna ) {
+                topatua=true;
+                var val = orden.ref;
+                if (( val != "" ) && ( val !== undefined)) {
+                    var of="";
+                    val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
+                    if (val === undefined) { return false }
+                    var n = val.indexOf("<br>");
+                    if (n > 0) {
+                        var miarray = val.split('<br>');
+                        tof = miarray[1];
+                        var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
+                        var req = httpsync.get({ url : url});
+                        var res = req.end();
+
+                        var miresp = res.data.toString();
+                        var mijson = JSON.parse(miresp);
+                        if ( mijson.length === 0 ) {
+                            orden.badutstock = 0;
+                        } else {
+                            mijson.forEach(function(entry) {
+                                if ( entry.QPendiente < entry.QNecesaria ) {
+                                    orden.badutstock = 1;
+                                } else {
+                                    orden.badutstock = 0;
+                                }
+                            });
+                        }
+                    } else {
+                        orden.badutstock = 0;
+                    }
+                } else {
+                    orden.badutstock = 0;
+                }
+            }
+        }, function(){
+            if ( topatua == true ) {
+                res.json(items);
+            }
+        });
+    });
+}
+
 exports.save = function(io) {
     return function(req, res){
 

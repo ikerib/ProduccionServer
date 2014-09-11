@@ -2,56 +2,56 @@
  * Created by ikerib on 30/06/14.
  */
 
-produccionApp.controller('linea2Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
+produccionApp.controller('linea3Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
 
     $scope.getDatuak = function () {
         // usSpinnerService.spin('spinner-1');
         var dsd = moment($scope.dt).format('YYYY-MM-DD');
         var hst = moment($scope.dtSecond).format('YYYY-MM-DD');
 
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna1 = data;
         }).error(function () { 
         	$scope.asteeguna1="";
         });
 
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna2 = data;
         }).error(function () { 
         	$scope.asteeguna2 = "";
         });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna3 = data;
         }).error(function () { 
         	$scope.asteeguna3 = "";
         });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna4 = data;
         }).error(function () { 
         	$scope.asteeguna4 = "";
         });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna5 = data;
         }).error(function () { 
         	$scope.asteeguna5 = "";
         });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna6 = data;
         }).error(function () { 
         	$scope.asteeguna6 = "";
         });
         
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
-        $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
+        $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna7 = data;
         }).error(function () { 
         	$scope.asteeguna7 = "";
@@ -71,7 +71,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
         var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
         var d = {
             id: miid,
-            linea: 2,
+            linea: 3,
             fetxa: fetxaformatua,
             ref: data
         };
@@ -92,7 +92,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
 
         for (var i = $scope.datuak.length; i--;) {
             var d = $scope.datuak[i];
-            d.milinea = 2;
+            d.milinea = 3;
             $http.post('/saveplanificacion', d);
         }
 
@@ -107,7 +107,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
             var d = $scope.datuak[i];
 
             if (d[0].id === miid) {
-                d.milinea = 2;
+                d.milinea = 3;
                 $http.post('/saveplanificacion', d[0]);
             }
 
@@ -123,7 +123,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
         } else {
             var d = {
                 fetxa: moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString(),
-                linea: 2,
+                linea: 3,
                 ref: midata
             }
             $http.post('/saveplanificacion', d);
@@ -134,7 +134,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
         var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
         var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
         var d = {
-            linea: 2,
+            linea: 3,
             fetxa: fetxaformatua,
             ref: midata
         };
