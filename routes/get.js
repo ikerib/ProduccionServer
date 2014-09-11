@@ -49,43 +49,36 @@ exports.getlinea1 = function(req,res) {
                     if (n > 0) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
-                        var ofertada = miarray.slice(0,2);
-                        console.log(ofertada);
-                        if (tof.indexOf("of") > -1) {
-                            var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
-                            var req = httpsync.get({ url : url});
-                            var res = req.end();
+                        var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
+                        var req = httpsync.get({ url : url});
+                        var res = req.end();
 
-                            if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
-                                console.log(res.data.toString());
-                                var miresp = res.data.toString();
-                                var mijson = JSON.parse(miresp);
-                                if ( mijson.length === 0 ) {
-                                    orden.badutstock = 0;
-                                } else {
-                                    var aurki = false;
-                                    mijson.forEach(function(entry) {
-                                        if ( entry.QPendiente < entry.QNecesaria ) {
-                                            orden.badutstock = 1;
-                                            console.log(entry);
-                                        } else {
-        //                                    orden.badutstock = 0;
-                                        }
-                                    });
-                                }
-                            } else {
+                        if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
+                            console.log(res.data.toString());
+                            var miresp = res.data.toString();
+                            var mijson = JSON.parse(miresp);
+                            if ( mijson.length === 0 ) {
                                 orden.badutstock = 0;
+                            } else {
+                                var aurki = false;
+                                mijson.forEach(function(entry) {
+                                    if ( entry.QPendiente < entry.QNecesaria ) {
+                                        orden.badutstock = 1;
+                                        console.log(entry);
+                                    } else {
+                                        orden.badutstock = 0;
+                                    }
+                                });
                             }
                         } else {
-                            console.log("ez du oferta formatu zuzena");
                             orden.badutstock = 0;
                         }
 
                     } else {
-                        orden.badutstock = 0;
+                        orden.badutstock = -1;
                     }
                 } else {
-                    orden.badutstock = 0;
+                    orden.badutstock = -1;
                 }
             }
         }, function(){
@@ -138,24 +131,31 @@ exports.getlinea2 = function(req,res) {
                         var req = httpsync.get({ url : url});
                         var res = req.end();
 
-                        var miresp = res.data.toString();
-                        var mijson = JSON.parse(miresp);
-                        if ( mijson.length === 0 ) {
-                            orden.badutstock = 0;
+                        if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
+                            //console.log(res.data.toString());
+                            var miresp = res.data.toString();
+                            var mijson = JSON.parse(miresp);
+                            if ( mijson.length === 0 ) {
+                                orden.badutstock = 0;
+                            } else {
+                                var aurki = false;
+                                mijson.forEach(function(entry) {
+                                    if ( entry.QPendiente < entry.QNecesaria ) {
+                                        orden.badutstock = 1;
+                                        console.log(entry);
+                                    } else {
+                                        orden.badutstock = 0;
+                                    }
+                                });
+                            }
                         } else {
-                            mijson.forEach(function(entry) {
-                                if ( entry.QPendiente < entry.QNecesaria ) {
-                                    orden.badutstock = 1;
-                                } else {
-                                    orden.badutstock = 0;
-                                }
-                            });
+                            orden.badutstock = -1;
                         }
                     } else {
-                        orden.badutstock = 0;
+                        orden.badutstock = -1;
                     }
                 } else {
-                    orden.badutstock = 0;
+                    orden.badutstock = -1;
                 }
             }
         }, function(){
@@ -198,9 +198,11 @@ exports.getlinea3 = function(req,res) {
                 var val = orden.ref;
                 if (( val != "" ) && ( val !== undefined)) {
                     var of="";
+
                     val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
                     if (val === undefined) { return false }
                     var n = val.indexOf("<br>");
+
                     if (n > 0) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
@@ -208,24 +210,31 @@ exports.getlinea3 = function(req,res) {
                         var req = httpsync.get({ url : url});
                         var res = req.end();
 
-                        var miresp = res.data.toString();
-                        var mijson = JSON.parse(miresp);
-                        if ( mijson.length === 0 ) {
-                            orden.badutstock = 0;
+                        if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
+                            console.log(res.data.toString());
+                            var miresp = res.data.toString();
+                            var mijson = JSON.parse(miresp);
+                            if ( mijson.length === 0 ) {
+                                orden.badutstock = 0;
+                            } else {
+                                var aurki = false;
+                                mijson.forEach(function(entry) {
+                                    if ( entry.QPendiente < entry.QNecesaria ) {
+                                        orden.badutstock = 1;
+                                        console.log(entry);
+                                    } else {
+                                        orden.badutstock = 0;
+                                    }
+                                });
+                            }
                         } else {
-                            mijson.forEach(function(entry) {
-                                if ( entry.QPendiente < entry.QNecesaria ) {
-                                    orden.badutstock = 1;
-                                } else {
-                                    orden.badutstock = 0;
-                                }
-                            });
+                            orden.badutstock = -1;
                         }
                     } else {
-                        orden.badutstock = 0;
+                        orden.badutstock = -1;
                     }
                 } else {
-                    orden.badutstock = 0;
+                    orden.badutstock = -1;
                 }
             }
         }, function(){
@@ -270,7 +279,6 @@ exports.sartu = function (req, res) {
             res.send(result);
         }
     });
-
 };
 
 exports.egutegia = function(req, res){
@@ -342,7 +350,6 @@ exports.ezabatu = function(req, res) {
     });
 }
 
-
 //Settings
 exports.getsettings = function(req, res){
 
@@ -355,8 +362,6 @@ exports.getsettings = function(req, res){
             });
         }
     })
-
-
 };
 
 exports.insertSetting = function (req, res) {
@@ -370,7 +375,6 @@ exports.insertSetting = function (req, res) {
     }, function() {
         res.send(200);
     });
-
 };
 
 exports.updateSetting = function(req, res){
@@ -387,6 +391,5 @@ exports.updateSetting = function(req, res){
         if (e) console.log(e)
         res.send((result===1)?{msg:'success'}:{msg:'error'+e})
     })
-
 };
 
