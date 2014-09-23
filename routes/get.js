@@ -323,6 +323,7 @@ exports.egutegia = function(req, res){
 
         forEach (items, function(orden, callback){
             var miobj = {};
+            miobj._id = orden._id;
             miobj.title = orden.ref;
             miobj.start = moment(orden.fetxa).format('YYYY-MM-DD');
             miresp.push(miobj);
@@ -331,6 +332,31 @@ exports.egutegia = function(req, res){
         res.json(miresp);
 
     })
+};
+
+exports.egutegiaeguneratu = function(req, res) {
+    var data = req.body;
+    var BSON = mongo.BSONPure;
+    var o_id = new BSON.ObjectID(data._id);
+
+    c_planificacion.update(
+        {'_id': o_id},
+        { $set :
+            {
+                fetxa: data.fetxa,
+            }
+        },
+        {
+            safe:true,
+            multi:false,
+            upsert:false
+        },
+        function(e, result){
+            if (e) console.log(e)
+            res.send(
+                (result===1)?{msg:'success'}:{msg:'error'+e})
+        }
+    );
 };
 
 exports.ezabatu = function(req, res) {

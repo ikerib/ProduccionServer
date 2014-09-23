@@ -90,6 +90,7 @@ server.post('/saveplanificacion', get.save(io));
 server.post('/sartu', get.sartu);
 server.post('/ezabatu', get.ezabatu);
 server.get('/egutegia', get.egutegia);
+server.put('/egutegiaeguneratu', get.egutegiaeguneratu);
 
 //Settings
 server.get('/getsettings', get.getsettings);
