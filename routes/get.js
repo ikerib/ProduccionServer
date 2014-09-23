@@ -60,6 +60,7 @@ exports.getlinea1 = function(req,res) {
                                 orden.badutstock = 0;
                             } else {
                                 var aurki = false;
+                                var amaituta = false;
                                 mijson.forEach(function(entry) {
                                     if ((aurki === false ) && ( parseFloat(entry.QPendiente) <= parseFloat(entry.StockFisico) )) {
                                         orden.badutstock = 1;
@@ -67,6 +68,14 @@ exports.getlinea1 = function(req,res) {
                                         orden.badutstock = 0;
                                         aurki = true;
                                     }
+
+                                    if ((amaituta===false) && ( parseFloat(entry.QFabricada) >= parseFloat(entry.QFabricar) )) {
+                                        orden.amaituta = 1;
+                                        amaituta = true;
+                                    } else if ((amaituta===false) && ( parseFloat(entry.QFabricada) < parseFloat(entry.QFabricar) )) {
+                                        orden.amaituta = 0;
+                                    }
+
                                 });
                             }
                         } else {
@@ -137,6 +146,7 @@ exports.getlinea2 = function(req,res) {
                                 orden.badutstock = 0;
                             } else {
                                 var aurki = false;
+                                var amaituta = false;
                                 mijson.forEach(function(entry) {
                                     if ((aurki === false ) && ( parseFloat(entry.QPendiente) <= parseFloat(entry.StockFisico) )) {
                                         orden.badutstock = 1;
@@ -144,6 +154,14 @@ exports.getlinea2 = function(req,res) {
                                         orden.badutstock = 0;
                                         aurki=true;
                                     }
+
+                                    if ((amaituta===false) && ( parseFloat(entry.QFabricada) >= parseFloat(entry.QFabricar) )) {
+                                        orden.amaituta = 1;
+                                        amaituta = true;
+                                    } else if ((amaituta===false) && ( parseFloat(entry.QFabricada) < parseFloat(entry.QFabricar) )) {
+                                        orden.amaituta = 0;
+                                    }
+
                                 });
                             }
                         } else {
@@ -215,6 +233,7 @@ exports.getlinea3 = function(req,res) {
                                 orden.badutstock = 0;
                             } else {
                                 var aurki = false;
+                                var amaituta = false;
                                 mijson.forEach(function(entry) {
                                     if ((aurki === false ) && ( parseFloat(entry.QPendiente) <= parseFloat(entry.StockFisico) )) {
                                         orden.badutstock = 1;
@@ -222,6 +241,14 @@ exports.getlinea3 = function(req,res) {
                                         orden.badutstock = 0;
                                         aurki=true;
                                     }
+
+                                    if ((amaituta===false) && ( parseFloat(entry.QFabricada) >= parseFloat(entry.QFabricar) )) {
+                                        orden.amaituta = 1;
+                                        amaituta = true;
+                                    } else if ((amaituta===false) && ( parseFloat(entry.QFabricada) < parseFloat(entry.QFabricar) )) {
+                                        orden.amaituta = 0;
+                                    }
+
                                 });
                             }
                         } else {

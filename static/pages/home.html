@@ -44,7 +44,8 @@
                                 ui-draggable="true" 
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
-                                ng-repeat="orden in asteeguna1" 
+                                ng-repeat="orden in asteeguna1"
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna1" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -87,6 +88,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna2" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna2" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -128,6 +130,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna3" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna3" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -169,6 +172,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna4" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna4" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -211,6 +215,7 @@
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna5" 
                                 ng-model="asteeguna5" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
                                     color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" 
@@ -251,6 +256,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna6" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna6" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -292,6 +298,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna7" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna7" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -337,6 +344,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna1" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna1" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -378,6 +386,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna2" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna2" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -419,6 +428,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)" 
                                 ng-repeat="orden in asteeguna3" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna3" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -460,6 +470,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna4" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna4" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -501,6 +512,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)" 
                                 ng-repeat="orden in asteeguna5" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna5" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -542,6 +554,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna6" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna6" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -583,6 +596,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna7" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna7" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -628,6 +642,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna1" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna1" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -669,6 +684,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna2" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna2" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -710,6 +726,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)" 
                                 ng-repeat="orden in asteeguna3" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna3" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -751,6 +768,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna4" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna4" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -792,6 +810,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)" 
                                 ng-repeat="orden in asteeguna5" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna5" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -833,6 +852,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna6" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna6" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 
@@ -874,6 +894,7 @@
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna7" 
+                                ng-class="whatClassIsIt(orden.amaituta)" 
                                 ng-model="asteeguna7" 
                                 style=" border:1px solid #000000; padding:3px; 
                                     background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; 

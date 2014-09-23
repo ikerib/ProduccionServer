@@ -6,6 +6,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
     $scope.isadmin = false;
     $scope.arraton="Haz click en OF para refrescar datos.";
+    $scope.estadofabricacion="";
     if ( $cookieStore.get('gitekplanificacion') === "1" ) {
         $scope.isadmin = true;
     }
@@ -308,11 +309,18 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             $scope.arratontooltip = "A Frabricar: " + parseInt(data[0].QFabricar) 
                             + "<br />Iniciada: " + parseInt(data[0].QIniciada) 
                             + "<br />Fabricada: " + parseInt(data[0].QFabricada);
+            // $scope.estadofabricacion = data;
         })
         .error(function () {
             console.log("error al obtener datos");
             return;
         });
+    }
+
+    $scope.whatClassIsIt= function(amaituta){
+        if(amaituta === 1) {
+            return "tatxatu"
+        }
     }
 
 });
