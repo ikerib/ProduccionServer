@@ -65,6 +65,7 @@ exports.getlinea1 = function(req,res) {
                                         orden.badutstock = 1;
                                     } else {
                                         orden.badutstock = 0;
+                                        aurki = true;
                                     }
                                 });
                             }
@@ -219,6 +220,7 @@ exports.getlinea3 = function(req,res) {
                                         orden.badutstock = 1;
                                     } else {
                                         orden.badutstock = 0;
+                                        aurki=true;
                                     }
                                 });
                             }
