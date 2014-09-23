@@ -137,10 +137,11 @@ exports.getlinea2 = function(req,res) {
                             } else {
                                 var aurki = false;
                                 mijson.forEach(function(entry) {
-                                    if ( entry.QPendiente < entry.QNecesaria ) {
+                                    if ((aurki === false ) && ( parseFloat(entry.QPendiente) <= parseFloat(entry.StockFisico) )) {
                                         orden.badutstock = 1;
                                     } else {
                                         orden.badutstock = 0;
+                                        aurki=true;
                                     }
                                 });
                             }
