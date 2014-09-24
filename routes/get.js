@@ -336,14 +336,17 @@ exports.egutegia = function(req, res){
 
 exports.egutegiaeguneratu = function(req, res) {
     var data = req.body;
-    var BSON = mongo.BSONPure;
-    var o_id = new BSON.ObjectID(data._id);
+
+    console.log(data._id)
+    console.log(data.fetxa)
+    //var BSON = mongo.BSONPure;
+    //var o_id = new BSON.ObjectID(data._id);
 
     c_planificacion.update(
-        {'_id': o_id},
+        {'_id': data._id},
         { $set :
             {
-                fetxa: data.fetxa,
+                fetxa: new Date(data.fetxa),
             }
         },
         {
