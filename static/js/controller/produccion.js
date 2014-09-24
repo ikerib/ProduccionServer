@@ -322,5 +322,25 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             return "tatxatu"
         }
     }
+    $scope.ordenatu = function(orden, cont) {
+console.log(orden);
+console.log(cont);
+        console.log("HEMEN");
+        var $data = {};
+        $data._id = orden._id;
+        
+        if ( (orden.orden !== undefined) && ( orden.orden !== "") && ( orden.orden !== NaN ) && ( orden.orden !== null )) {
+            $data.orden = orden.orden + cont
+        } else {
+            $data.orden = 0;
+        }
+
+        $http.put(
+            '/ordenatu', $data
+        ).success(function () {
+            $scope.$broadcast ('eguneratudatuak');
+        });
+    }
+
 
 });

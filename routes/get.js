@@ -25,7 +25,9 @@ exports.getlinea1 = function(req,res) {
             { linea: 1 },
             { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
         ]
-    },function(err, items){
+    },
+    {sort: {orden: 1, _id:1}},
+    function(err, items){
         if (err) {
             res.json(500, err);
         }
@@ -361,6 +363,29 @@ exports.egutegiaeguneratu = function(req, res) {
         }
     );
 };
+
+exports.ordenatu = function (req, res) {
+    var data = req.body;
+
+    c_planificacion.update(
+        {'_id': data._id},
+        { $set :
+        {
+            orden: data.orden
+        }
+        },
+        {
+            safe:true,
+            multi:false,
+            upsert:false
+        },
+        function(e, result){
+            if (e) console.log(e)
+            res.send(
+                (result===1)?{msg:'success'}:{msg:'error'+e})
+        }
+    );
+}
 
 exports.ezabatu = function(req, res) {
     var body = req.body;
