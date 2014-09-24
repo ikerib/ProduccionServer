@@ -28,22 +28,12 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket) 
 
     $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
         var $data = {};
-        console.log(event);
-        console.log(dayDelta);
-        console.log(minuteDelta);
-        console.log(revertFunc);
-        console.log(ui);
-        console.log(view);
         $data._id = event._id;
         $data.fetxa = moment(event._start).add(dayDelta._days);
-        console.log("Hasierakoa" + moment(event.start));
-        console.log("Amaierakoa" + moment($data.fetxa));
 
         $http.put(
             '/egutegiaeguneratu', $data
         ).success(function () {
-
-            console.log("fin");
         });
     }
 });

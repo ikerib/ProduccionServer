@@ -42,6 +42,7 @@
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna1)">
                             <div class="box-of" 
                                 ui-draggable="true" 
+                                ui-sortable
                                 drag="orden" 
                                 on-drop-success="dropSuccessHandler($event,$index,orden)"
                                 ng-repeat="orden in asteeguna1"
@@ -75,6 +76,7 @@
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
                                         ></span>
+                                    <span><button ng-click="ordenatu(orden,-1)">behera</button></span>
                             </div> <!-- box-of -->
                             <div 
                                 data-fetxa="{{eguna1}}"

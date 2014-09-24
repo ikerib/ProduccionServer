@@ -3,7 +3,14 @@
  */
 
 produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
-
+    $scope.sortableOptions = {
+        update: function(e, ui) { 
+            console.log("update");
+            console.log(e);
+            console.log(ui);
+        },
+        axis: 'x'
+    };
     $scope.getDatuak = function () {
         usSpinnerService.spin('spinner-1');
         var dsd = moment($scope.dt).format('YYYY-MM-DD');
@@ -57,9 +64,12 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
             $scope.asteeguna7 = "";
             usSpinnerService.stop('spinner-1');
         });
-
     };
     $scope.getDatuak();
+
+    $scope.$on('eguneratudatuak', function(e) {  
+        $scope.getDatuak();      
+    });
 
     socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
         $scope.getDatuak();

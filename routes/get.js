@@ -25,7 +25,9 @@ exports.getlinea1 = function(req,res) {
             { linea: 1 },
             { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
         ]
-    },function(err, items){
+    },
+    {sort: {orden:1,_id: 1}},
+    function(err, items){
         if (err) {
             res.json(500, err);
         }
@@ -337,11 +339,6 @@ exports.egutegia = function(req, res){
 exports.egutegiaeguneratu = function(req, res) {
     var data = req.body;
 
-    console.log(data._id)
-    console.log(data.fetxa)
-    //var BSON = mongo.BSONPure;
-    //var o_id = new BSON.ObjectID(data._id);
-
     c_planificacion.update(
         {'_id': data._id},
         { $set :
@@ -373,6 +370,30 @@ exports.ezabatu = function(req, res) {
     });
 }
 
+exports.ordenatu = function (req, res) {
+    var data = req.body;
+
+    c_planificacion.update(
+        {'_id': data._id},
+        { $set :
+        {
+            orden: data.orden
+        }
+        },
+        {
+            safe:true,
+            multi:false,
+            upsert:false
+        },
+        function(e, result){
+            if (e) console.log(e)
+            res.send(
+                (result===1)?{msg:'success'}:{msg:'error'+e})
+        }
+    );
+}
+
+
 //Settings
 exports.getsettings = function(req, res){
 
@@ -402,10 +423,8 @@ exports.insertSetting = function (req, res) {
 exports.updateSetting = function(req, res){
 
     var data = req.body;
-    var BSON = mongo.BSONPure;
-    var o_id = new BSON.ObjectID(data._id);
 
-    c_settings.update({'_id': o_id}, { $set :{
+    c_settings.update({'_id': data._id}, { $set :{
         ref: data.ref,
         backcolor: data.backcolor,
         forecolor: data.forecolor
