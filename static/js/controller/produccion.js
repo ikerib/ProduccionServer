@@ -323,8 +323,8 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         }
     }
     $scope.ordenatu = function(orden, cont) {
-console.log(orden);
-console.log(cont);
+        console.log(orden);
+        console.log(cont);
         console.log("HEMEN");
         var $data = {};
         $data._id = orden._id;
