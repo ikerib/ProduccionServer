@@ -24,6 +24,17 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket, 
 
                 eventRender: function (event, element) {
                     element.find('span.fc-event-title').html(element.find('span.fc-event-title').text());           
+                    switch(event.linea) {
+                        case 1:
+                            $(element).css("backgroundColor", "blue");
+                            break;
+                        case 2:
+                            $(element).css("backgroundColor", "green");
+                            break;
+                        case 3:
+                            $(element).css("backgroundColor", "orange");
+                            break;
+                    }
                 }
             }
         };
@@ -44,7 +55,11 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket, 
                     {
                         url: '/egutegia'
                     }
-                ]
+                ],
+
+                eventRender: function (event, element) {
+                    element.find('span.fc-event-title').html(element.find('span.fc-event-title').text());           
+                }
             }
         };
     }

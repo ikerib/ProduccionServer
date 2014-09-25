@@ -335,7 +335,8 @@ exports.egutegia = function(req, res){
     hasta = moment(req.query.end, "YYYY-MM-DD").toISOString();
 
     c_planificacion.find(
-            { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }
+        { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }},
+        { sort: { linea:1, orden:1}
     },function(err, items){
 
         if (err) {
@@ -346,6 +347,7 @@ exports.egutegia = function(req, res){
             var miobj = {};
             miobj._id = orden._id;
             miobj.title = orden.ref;
+            miobj.linea = orden.linea;
             miobj.start = moment(orden.fetxa).format('YYYY-MM-DD');
             miresp.push(miobj);
         });
