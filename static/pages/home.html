@@ -52,6 +52,7 @@
                                         data-fetxa="{{orden.fetxa}}"
                                         data-turno="1"
                                         data-linea="1"
+                                        data-orden="{{orden.orden}}"
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
@@ -61,7 +62,8 @@
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
 
-                                    <span><button ng-click="ordenatu(orden,-1)">Behera</button></span> 
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>                                    
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -101,6 +103,7 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
 
                                 </div>
                                 <div> <!-- box-of -->
@@ -141,6 +144,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -180,6 +185,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -219,6 +226,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -258,6 +267,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -297,6 +308,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -340,6 +353,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -379,6 +394,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -418,6 +435,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -457,6 +476,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -496,6 +517,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -535,6 +558,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -574,6 +599,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -617,6 +644,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -656,6 +685,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -695,6 +726,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -734,6 +767,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -773,6 +808,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -812,6 +849,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 
@@ -851,6 +890,8 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
                                 </div>
                                 <div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')" 

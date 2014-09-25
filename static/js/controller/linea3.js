@@ -60,6 +60,10 @@ produccionApp.controller('linea3Controller', function ($scope, $http, $resource,
     };
     $scope.getDatuak();
 
+    $scope.$on('eguneratu', function(e) {  
+        $scope.getDatuak();
+    });
+
     socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
         $scope.getDatuak();
     });

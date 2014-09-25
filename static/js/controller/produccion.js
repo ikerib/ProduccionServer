@@ -328,6 +328,9 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         console.log("HEMEN");
         var $data = {};
         $data._id = orden._id;
+        $data.fetxa = orden.fetxa;
+        console.log(orden.fetxa);
+        $data.linea = orden.linea;
         
         if ( (orden.orden !== undefined) && ( orden.orden !== "") && ( orden.orden !== NaN ) && ( orden.orden !== null )) {
             $data.orden = orden.orden + cont
@@ -341,6 +344,21 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             $scope.$broadcast ('eguneratudatuak');
         });
     }
+
+    $scope.updateOrden = function (data, l) {
+
+        var miid = l.$editable.attrs.miid;
+        var d = {
+            id: miid,
+            orden: data
+        };
+
+            $http.post('/saveorden', d).success(function () {
+                $scope.$broadcast ('eguneratu');
+            });
+              
+
+    };
 
 
 });

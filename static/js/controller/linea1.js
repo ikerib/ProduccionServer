@@ -61,6 +61,11 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
     };
     $scope.getDatuak();
 
+    $scope.$on('eguneratu', function(e) {  
+        $scope.getDatuak();
+    });
+
+
     socket.on('eguneratu', function (data) { // Listening in Socket in Angular Controller
         $scope.getDatuak();
     });
@@ -69,12 +74,14 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
         var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
         var miid = l.$editable.attrs.miid;
+        var miorden = l.$editable.attrs.orden;
         var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
         var d = {
             id: miid,
             linea: 1,
             fetxa: fetxaformatua,
-            ref: data
+            ref: data,
+            orden: miorden
         };
 
         if ( d.ref === "" ) {

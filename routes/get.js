@@ -113,7 +113,9 @@ exports.getlinea2 = function(req,res) {
             { linea: 2 },
             { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
         ]
-    },function(err, items){
+    },
+    {sort: {orden: 1, _id:1}},
+    function(err, items){
         if (err) {
             res.json(500, err);
         }
@@ -198,7 +200,9 @@ exports.getlinea3 = function(req,res) {
             { linea: 3 },
             { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
         ]
-    },function(err, items){
+    },
+    {sort: {orden: 1, _id:1}},
+    function(err, items){
         if (err) {
             res.json(500, err);
         }
@@ -288,6 +292,20 @@ exports.save = function(io) {
     }
 };
 
+exports.saveorden = function(io) {
+    return function(req, res){
+
+        var body = req.body;
+        var miorden =  parseInt(body.orden);
+        c_planificacion.findAndModify({_id: body.id}, {$set: {orden: miorden}}, {multi:false}, function(err, bug){
+            if (err) res.json(500, err);
+            else if (bug) res.json(bug);
+            else res.json(404);
+        });
+
+    }
+};
+
 exports.sartu = function (req, res) {
 
     var data = req.body;
@@ -295,7 +313,8 @@ exports.sartu = function (req, res) {
     var producto = {
             fetxa:new Date(data.fetxa),
             linea: data.linea,
-            ref: data.ref
+            ref: data.ref,
+            orden:0
     };
 
     c_planificacion.insert(producto, {safe:true}, function(err, result) {
@@ -367,24 +386,21 @@ exports.egutegiaeguneratu = function(req, res) {
 exports.ordenatu = function (req, res) {
     var data = req.body;
 
-    c_planificacion.update(
-        {'_id': data._id},
-        { $set :
-        {
-            orden: data.orden
-        }
-        },
-        {
-            safe:true,
-            multi:false,
-            upsert:false
-        },
-        function(e, result){
-            if (e) console.log(e)
-            res.send(
-                (result===1)?{msg:'success'}:{msg:'error'+e})
-        }
-    );
+    var desde = moment(data.fetxa).format('YYYY-MM-DD');
+    var hasta =  moment(desde).add('days', 1).format('YYYY-MM-DD');
+    var milinea = data.linea;
+    var miorden = data.orden;
+    var azkena=0;
+    c_planificacion.find ({
+        $and: [
+            { "orden": { $gte: miorden }},
+            { linea: milinea },
+            { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
+        ]
+    }).each( function(x) {
+        var newValue = x.orden + 1;
+        c_planificacion.update( { _id: x._id }, { $set: { orden: newValue }});
+    });
 }
 
 exports.ezabatu = function(req, res) {

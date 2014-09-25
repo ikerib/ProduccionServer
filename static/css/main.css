@@ -78,3 +78,8 @@ td.tdlinea {
 .tatxatu {
     text-decoration:line-through !important;
 }
+
+.divorden {
+  text-align: right;
+  font-size: 10px;
+}

@@ -86,6 +86,7 @@ server.get('/planificacionlinea2/:desde/:hasta', get.getlinea2);
 server.get('/planificacionlinea3/:desde/:hasta', get.getlinea3);
 
 server.post('/saveplanificacion', get.save(io));
+server.post('/saveorden', get.saveorden(io));
 
 server.post('/sartu', get.sartu);
 server.post('/ezabatu', get.ezabatu);
