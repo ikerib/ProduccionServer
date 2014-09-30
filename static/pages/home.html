@@ -1,5 +1,22 @@
-<div class="row">&nbsp;</div>
-<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="row">
+        <div class="col-xs-6 col-sm-4"></div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="row">
+              <div class="panel panel-default">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success"><span class="badge">{{ cantafabricar }}</span>A Fabricar:  </li>
+                    <li class="list-group-item list-group-item-info"><span class="badge">{{ cantiniciada }}</span>Iniciada:  </li>
+                    <li class="list-group-item list-group-item-warning"><span class="badge">{{ cantfabricada }}</span>Fabricada:  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+        <!-- Optional: clear the XS cols if their content doesn't match in height -->
+        <div class="clearfix visible-xs-block"></div>
+        <div class="col-xs-6 col-sm-4"></div>
+    </div>
+</div>
 <div id="linea1" class="row">
     <div class="col-md-12">
         <div class="col-md-1">
@@ -43,7 +60,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
                                 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
             
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -56,8 +73,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -70,9 +86,8 @@
                                           data-miid="{{ orden.id }}"
                                           ng-if="!isadmin"
                                           ng-click="grafikoa(orden.ref)"
-                                          ng-mouseenter="arraton(orden.ref);"
                                           ng-bind-html="orden.ref"
-                                          tooltip-html-unsafe="{{arratontooltip}}"
+                                          
                                     ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -86,7 +101,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -98,8 +113,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -112,8 +126,7 @@
                                             ng-if="!isadmin"
                                             ng-click="grafikoa(orden.ref)"
                                             ng-bind-html="orden.ref"
-                                            ng-mouseenter="arraton(orden.ref);"
-                                            tooltip-html-unsafe="{{arratontooltip}}"
+                                            
                                             ></span>
                                 </div>
                             </div>
@@ -127,7 +140,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -139,8 +152,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -153,8 +165,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -168,7 +179,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -180,8 +191,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -194,8 +204,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -209,7 +218,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -221,8 +230,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -235,8 +243,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -250,7 +257,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -262,8 +269,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -276,8 +282,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -291,7 +296,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -303,8 +308,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -317,8 +321,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -336,7 +339,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -348,8 +351,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -362,8 +364,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -377,7 +378,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -389,8 +390,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -403,8 +403,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -418,7 +417,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -430,8 +429,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -444,8 +442,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -459,7 +456,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -471,8 +468,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -485,8 +481,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -500,7 +495,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -512,8 +507,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -526,8 +520,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -541,7 +534,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -553,8 +546,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -567,8 +559,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -582,7 +573,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -594,8 +585,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -608,8 +598,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -627,7 +616,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -639,8 +628,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -653,8 +641,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -668,7 +655,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -680,8 +667,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -694,8 +680,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -709,7 +694,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -721,8 +706,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -735,8 +719,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -750,7 +733,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -762,8 +745,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -776,8 +758,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -791,7 +772,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -803,8 +784,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -817,8 +797,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -832,7 +811,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -844,8 +823,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -858,8 +836,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->
@@ -873,7 +850,7 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <div ui-draggable="true" drag="orden" ng-if="isadmin" tooltip-html-unsafe="{{arratontooltip}}" on-drop-success="dropSuccessHandler($event,$index,orden)">
+                                <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -885,8 +862,7 @@
                                         editable-text="orden.ref"
                                         e-form="textBtnForm" 
                                         ng-dblclick="textBtnForm.$show()"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        ng-click="grafikoa(orden.ref);"
+                                        ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
@@ -899,8 +875,7 @@
                                         ng-if="!isadmin"
                                         ng-click="grafikoa(orden.ref)"
                                         ng-bind-html="orden.ref"
-                                        ng-mouseenter="arraton(orden.ref);"
-                                        tooltip-html-unsafe="{{arratontooltip}}"
+                                        
                                         ></span>
                                 </div>
                             </div> <!-- box-of -->

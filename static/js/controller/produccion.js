@@ -306,10 +306,9 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             if ( (data === "") || (data.length === 0) ) {
                 return false;
             }
-            $scope.arratontooltip = "A Frabricar: " + parseInt(data[0].QFabricar) 
-                            + "<br />Iniciada: " + parseInt(data[0].QIniciada) 
-                            + "<br />Fabricada: " + parseInt(data[0].QFabricada);
-            // $scope.estadofabricacion = data;
+            $scope.cantafabricar = parseInt(data[0].QFabricar); 
+            $scope.cantiniciada = parseInt(data[0].QIniciada) 
+            $scope.cantfabricada = parseInt(data[0].QFabricada);
         })
         .error(function () {
             console.log("error al obtener datos");
