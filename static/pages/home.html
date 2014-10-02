@@ -60,9 +60,10 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
                                 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
             
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -101,9 +102,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -140,9 +141,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -179,9 +180,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -218,9 +219,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -257,9 +258,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -296,9 +297,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -339,10 +340,8 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
-
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
-
                                     <span 
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -378,9 +377,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -417,9 +416,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -456,9 +455,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -495,9 +494,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -534,9 +533,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -573,9 +572,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -616,9 +615,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -655,9 +654,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -694,9 +693,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -733,9 +732,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -772,9 +771,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -811,9 +810,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
@@ -850,9 +849,9 @@
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7" 
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
+                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                     <span 
                                         data-miid="{{ orden._id }}"
