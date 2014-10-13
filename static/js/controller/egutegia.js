@@ -23,7 +23,7 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket, 
                 ],
 
                 eventRender: function (event, element) {
-                    element.find('span.fc-event-title').html(element.find('span.fc-event-title').text());           
+                    element.find('span.fc-event-title').html(element.find('span.fc-event-title').text().replace("<br>","-").substr(0, 20));
                     switch(event.linea) {
                         case 1:
                             $(element).css("backgroundColor", "blue");
@@ -58,7 +58,7 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket, 
                 ],
 
                 eventRender: function (event, element) {
-                    element.find('span.fc-event-title').html(element.find('span.fc-event-title').text());
+                    element.find('span.fc-event-title').html(element.find('span.fc-event-title').text().replace("<br>","-").substr(0, 20));
                     switch(event.linea) {
                         case 1:
                             $(element).css("backgroundColor", "blue");
