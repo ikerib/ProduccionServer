@@ -53,8 +53,10 @@ produccionApp.controller('linea3Controller', function ($scope, $http, $resource,
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea3/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna7 = data;
+            usSpinnerService.stop('spinner-1');
         }).error(function () { 
         	$scope.asteeguna7 = "";
+            usSpinnerService.stop('spinner-1');
         });
 
     };
