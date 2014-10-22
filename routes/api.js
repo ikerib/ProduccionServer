@@ -32,10 +32,10 @@ exports.getplanificacion = function(req, res) {
             return res.send({ error: 'Ez da topatu' });
         }
 
-        var erantzuna[];
+        res.json(items);
 
         forEach (items, function(orden, callback){
-            
+
         }, function(){
 
         });
