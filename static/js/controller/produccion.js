@@ -225,7 +225,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         val = val.replace("<BR />", "<br>");
         val = val.replace("<br />", "<br>");
 
-        
+
         var n = val.indexOf("<br>");
         if (n > 0) {
             var miarray = val.split('<br>');
@@ -233,54 +233,54 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         }
 
 
-        var url = "/proxy/expertis/"+of.trim();
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of.trim();
 
         $http.get(url,{cache:false})
-        .success(function(data){
+            .success(function(data){
 
-            if ( (data === "") || (data.length === 0) ) {
-                return false;
-            }
-            $scope.chartData = [
-                ['A fabricar', parseFloat(data.QFabricar)], 
-                ['Fabricada',parseFloat(data.QFabricada)],
-                ['Iniciada', parseFloat(data.QIniciada)]
-            ];
-            $scope.chartConfig = {
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false
-                },
-                title: {
-                    text: 'Graficos del Articulo: ' + data.IDArticulo + ' en la Orden: ' + data.NOrden
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                if ( (data === "") || (data.length === 0) ) {
+                    return false;
+                }
+                $scope.chartData = [
+                    ['A fabricar', parseFloat(data[0].QFabricar)],
+                    ['Fabricada',parseFloat(data[0].QFabricada)],
+                    ['Iniciada', parseFloat(data[0].QIniciada)]
+                ];
+                $scope.chartConfig = {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: 'Graficos del Articulo: ' + data[0].IDArticulo + ' en la Orden: ' + data[0].NOrden
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
                             }
                         }
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    name: 'Producción',
-                    data: $scope.chartData
-                }]
-            }
-        })
-        .error(function(data, status, headers, config) {
-            console.log(data);
-        });
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: 'Producción',
+                        data: $scope.chartData
+                    }]
+                }
+            })
+            .error(function(data, status, headers, config) {
+                console.log(data);
+            });
     }
 
     $scope.arraton = function(val) {
@@ -300,20 +300,20 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         if ( of === "" ) {
             return false;
         }
-        var url = "/proxy/expertis/"+of.trim();
+        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of.trim();
         $http.get(url)
-        .success(function (data) {
-            if ( (data === "") || (data.length === 0) ) {
-                return false;
-            }
-            $scope.cantafabricar = parseInt(data.QFabricar); 
-            $scope.cantiniciada = parseInt(data.QIniciada) 
-            $scope.cantfabricada = parseInt(data.QFabricada);
-        })
-        .error(function () {
-            console.log("error al obtener datos");
-            return;
-        });
+            .success(function (data) {
+                if ( (data === "") || (data.length === 0) ) {
+                    return false;
+                }
+                $scope.cantafabricar = parseInt(data[0].QFabricar);
+                $scope.cantiniciada = parseInt(data[0].QIniciada)
+                $scope.cantfabricada = parseInt(data[0].QFabricada);
+            })
+            .error(function () {
+                console.log("error al obtener datos");
+                return;
+            });
     }
 
     $scope.whatClassIsIt= function(amaituta){
@@ -330,7 +330,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         $data.fetxa = orden.fetxa;
         console.log(orden.fetxa);
         $data.linea = orden.linea;
-        
+
         if ( (orden.orden !== undefined) && ( orden.orden !== "") && ( orden.orden !== NaN ) && ( orden.orden !== null )) {
             $data.orden = orden.orden + cont
         } else {
@@ -340,8 +340,8 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         $http.put(
             '/ordenatu', $data
         ).success(function () {
-            $scope.$broadcast ('eguneratudatuak');
-        });
+                $scope.$broadcast ('eguneratudatuak');
+            });
     }
 
     $scope.updateOrden = function (data, l) {
@@ -352,10 +352,10 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             orden: data
         };
 
-            $http.post('/saveorden', d).success(function () {
-                $scope.$broadcast ('eguneratu');
-            });
-              
+        $http.post('/saveorden', d).success(function () {
+            $scope.$broadcast ('eguneratu');
+        });
+
 
     };
 
