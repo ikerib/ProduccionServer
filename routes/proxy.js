@@ -5,6 +5,9 @@
 var httpsync = require('httpsync');
 
 exports.getofdata = function(req, res) {
+    var kk={};
+    kk.mezua ="HEMEN";
+    res.json(kk);
     var miof = req.params.of;
     var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+miof.trim();
 
