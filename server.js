@@ -8,6 +8,7 @@ var connect = require('connect')
     , path = require('path')
     , get = require('./routes/get')
     , api = require('./routes/api')
+    , proxy = require('./routes/proxy')
     , moment = require('moment');
 
 
@@ -86,7 +87,8 @@ server.get('/planificacionlinea1/:desde/:hasta', get.getlinea1);
 server.get('/planificacionlinea2/:desde/:hasta', get.getlinea2);
 server.get('/planificacionlinea3/:desde/:hasta', get.getlinea3);
 
-server.get ('/api/getplanificacion/:dia', api.getplanificacion)
+server.get ('/api/getplanificacion/:dia', api.getplanificacion);
+server.get ('/proxy/expertis/:of', proxy.getofdata);
 
 server.post('/saveplanificacion', get.save(io));
 server.post('/saveorden', get.saveorden(io));
