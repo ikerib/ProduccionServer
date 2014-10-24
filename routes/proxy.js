@@ -5,12 +5,12 @@
 var httpsync = require('httpsync');
 
 exports.getofdata = function(req, res) {
-    var kk={};
-    kk.mezua ="HEMEN";
-    res.json(kk);
+
     var miof = req.params.of;
     var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+miof.trim();
-
+    var kk={};
+    kk.mezua =url;
+    res.json(kk);
     var req = httpsync.get({ url : url});
     var resp = req.end();
     var erantzuna = {};
@@ -40,6 +40,6 @@ exports.getofdata = function(req, res) {
         erantzuna.NOrden ="-";
     }
 
-    res.json(erantzuna);
+    //res.json(erantzuna);
 }
 
