@@ -233,7 +233,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         }
 
 
-        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of.trim();
+        var url = "/proxy/expertis/"+of.trim();
 
         $http.get(url,{cache:false})
             .success(function(data){
@@ -242,9 +242,9 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
                     return false;
                 }
                 $scope.chartData = [
-                    ['A fabricar', parseFloat(data[0].QFabricar)],
-                    ['Fabricada',parseFloat(data[0].QFabricada)],
-                    ['Iniciada', parseFloat(data[0].QIniciada)]
+                    ['A fabricar', parseFloat(data.QFabricar)],
+                    ['Fabricada',parseFloat(data.QFabricada)],
+                    ['Iniciada', parseFloat(data.QIniciada)]
                 ];
                 $scope.chartConfig = {
                     chart: {
@@ -253,7 +253,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
                         plotShadow: false
                     },
                     title: {
-                        text: 'Graficos del Articulo: ' + data[0].IDArticulo + ' en la Orden: ' + data[0].NOrden
+                        text: 'Graficos del Articulo: ' + data.IDArticulo + ' en la Orden: ' + data.NOrden
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -300,15 +300,15 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         if ( of === "" ) {
             return false;
         }
-        var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+of.trim();
+        var url = "/proxy/expertis/"+of.trim();
         $http.get(url)
             .success(function (data) {
                 if ( (data === "") || (data.length === 0) ) {
                     return false;
                 }
-                $scope.cantafabricar = parseInt(data[0].QFabricar);
-                $scope.cantiniciada = parseInt(data[0].QIniciada)
-                $scope.cantfabricada = parseInt(data[0].QFabricada);
+                $scope.cantafabricar = parseInt(data.QFabricar);
+                $scope.cantiniciada = parseInt(data.QIniciada)
+                $scope.cantfabricada = parseInt(data.QFabricada);
             })
             .error(function () {
                 console.log("error al obtener datos");
