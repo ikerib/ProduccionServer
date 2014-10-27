@@ -7,10 +7,11 @@ var httpsync = require('httpsync');
 exports.getofdata = function(req, res) {
 
     var miof = req.params.of;
-    var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+miof.trim();
+    //var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+miof.trim();
+    var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+miof.trim();
     var kk={};
     kk.mezua =url;
-    res.json(kk);
+    //res.json(kk);
     var req = httpsync.get({ url : url});
     var resp = req.end();
     var erantzuna = {};
@@ -40,6 +41,6 @@ exports.getofdata = function(req, res) {
         erantzuna.NOrden ="-";
     }
 
-    //res.json(erantzuna);
+    res.json(erantzuna);
 }
 
