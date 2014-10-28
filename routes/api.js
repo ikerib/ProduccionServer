@@ -67,8 +67,14 @@ exports.getplanificacion = function(req, res) {
 
                         });
 
+                    } else {
+                        orden.amaituta = 0;
                     }
+                } else {
+                    orden.amaituta = 0;
                 }
+            } else {
+                orden.amaituta = 0;
             }
 
         }, function(){
