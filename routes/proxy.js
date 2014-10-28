@@ -41,6 +41,6 @@ exports.getofdata = function(req, res) {
         erantzuna.NOrden ="-";
     }
 
-    res.json(erantzuna);   
+    res.json(erantzuna);
 }
 
