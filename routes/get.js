@@ -311,7 +311,7 @@ exports.savedenbora = function(io) {
     return function(req, res){
 
         var body = req.body;
-        var midenbora =  parseInt(body.denbora);
+        var midenbora =  body.denbora;
         c_planificacion.findAndModify({_id: body.id}, {$set: {denbora: midenbora}}, {multi:false}, function(err, bug){
             if (err) res.json(500, err);
             else if (bug) res.json(bug);
