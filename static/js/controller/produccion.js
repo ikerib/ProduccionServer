@@ -357,6 +357,19 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
             $scope.$broadcast ('eguneratu');
         });
 
+    };
+
+    $scope.updateDenbora = function (data, l) {
+
+        var miid = l.$editable.attrs.miid;
+        var d = {
+            id: miid,
+            denbora: data
+        };
+
+        $http.post('/savedenbora', d).success(function () {
+            $scope.$broadcast ('eguneratu');
+        });
 
     };
 

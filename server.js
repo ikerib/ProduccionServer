@@ -94,6 +94,7 @@ server.get ('/proxy/expertis/:of', proxy.getofdata);
 
 server.post('/saveplanificacion', get.save(io));
 server.post('/saveorden', get.saveorden(io));
+server.post('/savedenbora', get.savedenbora(io));
 
 server.post('/sartu', get.sartu);
 server.post('/ezabatu', get.ezabatu);

@@ -134,6 +134,7 @@ exports.getlinea2 = function(req,res) {
                 if (( val != "" ) && ( val !== undefined)) {
                     var of="";
                     val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
+
                     if (val === undefined) { return false }
                     var n = val.indexOf("<br>");
                     if (n > 0) {
@@ -298,6 +299,20 @@ exports.saveorden = function(io) {
         var body = req.body;
         var miorden =  parseInt(body.orden);
         c_planificacion.findAndModify({_id: body.id}, {$set: {orden: miorden}}, {multi:false}, function(err, bug){
+            if (err) res.json(500, err);
+            else if (bug) res.json(bug);
+            else res.json(404);
+        });
+
+    }
+};
+
+exports.savedenbora = function(io) {
+    return function(req, res){
+
+        var body = req.body;
+        var midenbora =  parseInt(body.denbora);
+        c_planificacion.findAndModify({_id: body.id}, {$set: {denbora: midenbora}}, {multi:false}, function(err, bug){
             if (err) res.json(500, err);
             else if (bug) res.json(bug);
             else res.json(404);
