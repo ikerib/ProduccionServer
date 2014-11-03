@@ -66,8 +66,8 @@ td.tdlinea {
     background-color : #aaaaaa;
 }*/
 .on-drag-hover:before {
-  background: #fbec88; 
-  border: 1px solid #fad42e; 
+  background: #fbec88;
+  border: 1px solid #fad42e;
   content: 'soltar aqui';
   color: #363636;
   display: block;
@@ -83,3 +83,8 @@ td.tdlinea {
   text-align: right;
   font-size: 10px;
 }
+
+.divdenbora {
+  color: green !important;
+}
+
