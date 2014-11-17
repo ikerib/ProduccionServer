@@ -11,56 +11,56 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
 
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna1 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna1="";
         });
 
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna2 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna2 = "";
         });
-        
+
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna3 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna3 = "";
         });
-        
+
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna4 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna4 = "";
         });
-        
+
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna5 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna5 = "";
         });
-        
+
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna6 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna6 = "";
         });
-        
+
         dsd = moment(dsd).add('days', 1).format('YYYY-MM-DD');
         $http.get('/planificacionlinea2/' + dsd + '/' + hst).success(function (data) {
             $scope.asteeguna7 = data;
-        }).error(function () { 
+        }).error(function () {
         	$scope.asteeguna7 = "";
         });
 
     };
     $scope.getDatuak();
 
-    $scope.$on('eguneratu', function(e) {  
+    $scope.$on('eguneratu', function(e) {
         $scope.getDatuak();
     });
 
@@ -68,8 +68,30 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
         $scope.getDatuak();
     });
 
-    $scope.updateUser = function (data, l) {
+    function checkdata( data ) {
+        // begiratu < daukan
+        var n1 = data.indexOf("<");
+        // begiratu > bestearen ondoren daukan
+        var n2 = data.indexOf(">");
 
+        if ( (( n1 === -1 ) && ( n2 > -1 )) || ( ( n1 > -1 ) && ( n2 === -1 ) )) {
+            return false;
+        } else {
+            if ( ( n1 !== -1 ) && ( n2 !== -1 )) {
+                if ( n1 >= n2 ) {
+                    return false;
+                }
+            }
+            if ( data.indexOf("<b r>") > -1 ) {
+                data.replace("<b r>","<br/>");
+            }
+        }
+    }
+
+    $scope.updateUser = function (data, l) {
+        if ( checkdata(data) === false ) {
+            return "Texto mal introducido. Tiene que ser ARTICULO<br>OFXXXXX"
+        }
         var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
         var miid = l.$editable.attrs.miid;
         var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
@@ -88,7 +110,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
             $http.post('/saveplanificacion', d).success(function () {
                 $scope.getDatuak();
             });
-       }       
+       }
 
     };
 
@@ -119,6 +141,9 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
     };
 
     $scope.addData = function (midata, l) {
+        if ( checkdata(midata) === false ) {
+            return "Texto mal introducido. Tiene que ser ARTICULO<br>OFXXXXX"
+        }
         var miid = l.$editable.attrs.miid;
         // id ez badauka, insert
         if (( miid === "" ) || ( miid === undefined )) {
@@ -163,7 +188,7 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
 
     $scope.onDropComplete = function(index, data, evt){
         console.log(data);
-        console.log(index);        
+        console.log(index);
     }
 
     $scope.onDrop = function($event,$data, linea,eguna){
@@ -191,11 +216,11 @@ produccionApp.controller('linea2Controller', function ($scope, $http, $resource,
             $http.post('/sartu', d).success(function () {
                 console.log("baiiiiii");
                 $scope.getDatuak();
-            
+
             });
         }).error(function (data, status, headers, config) {
             alert("tssssss!!");
         });
     };
-    
+
 });
