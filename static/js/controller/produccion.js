@@ -5,6 +5,10 @@
 produccionApp.controller('produccionController', function ($scope, $http, $cookieStore) {
 
     $scope.isadmin = false;
+    $scope.vlinea1 = true;
+    $scope.vlinea2 = true;
+    $scope.vlinea3 = true;
+    $scope.vweekend = true;
     $scope.arraton="Haz click en OF para refrescar datos.";
     $scope.estadofabricacion="";
     if ( $cookieStore.get('gitekplanificacion') === "1" ) {
@@ -373,5 +377,18 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
     };
 
+    // $scope.ikusimakusi = function(linea,data) {
+    //     switch(linea) {
+    //         case 1:
+    //             (($scope.vlinea1 === 0) ? 1:0)
+    //             break;
+    //         case 2:
+    //             (($scope.vlinea2 === 0) ? 1:0)
+    //             break;
+    //         case 3:
+    //             (($scope.vlinea3 === 0) ? 1:0)
+    //             break;
+    //     }
+    // } 
 
 });

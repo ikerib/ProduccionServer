@@ -1,6 +1,18 @@
 <div class="row">
     <div class="row">
-        <div class="col-xs-6 col-sm-4"></div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="row">
+              <div class="panel panel-default">
+                <p>Mostrar/Ocultar:</p>
+                <ul class="list-unstyled">
+                    <li><input type="checkbox" ng-model="vlinea1" >Siplace</li>
+                    <li><input type="checkbox" ng-model="vlinea2" >Assembleon</li>
+                    <li><input type="checkbox" ng-model="vlinea3" >Montage y Repaso</li>
+                    <li><input type="checkbox" ng-model="vweekend" >Fin de semana</li>
+                </ul>
+              </div>
+            </div>
+        </div>
         <div class="col-xs-6 col-sm-4">
             <div class="row">
               <div class="panel panel-default">
@@ -48,13 +60,13 @@
                         <!-- <th class="text-center">&nbsp;</th> -->
                         <th class="text-center" ng-model="eguna5">{{ eguna5 | date : 'yyyy/MM/dd'}} <br /> Viernes</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna6">{{ eguna6 | date : 'yyyy/MM/dd'}} <br /> Sabado</th>
+                        <th class="text-center" ng-model="eguna6" ng-if="vweekend==true">{{ eguna6 | date : 'yyyy/MM/dd'}} <br /> Sabado</th>
                         <!-- <th class="text-center">&nbsp;</th> -->
-                        <th class="text-center" ng-model="eguna7">{{ eguna7 | date : 'yyyy/MM/dd'}} <br /> Domingo</th>
+                        <th class="text-center" ng-model="eguna7" ng-if="vweekend==true">{{ eguna7 | date : 'yyyy/MM/dd'}} <br /> Domingo</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-controller="linea1Controller">
+                    <tr ng-controller="linea1Controller" ng-if="vlinea1==true">
                         <td class="tdlinea">Siplace</td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna1)">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
@@ -264,7 +276,7 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna6)">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna6)" ng-if="vweekend==true">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
@@ -305,7 +317,7 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna7)">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna7)" ng-if="vweekend==true">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
@@ -348,7 +360,7 @@
                         </td>
                     </tr>
 
-                    <tr ng-controller="linea2Controller">
+                    <tr ng-controller="linea2Controller" ng-if="vlinea2==true">
                         <td class="tdlinea">Assembleon </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna1)">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
@@ -554,7 +566,7 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna6)">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna6)" ng-if="vweekend==true">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
@@ -595,7 +607,7 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna7)">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna7)" ng-if="vweekend==true">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
@@ -638,7 +650,7 @@
                         </td>
                     </tr>
 
-                    <tr ng-controller="linea3Controller">
+                    <tr ng-controller="linea3Controller" ng-if="vlinea3==true">
                         <td class="tdlinea">Montage y repaso </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna1)">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
@@ -845,7 +857,7 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna6)">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna6)" ng-if="vweekend==true">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
@@ -886,7 +898,7 @@
                                 editable-text="orden.ref"
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
-                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna7)">
+                        <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna7)" ng-if="vweekend==true">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
