@@ -1,4 +1,4 @@
-var produccionApp = angular.module('produccionApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'colorpicker.module', 
+var produccionApp = angular.module('produccionApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'colorpicker.module',
         'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng', 'ngCookies','angularSpinner','ngDragDrop']);
 
 produccionApp.config(function ($routeProvider) {
@@ -24,6 +24,11 @@ produccionApp.config(function ($routeProvider) {
         .when('/login', {
             templateUrl:'pages/login.html',
             controller:'loginController'
+        })
+
+        .when('/bonos', {
+            templateUrl:'pages/bonos.html',
+            controller:'bonosController'
         })
 
         .when('/logout', {

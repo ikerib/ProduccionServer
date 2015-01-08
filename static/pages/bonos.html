@@ -1,0 +1,44 @@
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
+
+<script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" async></script>
+
+<div class="row">&nbsp;</div>
+<div class="row" ng-controller="bonosController">
+
+  <table id="example" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Operario</th>
+      <th>Turno</th>
+      <th>Horas</th>
+      <th>Referencia</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Fecha</th>
+      <th>Operario</th>
+      <th>Turno</th>
+      <th>Horas</th>
+      <th>Referencia</th>
+    </tr>
+  </tfoot>
+  <tbody>
+   <tr ng-repeat="bono in bonoak">
+    <td>{{ bono.fecha }}</td>
+    <td>{{ bono.Operario }}</td>
+    <td>{{ bono.Turno }}</td>
+    <td>{{ bono.Horas }}</td>
+    <td>{{ bono.Ref }}</td>
+   </tr>
+  </tbody>
+  </table>
+
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#example').DataTable();
+  });
+</script>
