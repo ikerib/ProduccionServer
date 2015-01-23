@@ -16,7 +16,7 @@ exports.getplanificacion = function(req, res) {
     var hasta = moment(desde).add('days', 1).toISOString();
 
 
-    c_planificacion.find( 
+    c_planificacion.find(
 
         { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
     ,
@@ -78,6 +78,8 @@ exports.getplanificacion = function(req, res) {
             }
 
         }, function(){
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.json(items);
         });
     });

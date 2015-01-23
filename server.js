@@ -22,16 +22,6 @@ server.configure(function(){
     server.use(express.cookieParser());
     server.use(express.session({ secret: "ezdoknahi!!"}));
     server.use(connect.static(__dirname + '/static'));
-    server.use(function(req,res){
-      // Website you wish to allow to connect
-      res.setHeader('Access-Control-Allow-Origin', '*');
-
-      // Request methods you wish to allow
-      res.setHeader('Access-Control-Allow-Methods', 'GET');
-
-      // Request headers you wish to allow
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    });
 });
 
 
