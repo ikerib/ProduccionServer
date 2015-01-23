@@ -40,7 +40,8 @@ exports.getofdata = function(req, res) {
         erantzuna.IDArticulo = "-";
         erantzuna.NOrden ="-";
     }
-
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.json(erantzuna);
 }
 
