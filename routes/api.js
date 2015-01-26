@@ -50,6 +50,7 @@ exports.getplanificacion = function(req, res) {
                     var req = httpsync.get({ url : url});
                     var res = req.end();
 
+                    console.log("HEMEN");
 
                     if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                         var miresp = res.data.toString();
