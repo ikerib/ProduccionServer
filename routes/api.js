@@ -25,10 +25,14 @@ exports.getplanificacion = function(req, res) {
     },
     function(err, items){
         if (err) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.json(500, err);
         }
         if (items.length === 0) {
             res.statusCode = 404;
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             return res.send({ error: 'Ez da topatu' });
         }
 
@@ -50,7 +54,7 @@ exports.getplanificacion = function(req, res) {
                     var req = httpsync.get({ url : url});
                     var res = req.end();
 
-                    console.log("HEMEN");
+
 
                     if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                         var miresp = res.data.toString();
