@@ -116,29 +116,18 @@ exports.getgantt = function(req, res) {
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             return res.send({ error: 'Ez da topatu' });
         }
-        //data - specifies the gantt tasks
-        //id - (string, number) the event id.
-        //    start_date - (Date) the date when an event is scheduled to begin.
-        //    text - (string) the task description.
-        //    progress - (number) a number from 0 to 1 that shows what percent of the task is complete.
-        //    duration - (number) the task duration in the units of the current time scale.
-        //    parent - (number) the id of the parent task
+
         var data = [];
         var l = {};
         l.id=1;
-        l.start_date = moment(d).format('DD/MM/YYYY');
+        l.start_date = moment(desde).format('DD/MM/YYYY');
         l.text = "LINEA1";
         l.progress = 0;
         l.parent = 0;
         data.push(l);
         var that = this;
         forEach (items, function(item, callback){
-            //console.log(item.fetxa);
-            //console.log(moment(item.fetxa).format('DD/MM/YYYY'));
             var textua = item.ref.split('<BR>');
-            console.log("REF =>" + item.ref);
-            console.log("textua0 =>" + textua[0]);
-            console.log("textua1 =>" + textua[1]);
             var d = {};
             if ( ( textua.length === 1) ) {
                 d.id = textua[0];
