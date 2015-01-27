@@ -16,6 +16,7 @@ html.no-js
     link(rel='stylesheet', href='/css/colorpicker.css')
     link(rel='stylesheet', href='/css/xeditable.css')
     link(rel='stylesheet', href='/css/fullcalendar.css')
+    link(rel='stylesheet', href='/css/gantt/dhtmlxgantt.css')
     link(rel='stylesheet', href='/css/calendarDemo.css')
     link(rel='stylesheet', href='/css/main.css')
     script(src='/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js')
@@ -49,7 +50,7 @@ html.no-js
                 a(href='#/egutegia') Egutegia
 
               li
-                a(href='#') Gaua
+                a(href='#/gantt') Gantt
             ul.nav.navbar-nav.navbar-right
               li
                 a(href='#')(ng-show='isadmin')(ng-click='dologout()')
@@ -90,6 +91,7 @@ html.no-js
     script(src='js/vendor/gcal.js')
     script(src='js/vendor/highcharts.js')
     script(src='js/vendor/highcharts-ng.min.js')
+    script(src='js/vendor/gantt/dhtmlxgantt.js')
     script(src='js/controller.js')
     script(src='js/controller/produccion.js')
     script(src='js/controller/linea1.js')
@@ -99,4 +101,5 @@ html.no-js
     script(src='js/controller/egutegia.js')
     script(src='js/controller/login.js')
     script(src='js/controller/logout.js')
+    script(src='js/controller/gantt.js')
     script(src='js/main.js')
