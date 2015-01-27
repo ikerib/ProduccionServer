@@ -76,10 +76,15 @@ produccionApp.directive('dhxGantt', function() {
     template: '<div ng-transclude></div>',
 
     link:function ($scope, $element, $attrs, $controller){
+      console.log($attrs.data);
       //watch data collection, reload on changes
       $scope.$watch($attrs.data, function(collection){
         gantt.clearAll();
-        gantt.parse(collection, "json");
+        // console.log("hemen:");
+        // console.log(collection);
+        if (collection !== undefined)  {
+          gantt.parse(collection, "json");
+        }
       }, true);
 
       //size of gantt

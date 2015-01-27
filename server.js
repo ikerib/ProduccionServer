@@ -89,6 +89,7 @@ server.get('/planificacionlinea3/:desde/:hasta', get.getlinea3);
 
 
 server.get ('/api/getplanificacion/:dia', api.getplanificacion)
+server.get ('/api/getgantt/:dia', api.getgantt)
 server.get ('/proxy/expertis/:of', proxy.getofdata);
 
 
