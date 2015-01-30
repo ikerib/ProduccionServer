@@ -76,12 +76,11 @@ produccionApp.directive('dhxGantt', function() {
     template: '<div ng-transclude></div>',
 
     link:function ($scope, $element, $attrs, $controller){
-      console.log($attrs.data);
+      // console.log($attrs.data);
       //watch data collection, reload on changes
       $scope.$watch($attrs.data, function(collection){
         gantt.clearAll();
-        // console.log("hemen:");
-        // console.log(collection);
+
         if (collection !== undefined)  {
           gantt.parse(collection, "json");
         }
@@ -94,6 +93,7 @@ produccionApp.directive('dhxGantt', function() {
         gantt.setSizes();
       });
 
+      gantt.config.open_tree_initially = true;
       //init gantt
       gantt.init($element[0]);
     }

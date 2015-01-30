@@ -102,7 +102,7 @@ exports.getgantt = function(req, res) {
         { "fetxa": { $gte: new Date(desde) }}
     ,
     {
-        sort: {linea:1, fetxa: 1}
+        sort: { fetxa: 1, linea: 1, orden:1}
     },
     function(err, items){
         if (err) {
@@ -127,6 +127,8 @@ exports.getgantt = function(req, res) {
         data.push(l);
         var that = this;
         forEach (items, function(item, callback){
+            console.log(item);
+
             var textua = item.ref.split('<BR>');
             var d = {};
             if ( ( textua.length === 1) ) {

@@ -4,9 +4,9 @@
 <div class="row" ng-controller="ganttController">
 
 
-  <div data="gantdatuak" dhx-gantt style="height:300px; width:100%;">
+  <div data="gantdatuak" dhx-gantt style="height:600px; width:100%;">
     <div gantt-column label="Task">{{task.text | lowercase}}</div>
-    <div gantt-column align="center" width="200"  label="Duration">{{task.duration}}</div>
+    <!-- <div gantt-column align="center" width="200"  label="Duration">{{task.duration}}</div> -->
     <!-- <div gantt-column-add width="45"></div> -->
 
     <div gantt-template="task_text">
