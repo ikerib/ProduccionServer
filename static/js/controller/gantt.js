@@ -52,8 +52,8 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
 
       $http.get('/api/getgantt/' + dsd ).success(function (data) {
           $scope.gantdatuak = data;
-          return data;
           console.log(data);
+          return data;
       }).error(function () {
           console.log("Hau dek akatsa hau!");
           // $scope.gantdatuak={ data: [] };

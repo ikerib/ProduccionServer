@@ -93,8 +93,35 @@ produccionApp.directive('dhxGantt', function() {
         gantt.setSizes();
       });
 
-      gantt.config.open_tree_initially = true;
       //init gantt
+      gantt.config.open_tree_initially = true;
+      gantt.config.duration_unit = "hour";//an hour
+      gantt.config.duration_step = 1;
+      gantt.config.details_on_create = true;
+
+      gantt.config.subscales = [
+            {unit:"hour", step:2, date:"%H"}
+          ];
+      gantt.ignore_time = null;
+
+      gantt.attachEvent("onTaskClick", function(id,e){
+        console.log(id);
+        console.log(e);
+        console.log(this.getTask(id));
+      });
+
+      gantt.attachEvent("onTaskDrag", function(id, mode, task, original){
+        console.log(id);
+          console.log(mode);
+          console.log(task);
+          console.log(original);
+        });
+      gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
+          console.log(id);
+          console.log(mode);
+          console.log(e);
+      });
+
       gantt.init($element[0]);
     }
   };

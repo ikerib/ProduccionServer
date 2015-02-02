@@ -92,13 +92,9 @@ exports.getplanificacion = function(req, res) {
 
 exports.getgantt = function(req, res) {
     var desde = moment(req.params.dia,"YYYY-MM-DD").toISOString();
-    console.log(desde);
-    // var hasta = moment(desde).add('days', 1).toISOString();
     var d = moment(desde).subtract('days', 7).toISOString();
 
-
     c_planificacion.find(
-
         { "fetxa": { $gte: new Date(desde) }}
     ,
     {
@@ -119,15 +115,14 @@ exports.getgantt = function(req, res) {
 
         var data = [];
         var l = {};
-        l.id=1;
-        l.start_date = moment(desde).format('DD/MM/YYYY');
-        l.text = "LINEA1";
-        l.progress = 0;
-        l.parent = 0;
+            l.id=1;
+            l.type = "project";
+            l.text = "LINEA1";
+            l.open=true;
+
         data.push(l);
-        var that = this;
+
         forEach (items, function(item, callback){
-            console.log(item);
 
             var textua = item.ref.split('<BR>');
             var d = {};
@@ -136,7 +131,7 @@ exports.getgantt = function(req, res) {
             } else {
                 d.id = textua[1];
             }
-            d.start_date = moment(item.fetxa).format('DD/MM/YYYY');
+            d.start_date = moment(item.fetxa).format('DD/MM/YYYY hh:mm:ss');
             if ( textua[0] !== undefined ) {
                 d.text = textua[0];
             } else {
@@ -144,8 +139,14 @@ exports.getgantt = function(req, res) {
             }
 
             d.progress = 0;
-            d.duration = 1;
+            // if ( item.denbora !== undefined ) {
+            //     d.duration = item.denbora;
+            // } else {
+            //     d.duration = 8;
+            // }
+            d.end_date = moment(item.fetxa).add(8,'hours').format('DD/MM/YYYY hh:mm:ss');
             d.parent = 1;
+            // console.log(d);
             data.push(d);
 
         }, function(){
