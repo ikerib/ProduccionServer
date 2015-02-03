@@ -97,6 +97,7 @@ server.post('/saveplanificacion', get.save(io));
 server.post('/saveorden', get.saveorden(io));
 server.post('/savedenbora', get.savedenbora(io));
 server.post('/savedenborafin', get.savedenborafin(io));
+// server.post('/savefetxa', get.savefetxa(io));
 
 server.post('/sartu', get.sartu);
 server.post('/ezabatu', get.ezabatu);

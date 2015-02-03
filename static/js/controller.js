@@ -68,7 +68,7 @@ produccionApp.directive('autoActive', ['$location', function ($location) {
     }
 }]);
 
-produccionApp.directive('dhxGantt', function() {
+produccionApp.directive('dhxGantt', ['$http',function($http) {
   return {
     restrict: 'A',
     scope: false,
@@ -98,34 +98,55 @@ produccionApp.directive('dhxGantt', function() {
       gantt.config.duration_unit = "hour";//an hour
       gantt.config.duration_step = 1;
       gantt.config.details_on_create = true;
-
       gantt.config.subscales = [
+            {unit:"week", step:1, date:"Week #%W"},
             {unit:"hour", step:2, date:"%H"}
           ];
       gantt.ignore_time = null;
-
+      gantt.config.scale_height = 74;
       gantt.attachEvent("onTaskClick", function(id,e){
-        console.log(id);
-        console.log(e);
         console.log(this.getTask(id));
       });
 
-      gantt.attachEvent("onTaskDrag", function(id, mode, task, original){
-        console.log(id);
-          console.log(mode);
-          console.log(task);
-          console.log(original);
-        });
-      gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
+      gantt.attachEvent("onAfterTaskDrag", function(id, progress, e){
           console.log(id);
-          console.log(mode);
+          console.log(progress);
           console.log(e);
+
+          var task = gantt.getTask(id);
+          console.log(task);
+          onAfterTaskDragUpdateDenborak(task);
+
       });
+
+      gantt.attachEvent("onAfter")
+
+      function onAfterTaskDragUpdateDenborak(task) {
+        var miid = task._id;
+        // moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
+        var fetxa = moment(task.start_date).toISOString();
+        var midenbora = moment(task.start_date).format('HH:mm');
+        var midenborafin = moment(task.end_date).format('HH:mm');
+
+        var d = {
+            id: miid,
+            denbora: midenbora,
+            denborafin: midenborafin,
+            fetxa:fetxa
+        };
+
+
+        $http.post('/savedenbora', d).success(function () {});
+        $http.post('/savedenborafin', d).success(function () {});
+        // $http.post('/savefetxa', fetxa).success(function () {}).error(function(err){console.log(err)});
+
+      }
 
       gantt.init($element[0]);
     }
   };
-});
+}]);
+
 
 
 function templateHelper($element){

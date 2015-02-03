@@ -127,6 +127,7 @@ exports.getgantt = function(req, res) {
 
             var textua = item.ref.split('<BR>');
             var d = {};
+            d._id = item._id;
             if ( ( textua.length === 1) ) {
                 d.id = textua[0];
             } else {

@@ -326,7 +326,8 @@ exports.savedenborafin = function(io) {
 
         var body = req.body;
         var midenbora =  body.denborafin;
-        c_planificacion.findAndModify({_id: body.id}, {$set: {denborafin: midenbora}}, {multi:false}, function(err, bug){
+        var mifetxa = new Date(body.fetxa);
+        c_planificacion.findAndModify({_id: body.id}, {$set: {denborafin: midenbora, fetxa: mifetxa}}, {multi:false}, function(err, bug){
             if (err) res.json(500, err);
             else if (bug) res.json(bug);
             else res.json(404);
@@ -334,6 +335,7 @@ exports.savedenborafin = function(io) {
 
     }
 };
+
 
 exports.sartu = function (req, res) {
 

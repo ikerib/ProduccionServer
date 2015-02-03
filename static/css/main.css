@@ -88,3 +88,6 @@ td.tdlinea {
   color: green !important;
 }
 
+.ng-scope {
+  margin-top: 0px;
+}

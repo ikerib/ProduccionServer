@@ -2,20 +2,27 @@
 
 <div class="row">&nbsp;</div>
 <div class="row" ng-controller="ganttController">
-
-
-  <div data="gantdatuak" dhx-gantt style="height:600px; width:100%;">
-    <div gantt-column label="Task">{{task.text | lowercase}}</div>
-    <!-- <div gantt-column align="center" width="200"  label="Duration">{{task.duration}}</div> -->
-    <!-- <div gantt-column-add width="45"></div> -->
-
-    <div gantt-template="task_text">
-      {{task.text | uppercase}}
-    </div>
-    <ul class="unstyled">
-      <li>Export to PDF</li>
-      <li>Export to PNG</li>
-    </ul>
+  <div class="row">
+    <button class="btn btn-primary btn-sm" ng-click="originalscale()"><span class="glyphicon glyphicon-eye-open"> Vista Origen</span></button>
+    <button class="btn btn-primary btn-sm" ng-click="dayscale()"><span class="glyphicon glyphicon-sound-dolby"> Vista Dias</span></button>
+    <button class="btn btn-primary btn-sm" ng-click="weekscale()"><span class="glyphicon glyphicon-th-list"> Vista Semanas</span></button>
+    <button class="btn btn-primary btn-sm" ng-click="monthscale()"><span class="glyphicon glyphicon-calendar"> Vista Mes</span></button>
+    <button class="btn btn-primary btn-sm" ng-click="yearscale()"><span class="glyphicon glyphicon-th"> Vista Año</span></button>
+    <br />
   </div>
+  <div class="row">
+    <div data="gantdatuak" dhx-gantt style="height:600px; width:100%;">
+      <div gantt-column label="Task">{{task.text | lowercase}}</div>
+      <!-- <div gantt-column align="center" width="200"  label="Duration">{{task.duration}}</div> -->
+      <!-- <div gantt-column-add width="45"></div> -->
 
+      <div gantt-template="task_text">
+        {{task.text | uppercase}}
+      </div>
+      <ul class="unstyled">
+        <li>Export to PDF</li>
+        <li>Export to PNG</li>
+      </ul>
+    </div>
+  </div>
 </div>
