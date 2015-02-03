@@ -78,6 +78,8 @@
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
 
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"

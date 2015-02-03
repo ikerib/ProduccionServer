@@ -122,6 +122,7 @@ exports.getgantt = function(req, res) {
 
         data.push(l);
 
+
         forEach (items, function(item, callback){
 
             var textua = item.ref.split('<BR>');
@@ -131,21 +132,32 @@ exports.getgantt = function(req, res) {
             } else {
                 d.id = textua[1];
             }
-            d.start_date = moment(item.fetxa).format('DD/MM/YYYY hh:mm:ss');
+
+            var tmp = moment(item.fetxa).format('DD/MM/YYYY');
+
+            //HORA INI
+            if ( item.denbora !== undefined ) {
+                var ho = item.denbora;
+                d.start_date = moment(tmp + ' ' + item.denbora, "DD/MM/YYYY HH:mm").format('DD/MM/YYYY HH:mm:ss');
+            } else  {
+                d.start_date = moment(item.fetxa).format('DD/MM/YYYY HH:mm:ss');
+            }
+            // HORA FIN
+            if ( item.denborafin !== undefined ) {
+                d.end_date = moment(tmp + ' ' + item.denborafin, "DD/MM/YYYY HH:mm").format('DD/MM/YYYY HH:mm:ss');
+            } else {
+                d.end_date = moment(d.start_date, 'DD/MM/YYYY HH:mm:ss' ).add(8,'hours').format('DD/MM/YYYY HH:mm:ss');
+            }
+
+
+            d.progress = 0;
             if ( textua[0] !== undefined ) {
                 d.text = textua[0];
             } else {
                 d.text = "";
             }
-
-            d.progress = 0;
-            // if ( item.denbora !== undefined ) {
-            //     d.duration = item.denbora;
-            // } else {
-            //     d.duration = 8;
-            // }
-            d.end_date = moment(item.fetxa).add(8,'hours').format('DD/MM/YYYY hh:mm:ss');
             d.parent = 1;
+
             // console.log(d);
             data.push(d);
 

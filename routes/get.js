@@ -321,6 +321,20 @@ exports.savedenbora = function(io) {
     }
 };
 
+exports.savedenborafin = function(io) {
+    return function(req, res){
+
+        var body = req.body;
+        var midenbora =  body.denborafin;
+        c_planificacion.findAndModify({_id: body.id}, {$set: {denborafin: midenbora}}, {multi:false}, function(err, bug){
+            if (err) res.json(500, err);
+            else if (bug) res.json(bug);
+            else res.json(404);
+        });
+
+    }
+};
+
 exports.sartu = function (req, res) {
 
     var data = req.body;

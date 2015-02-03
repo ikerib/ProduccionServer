@@ -377,6 +377,21 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
     };
 
+    $scope.updateDenboraFin = function (data, l) {
+
+        var miid = l.$editable.attrs.miid;
+        var d = {
+            id: miid,
+            denborafin: data
+        };
+
+        $http.post('/savedenborafin', d).success(function () {
+            $scope.$broadcast ('eguneratu');
+        });
+
+    };
+
+
     // $scope.ikusimakusi = function(linea,data) {
     //     switch(linea) {
     //         case 1:
@@ -389,6 +404,6 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     //             (($scope.vlinea3 === 0) ? 1:0)
     //             break;
     //     }
-    // } 
+    // }
 
 });
