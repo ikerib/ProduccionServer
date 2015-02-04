@@ -122,6 +122,7 @@ exports.getgantt = function(req, res) {
 
         data.push(l);
 
+        var rek = req;
 
         forEach (items, function(item, callback){
 
@@ -150,8 +151,55 @@ exports.getgantt = function(req, res) {
                 d.end_date = moment(d.start_date, 'DD/MM/YYYY HH:mm:ss' ).add(8,'hours').format('DD/MM/YYYY HH:mm:ss');
             }
 
+            // CALCULO DEL PROGRESO
+            val = item.ref;
+            if ( ( val === "" ) || ( val === undefined ) ) {
+                d.progress = 0;
+            } else {
+                var of="";
+                val = val.replace("<BR>", "<br>");
+                val = val.replace("<BR />", "<br>");
+                val = val.replace("<br />", "<br>");
+                if (val === undefined) {
+                    d.progress = 0;
+                }
+                var n = val.indexOf("<br>");
+                if (n > 0) {
+                    var miarray = val.split('<br>');
+                    of = miarray[1];
+                }
+                if ( of === "" ) {
+                    d.progress = 0;
+                } else {
+                    var url2 = "http://10.0.0.12:5080/expertis/delaoferta?of="+ of.trim();
+                    var req2 = httpsync.get({ url : url2});
+                    var res = req2.end();
+                    if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
+                        var miresp = res.data.toString();
+                        var mijson = JSON.parse(miresp);
+                        if (mijson.length > 0) {
+                            //console.log(mijson);
+                            var datuak = mijson[0];
+                            var qfabricar = parseFloat(datuak.QFabricar);
+                            var qfabricada = parseFloat(datuak.QFabricada);
 
-            d.progress = 0;
+                            d.progress = Math.round((qfabricar * 100) / qfabricada);
+                            //console.log(qfabricar);
+                            //console.log(qfabricada);
+                            //console.log((qfabricar * 100) / qfabricada);
+                            //console.log(d.progress);
+                            //console.log("********");
+                        } else {
+                            d.progress = 0;
+                        }
+
+
+                    } else {
+                        d.progress = 0;
+                    }
+                }
+            }
+
             if ( textua[0] !== undefined ) {
                 d.text = textua[0];
             } else {
@@ -171,3 +219,17 @@ exports.getgantt = function(req, res) {
         });
     });
 }
+
+        // $http.get(url)
+        //     .success(function (data) {
+        //         if ( (data === "") || (data.length === 0) ) {
+        //             return false;
+        //         }
+        //         $scope.cantafabricar = parseInt(data.QFabricar);
+        //         $scope.cantiniciada = parseInt(data.QIniciada)
+        //         $scope.cantfabricada = parseInt(data.QFabricada);
+        //     })
+        //     .error(function () {
+        //         console.log("error al obtener datos");
+        //         return;
+        //     });

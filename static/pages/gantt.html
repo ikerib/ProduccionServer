@@ -2,13 +2,33 @@
 
 <div class="row">&nbsp;</div>
 <div class="row" ng-controller="ganttController">
+    <span us-spinner spinner-key="spinner-gantt"></span>
   <div class="row">
-    <button class="btn btn-primary btn-sm" ng-click="originalscale()"><span class="glyphicon glyphicon-eye-open"> Vista Origen</span></button>
-    <button class="btn btn-primary btn-sm" ng-click="dayscale()"><span class="glyphicon glyphicon-sound-dolby"> Vista Dias</span></button>
-    <button class="btn btn-primary btn-sm" ng-click="weekscale()"><span class="glyphicon glyphicon-th-list"> Vista Semanas</span></button>
-    <button class="btn btn-primary btn-sm" ng-click="monthscale()"><span class="glyphicon glyphicon-calendar"> Vista Mes</span></button>
-    <button class="btn btn-primary btn-sm" ng-click="yearscale()"><span class="glyphicon glyphicon-th"> Vista Año</span></button>
-    <br />
+      <div class="btn-group" role="group" >
+          <button class="btn btn-primary btn-sm" ng-click="originalscale()"><span class="glyphicon glyphicon-eye-open"> Vista Origen</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="dayscale()"><span class="glyphicon glyphicon-sound-dolby"> Vista Dias</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="weekscale()"><span class="glyphicon glyphicon-th-list"> Vista Semanas</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="monthscale()"><span class="glyphicon glyphicon-calendar"> Vista Mes</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="yearscale()"><span class="glyphicon glyphicon-th"> Vista Año</span></button>
+      </div>
+      <div class="btn-group" role="group">
+          <button class="btn btn-primary btn-sm" datepicker-popup="{{format}}" name="dtgantini" ng-model="dtgantini"
+                        is-open="datepickers.dtgantini" datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                        ng-click="open($event,'dtgantini')" ng-change="selectDate(dtgantini)"><i
+                        class="glyphicon glyphicon-calendar">Desde</i>
+          </button>
+          <button class="btn btn-primary btn-sm" datepicker-popup="{{format}}" name="dtgantfin" ng-model="dtgantfin"
+                  is-open="datepickers.dtgantfin" datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                  ng-click="open($event,'dtgantfin')" ng-change="selectDate(dtgantfin)"><i
+                  class="glyphicon glyphicon-calendar">Hasta</i>
+          </button>
+      </div>
+      <div class="btn-group pull-right" role="group" >
+          <button class="btn btn-primary btn-sm left">Export to PDF</button>
+          <button class="btn btn-primary btn-sm left">Export to PNG</button>
+      </div>
+
+
   </div>
   <div class="row">
     <div data="gantdatuak" dhx-gantt style="height:600px; width:100%;">
@@ -19,10 +39,7 @@
       <div gantt-template="task_text">
         {{task.text | uppercase}}
       </div>
-      <ul class="unstyled">
-        <li>Export to PDF</li>
-        <li>Export to PNG</li>
-      </ul>
+
     </div>
   </div>
 </div>

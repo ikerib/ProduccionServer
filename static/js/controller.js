@@ -68,7 +68,7 @@ produccionApp.directive('autoActive', ['$location', function ($location) {
     }
 }]);
 
-produccionApp.directive('dhxGantt', ['$http',function($http) {
+produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,usSpinnerService) {
   return {
     restrict: 'A',
     scope: false,
@@ -76,12 +76,14 @@ produccionApp.directive('dhxGantt', ['$http',function($http) {
     template: '<div ng-transclude></div>',
 
     link:function ($scope, $element, $attrs, $controller){
-      // console.log($attrs.data);
-      //watch data collection, reload on changes
+
+        usSpinnerService.spin('spinner-gantt');
+
       $scope.$watch($attrs.data, function(collection){
         gantt.clearAll();
 
         if (collection !== undefined)  {
+
           gantt.parse(collection, "json");
         }
       }, true);
@@ -109,21 +111,32 @@ produccionApp.directive('dhxGantt', ['$http',function($http) {
       });
 
       gantt.attachEvent("onAfterTaskDrag", function(id, progress, e){
-          console.log(id);
-          console.log(progress);
-          console.log(e);
 
           var task = gantt.getTask(id);
-          console.log(task);
           onAfterTaskDragUpdateDenborak(task);
 
       });
+
+      gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+          var task = gantt.getTask(id);
+          onAfterTaskDragUpdateDenborak(task);
+
+      });
+
+        gantt.attachEvent("onLightboxDelete", function(id){
+            alert("Functión no implementada.")
+            //var task = gantt.getTask(id);
+            //if (task.duration > 60){
+            //    alert("The duration is too long. Please, try again");
+            //    return false;
+            //}
+            //return true;
+        });
 
       gantt.attachEvent("onAfter")
 
       function onAfterTaskDragUpdateDenborak(task) {
         var miid = task._id;
-        // moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
         var fetxa = moment(task.start_date).toISOString();
         var midenbora = moment(task.start_date).format('HH:mm');
         var midenborafin = moment(task.end_date).format('HH:mm');
@@ -137,17 +150,17 @@ produccionApp.directive('dhxGantt', ['$http',function($http) {
 
 
         $http.post('/savedenbora', d).success(function () {});
-        $http.post('/savedenborafin', d).success(function () {});
-        // $http.post('/savefetxa', fetxa).success(function () {}).error(function(err){console.log(err)});
+        $http.post('/savedenborafinfetxa', d).success(function () {});
 
       }
 
+        gantt.attachEvent("onGanttRender", function(){
+            usSpinnerService.stop('spinner-gantt');
+        });
       gantt.init($element[0]);
     }
   };
 }]);
-
-
 
 function templateHelper($element){
   var template = $element[0].innerHTML;
