@@ -96,6 +96,7 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
       });
 
       //init gantt
+      gantt.config.grid_width = 200;
       gantt.config.open_tree_initially = true;
       gantt.config.duration_unit = "hour";//an hour
       gantt.config.duration_step = 1;
@@ -106,6 +107,20 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
           ];
       gantt.ignore_time = null;
       gantt.config.scale_height = 74;
+
+      // Style weekend
+      gantt.templates.scale_cell_class = function(date){
+            if(date.getDay()==0||date.getDay()==6){
+                return "weekend";
+            }
+        };
+        gantt.templates.task_cell_class = function(item,date){
+            if(date.getDay()==0||date.getDay()==6){
+                return "weekend"
+            }
+        };
+
+
       gantt.attachEvent("onTaskClick", function(id,e){
         console.log(this.getTask(id));
       });
@@ -150,13 +165,14 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 
 
         $http.post('/savedenbora', d).success(function () {});
-        $http.post('/savedenborafinfetxa', d).success(function () {});
-
+        $http.post('/savedenborafinfetxa', d).success(function () {
+          dhtmlx.message("Datos actualizados correctamente!");
+          });
       }
 
-        gantt.attachEvent("onGanttRender", function(){
-            usSpinnerService.stop('spinner-gantt');
-        });
+      gantt.attachEvent("onGanttRender", function(){
+          usSpinnerService.stop('spinner-gantt');
+      });
       gantt.init($element[0]);
     }
   };

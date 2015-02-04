@@ -11,6 +11,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     $scope.vweekend = true;
     $scope.arraton="Haz click en OF para refrescar datos.";
     $scope.estadofabricacion="";
+    $scope.mostrarganttgrid = 1;
     if ( $cookieStore.get('gitekplanificacion') === "1" ) {
         $scope.isadmin = true;
     }

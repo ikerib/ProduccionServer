@@ -1,3 +1,17 @@
+<style>
+  html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  .weekend{
+    background: #f4f7f4;
+  }
+  .gantt_selected .weekend{
+    background: #f7eb91;
+  }
+</style>
+
 
 
 <div class="row">&nbsp;</div>
@@ -5,11 +19,12 @@
     <span us-spinner spinner-key="spinner-gantt"></span>
   <div class="row">
       <div class="btn-group" role="group" >
-          <button class="btn btn-primary btn-sm" ng-click="originalscale()"><span class="glyphicon glyphicon-eye-open"> Vista Origen</span></button>
-          <button class="btn btn-primary btn-sm" ng-click="dayscale()"><span class="glyphicon glyphicon-sound-dolby"> Vista Dias</span></button>
-          <button class="btn btn-primary btn-sm" ng-click="weekscale()"><span class="glyphicon glyphicon-th-list"> Vista Semanas</span></button>
-          <button class="btn btn-primary btn-sm" ng-click="monthscale()"><span class="glyphicon glyphicon-calendar"> Vista Mes</span></button>
-          <button class="btn btn-primary btn-sm" ng-click="yearscale()"><span class="glyphicon glyphicon-th"> Vista Año</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="ganttgridtoogle()">AA</button>
+          <button class="btn btn-primary btn-sm" ng-click="originalscale()"><span class="glyphicon glyphicon-eye-open">&nbsp;Origen</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="dayscale()"><span class="glyphicon glyphicon-sound-dolby">&nbsp;Dias</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="weekscale()"><span class="glyphicon glyphicon-th-list">&nbsp;Semanas</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="monthscale()" ><span class="glyphicon glyphicon-calendar">&nbsp;Mes</span></button>
+          <button class="btn btn-primary btn-sm" ng-click="yearscale()"><span class="glyphicon glyphicon-th">&nbsp;Año</span></button>
       </div>
       <div class="btn-group" role="group">
           <button class="btn btn-primary btn-sm"
@@ -22,7 +37,7 @@
               close-text="Close"
               ng-click="open($event,'dtganttini')"
               ng-change="selectDatedtganttini(dtganttini)">
-                <i class="glyphicon glyphicon-calendar">Desde: {{ dtganttini | date:'dd/MM/yyyy' }}</i>
+                <i class="glyphicon glyphicon-calendar">&nbsp;Desde: {{ dtganttini | date:'dd/MM/yyyy' }}</i>
           </button>
           <button class="btn btn-primary btn-sm"
               datepicker-popup="{{format}}"
@@ -34,13 +49,14 @@
               close-text="Close"
               ng-click="open($event,'dtganttfin')"
               ng-change="selectDatedtganttfin(dtganttfin)">
-                <i class="glyphicon glyphicon-calendar">Hasta: {{ dtganttfin | date:'dd/MM/yyyy' }}</i>
+                <i class="glyphicon glyphicon-calendar">&nbsp;Hasta: {{ dtganttfin | date:'dd/MM/yyyy' }}</i>
           </button>
           <button class="btn btn-warning btn-sm" ng-click="filtrarGantt()">Filtrar</button>
       </div>
       <div class="btn-group pull-right" role="group" >
-          <button class="btn btn-primary btn-sm left">Export to PDF</button>
-          <button class="btn btn-primary btn-sm left">Export to PNG</button>
+          <button class="btn btn-primary btn-sm left" onclick='gantt.exportToPDF()'>Export to PDF</button>
+          <button class="btn btn-primary btn-sm left" onclick='gantt.exportToPNG()'>Export to PNG</button>
+          <button class="btn btn-primary btn-sm left" onclick='gantt.exportToExcel()'>Export to Excel</button>
       </div>
 
 

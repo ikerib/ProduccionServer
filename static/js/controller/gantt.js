@@ -90,12 +90,22 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
   };
 
   $scope.filtrarGantt = function() {
-      gantt.config.start_date = new Date(2013, 08, 10);
+      // gantt.config.start_date = new Date(2013, 08, 10);
       gantt.config.start_date = $scope.dtganttini;
-      gantt.config.end_date = new Date(2013, 08, 20);
+      // gantt.config.end_date = new Date(2013, 08, 20);
       gantt.config.end_date = $scope.dtganttfin;
       gantt.render();
   }
 
+  $scope.ganttgridtoogle = function(){
+    if ( $scope.mostrarganttgrid === 1 ) {
+      gantt.config.grid_width = 0;
+      $scope.mostrarganttgrid = 0;
+    } else {
+      gantt.config.grid_width = 200;
+      $scope.mostrarganttgrid = 1;
+    }
+    gantt.render();
+  }
 
 });
