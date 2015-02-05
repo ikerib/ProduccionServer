@@ -84,7 +84,6 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
         gantt.clearAll();
 
         if (collection !== undefined)  {
-
           gantt.parse(collection, "json");
         }
       }, true);

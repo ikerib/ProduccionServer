@@ -1,7 +1,7 @@
 /**
  * Created by ikerib on 27/05/14.
  */
-
+"use strict";
 var moment = require('moment');
 var forEach = require('async-foreach').forEach;
 var httpsync = require('httpsync');
@@ -18,8 +18,7 @@ exports.getplanificacion = function(req, res) {
 
     c_planificacion.find(
 
-        { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
-    ,
+        { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }},
     {
         sort: {linea:1,orden: 1}
     },
@@ -42,14 +41,14 @@ exports.getplanificacion = function(req, res) {
 
             var val = orden.ref;
 
-            if (( val != "" ) && ( val !== undefined)) {
+            if (( val !== "" ) && ( val !== undefined)) {
                 var of="";
                 val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
-                if (val === undefined) { return false }
+                if (val === undefined) { return false; }
                 var n = val.indexOf("<br>");
                 if (n > 0) {
                     var miarray = val.split('<br>');
-                    tof = miarray[1];
+                    var tof = miarray[1];
                     var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
                     var req = httpsync.get({ url : url});
                     var res = req.end();
@@ -88,15 +87,14 @@ exports.getplanificacion = function(req, res) {
             res.json(items);
         });
     });
-}
+};
 
 exports.getgantt = function(req, res) {
     var desde = moment(req.params.dia,"YYYY-MM-DD").toISOString();
     var d = moment(desde).subtract('days', 7).toISOString();
 
     c_planificacion.find(
-        { "fetxa": { $gte: new Date(desde) }}
-    ,
+        { "fetxa": { $gte: new Date(desde) }},
     {
         sort: { fetxa: 1, linea: 1, orden:1}
     },
@@ -114,18 +112,46 @@ exports.getgantt = function(req, res) {
         }
 
         var data = [];
-        var l = {};
-            l.id=1;
-            l.type = "project";
-            l.text = "LINEA1";
-            l.open=true;
 
-        data.push(l);
+
+        var linea1gehituta = false;
+        var linea2gehituta = false;
+        var linea3gehituta = false;
+        //Comprobamos que en los datos está la 3º línea
+        for (var i=0; i < items.length; i++) {
+            if (( items[i].linea === 1 ) && (linea1gehituta === false )){
+                var l = {};
+                l.id=1;
+                l.type = "project";
+                l.text = "Siplace";
+                l.open=true;
+                data.push(l);
+                linea1gehituta = true;
+            }
+            if (( items[i].linea === 2 ) && (linea2gehituta === false )){
+                var l2 = {};
+                l2.id=2;
+                l2.type = "project";
+                l2.text = "Assambleon";
+                l2.open=true;
+                data.push(l2);
+                linea2gehituta = true;
+            }
+            if (( items[i].linea === 3 ) && (linea3gehituta === false )){
+                var l3 = {};
+                l3.id=3;
+                l3.type = "project";
+                l3.text = "Repaso";
+                l3.open=true;
+                data.push(l3);
+                linea3gehituta = true;
+            }
+        }
+
 
         var rek = req;
 
         forEach (items, function(item, callback){
-
             var textua = item.ref.split('<BR>');
             var d = {};
             d._id = item._id;
@@ -152,7 +178,7 @@ exports.getgantt = function(req, res) {
             }
 
             // CALCULO DEL PROGRESO
-            val = item.ref;
+            var val = item.ref;
             if ( ( val === "" ) || ( val === undefined ) ) {
                 d.progress = 0;
             } else {
@@ -200,12 +226,18 @@ exports.getgantt = function(req, res) {
                 }
             }
 
+            // nos aseguramos de que el progeso tiene un valor
+            if ( ( d.progress === undefined ) || ( d.progress === null) || ( isFinite(d.progress) === false ) ) {
+                d.progress = 0;
+                //console.log("A");
+            }
+
             if ( textua[0] !== undefined ) {
                 d.text = textua[0];
             } else {
                 d.text = "";
             }
-            d.parent = 1;
+            d.parent = parseInt(item.linea);
 
             // console.log(d);
             data.push(d);
@@ -218,18 +250,4 @@ exports.getgantt = function(req, res) {
             //res.json(data);
         });
     });
-}
-
-        // $http.get(url)
-        //     .success(function (data) {
-        //         if ( (data === "") || (data.length === 0) ) {
-        //             return false;
-        //         }
-        //         $scope.cantafabricar = parseInt(data.QFabricar);
-        //         $scope.cantiniciada = parseInt(data.QIniciada)
-        //         $scope.cantfabricada = parseInt(data.QFabricada);
-        //     })
-        //     .error(function () {
-        //         console.log("error al obtener datos");
-        //         return;
-        //     });
+};
