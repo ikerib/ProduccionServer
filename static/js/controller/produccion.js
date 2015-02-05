@@ -3,7 +3,7 @@
  */
 
 produccionApp.controller('produccionController', function ($scope, $http, $cookieStore) {
-
+    "use strict";
     $scope.isadmin = false;
     $scope.vlinea1 = true;
     $scope.vlinea2 = true;
@@ -19,7 +19,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     $scope.datepickers = {
         dt: false,
         dtSecond: false
-    }
+    };
     $scope.dateOptions = {
         'year-format': "'yy'",
         'starting-day': 1
@@ -30,7 +30,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     $scope.astea = ['0'];
 
     $scope.lortuastelehena = function (fetxa) {
-        egunzen = moment(fetxa, "YYYY/MM/DD").day();
+        var egunzen = moment(fetxa, "YYYY/MM/DD").day();
         switch (egunzen) {
             case 0: // igandea
                 return moment(fetxa, "YYYY/MM/DD").add('days', 1).format("YYYY/MM/DD");
@@ -68,22 +68,24 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     $scope.eratufetxak(fetxa);
 
     $scope.aldatuastea = function (z) {
+        var mifec;
+        var fetxaberria;
         if (z < 0) {
             z = z * -1;
-            var mifec = moment($scope.dt).format('YYYY/MM/DD');
-            if (moment(mifec).isValid() == false) {
+            mifec = moment($scope.dt).format('YYYY/MM/DD');
+            if (moment(mifec).isValid() === false) {
                 mifec = moment($scope.dt, 'YYYY/MM/DD').format('YYYY/MM/DD');
             }
-            var fetxaberria = moment(mifec).subtract('days', z).format("YYYY/MM/DD");
+            fetxaberria = moment(mifec).subtract('days', z).format("YYYY/MM/DD");
         } else {
-            var mifec = moment($scope.dt).format('YYYY/MM/DD');
-            if (moment(mifec).isValid() == false) {
+            mifec = moment($scope.dt).format('YYYY/MM/DD');
+            if (moment(mifec).isValid() === false) {
                 mifec = moment($scope.dt, 'YYYY/MM/DD');
             }
-            var fetxaberria = moment(mifec, 'YYYY/MM/DD').add('days', z).format("YYYY/MM/DD");
+            fetxaberria = moment(mifec, 'YYYY/MM/DD').add('days', z).format("YYYY/MM/DD");
         }
         $scope.eratufetxak(fetxaberria);
-    }
+    };
 
     $scope.nameFilter = null;
 
@@ -93,47 +95,54 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
         switch (nireindex) {
             case 0:
-                if ($scope.eguna1 == fec) {
+                if ($scope.eguna1 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
             case 1:
-                if ($scope.eguna2 == fec) {
+                if ($scope.eguna2 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
             case 2:
-                if ($scope.eguna3 == fec) {
+                if ($scope.eguna3 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
             case 3:
-                if ($scope.eguna4 == fec) {
+                if ($scope.eguna4 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
             case 4:
-                if ($scope.eguna5 == fec) {
+                if ($scope.eguna5 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
             case 5:
-                if ($scope.eguna6 == fec) {
+                if ($scope.eguna6 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
             case 6:
-                if ($scope.eguna7 == fec) {
+                if ($scope.eguna7 === fec) {
                     return true;
                 } else {
                     return false;
                 }
+                break;
         }
         var nirefec = "eguna" + nireindex;
         var esanfec = $scope.nirefec;
@@ -141,9 +150,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     };
 
     $scope.today = function () {
-        // $scope.dt = new Date();
         $scope.dt = moment($scope.dt).toDate();
-        // $scope.dtSecond = new Date();
         $scope.dtSecond = moment($scope.dtSecond).toDate();
     };
     $scope.today();
@@ -172,35 +179,27 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
     };
 
     $scope.selectDate = function (dt) {
-        console.log(dt);
         var fetxa = $scope.lortuastelehena(moment(dt).format("YYYY/MM/DD"));
         $scope.dt = fetxa;
         $scope.eratufetxak(fetxa);
-    }
+    };
 
     $scope.hemanEguna = function (numeguna) {
         switch (numeguna) {
             case "0":
                 return $scope.eguna1;
-                break;
             case "1":
                 return $scope.eguna2;
-                break;
             case "2":
                 return $scope.eguna3;
-                break;
             case "3":
                 return $scope.eguna4;
-                break;
             case "4":
                 return $scope.eguna5;
-                break;
             case "5":
                 return $scope.eguna6;
-                break;
             case "6":
                 return $scope.eguna7;
-                break;
         }
     };
 
@@ -208,19 +207,18 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         $http.get('/getsettings').success(function (data) {
             $scope.users = data;
         }).error(function () {
-            console.log("error al obtener datos");
-            return;
+            alert("error al obtener datos");
         });
     };
     $scope.getusers();
 
     $scope.dologout = function() {
-        console.log("logout");
+        // console.log("logout");
         if ( $scope.isadmin ) {
             $cookieStore.remove("gitekplanificacion");
         }
         window.location.href = "/";
-    }
+    };
     $scope.koo = $cookieStore.get('gitekplanificacion');
 
     $scope.grafikoa = function(val) {
@@ -281,12 +279,12 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
                         name: 'Producción',
                         data: $scope.chartData
                     }]
-                }
+                };
             })
             .error(function(data, status, headers, config) {
-                console.log(data);
+                // console.log(data);
             });
-    }
+    };
 
     $scope.arraton = function(val) {
         if ( ( val === "" ) || ( val === undefined ) ) { return false; }
@@ -295,7 +293,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         val = val.replace("<BR />", "<br>");
         val = val.replace("<br />", "<br>");
         if (val === undefined) {
-            return false
+            return false;
         }
         var n = val.indexOf("<br>");
         if (n > 0) {
@@ -312,33 +310,33 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
                     return false;
                 }
                 $scope.cantafabricar = parseInt(data.QFabricar);
-                $scope.cantiniciada = parseInt(data.QIniciada)
+                $scope.cantiniciada = parseInt(data.QIniciada);
                 $scope.cantfabricada = parseInt(data.QFabricada);
             })
             .error(function () {
-                console.log("error al obtener datos");
+                alert("error al obtener datos");
                 return;
             });
-    }
+    };
 
     $scope.whatClassIsIt= function(amaituta){
         if(amaituta === 1) {
-            return "tatxatu"
+            return "tatxatu";
         }
-    }
+    };
 
     $scope.ordenatu = function(orden, cont) {
-        console.log(orden);
-        console.log(cont);
+        // console.log(orden);
+        // console.log(cont);
 
         var $data = {};
         $data._id = orden._id;
         $data.fetxa = orden.fetxa;
-        console.log(orden.fetxa);
+        // console.log(orden.fetxa);
         $data.linea = orden.linea;
 
-        if ( (orden.orden !== undefined) && ( orden.orden !== "") && ( orden.orden !== NaN ) && ( orden.orden !== null )) {
-            $data.orden = orden.orden + cont
+        if ( (orden.orden !== undefined) && ( orden.orden !== "") && ( isNaN(orden.orden) !== true ) && ( orden.orden !== null )) {
+            $data.orden = orden.orden + cont;
         } else {
             $data.orden = 0;
         }
@@ -348,7 +346,7 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
         ).success(function () {
                 $scope.$broadcast ('eguneratudatuak');
             });
-    }
+    };
 
     $scope.updateOrden = function (data, l) {
 

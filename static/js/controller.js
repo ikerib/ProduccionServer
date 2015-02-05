@@ -1,3 +1,4 @@
+'use strict';
 var produccionApp = angular.module('produccionApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'colorpicker.module',
         'xeditable', 'ngSanitize', 'ui.calendar', 'highcharts-ng', 'ngCookies','angularSpinner','ngDragDrop']);
 
@@ -33,7 +34,7 @@ produccionApp.config(function ($routeProvider) {
 
         .when('/logout', {
             controller:'logoutController'
-        })
+        });
 });
 
 produccionApp.factory('socket', function () {
@@ -65,7 +66,7 @@ produccionApp.directive('autoActive', ['$location', function ($location) {
 
             scope.$on('$locationChangeSuccess', setActive);
         }
-    }
+    };
 }]);
 
 produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,usSpinnerService) {
@@ -110,15 +111,23 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 
       // Style weekend
       gantt.templates.scale_cell_class = function(date){
-            if(date.getDay()==0||date.getDay()==6){
+            if(date.getDay()===0||date.getDay()===6){
                 return "weekend";
             }
         };
         gantt.templates.task_cell_class = function(item,date){
-            if(date.getDay()==0||date.getDay()==6){
-                return "weekend"
+            if(date.getDay()===0||date.getDay()===6){
+                return "weekend";
             }
         };
+
+      // Style completed
+      gantt.templates.task_class=function(start,end,task){
+        if (task.progress >= 100) {
+            return "completed_task";
+        }
+        return "";
+      };
 
 
       gantt.attachEvent("onTaskClick", function(id,e){
@@ -139,7 +148,7 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
       });
 
         gantt.attachEvent("onLightboxDelete", function(id){
-            alert("Functión no implementada.")
+            alert("Functión no implementada.");
             //var task = gantt.getTask(id);
             //if (task.duration > 60){
             //    alert("The duration is too long. Please, try again");
@@ -148,7 +157,7 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
             //return true;
         });
 
-      gantt.attachEvent("onAfter")
+      gantt.attachEvent("onAfter");
 
       function onAfterTaskDragUpdateDenborak(task) {
         var miid = task._id;
@@ -181,7 +190,7 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 function templateHelper($element){
   var template = $element[0].innerHTML;
   return template.replace(/[\r\n]/g,"").replace(/"/g, "\\\"").replace(/\{\{task\.([^\}]+)\}\}/g, function(match, prop){
-    if (prop.indexOf("|") != -1){
+    if (prop.indexOf("|") !== -1){
       var parts = prop.split("|");
       return "\"+gantt.aFilter('"+(parts[1]).trim()+"')(task."+(parts[0]).trim()+")+\"";
     }
@@ -217,11 +226,14 @@ produccionApp.directive('ganttColumn', ['$filter', function($filter){
       var template =  Function('task', 'return "'+templateHelper($element)+'"');
       var config = { template:template, label:label, width:width, align:align };
 
-      if (!gantt.config.columnsSet)
+      if (!gantt.config.columnsSet) {
           gantt.config.columnsSet = gantt.config.columns = [];
+      }
 
-      if (!gantt.config.columns.length)
-        config.tree = true;
+      if (!gantt.config.columns.length) {
+          config.tree = true;
+      }
+
       gantt.config.columns.push(config);
 
     }
@@ -235,7 +247,7 @@ produccionApp.directive('ganttColumnAdd', ['$filter', function($filter){
     link:function(){
       gantt.config.columns.push({ width:45, name:"add" });
     }
-  }
+  };
 }]);
 
 produccionApp.run(function (editableOptions) {
@@ -246,10 +258,10 @@ produccionApp.filter('searchBy', function () {
     return function (array, prop, val) {
         // filter has polyfills for older browsers. Check underscore.js if needed
         return array.filter(function (row) {
-            return row[prop] == val;
+            return row[prop] === val;
         })[0];
         // this returns an array. You can pick the first element with [0]
-    }
+    };
 });
 
 produccionApp.filter('searchByRefBackcolor', function () {
@@ -257,7 +269,7 @@ produccionApp.filter('searchByRefBackcolor', function () {
     return function (array, prop, val) {
         // miramos si tiene almohadilla
         if (val === undefined) {
-            return false
+            return false;
         }
         val = val.replace("<BR>", "<br>");
         val = val.replace("<BR />", "<br>");
@@ -268,7 +280,7 @@ produccionApp.filter('searchByRefBackcolor', function () {
             val = miarray[0].trim();
         }
         var kk = array.filter(function (row) {
-            return row[prop] == val;
+            return row[prop] === val;
         });
 
         if (kk.length > 0) {
@@ -276,7 +288,7 @@ produccionApp.filter('searchByRefBackcolor', function () {
         }
 
         return  null;
-    }
+    };
 });
 
 produccionApp.filter('searchByRefForecolor', function () {
@@ -284,7 +296,7 @@ produccionApp.filter('searchByRefForecolor', function () {
     return function (array, prop, val) {
         // miramos si tiene almohadilla
         if (val === undefined) {
-            return false
+            return false;
         }
         val = val.replace("<BR>", "<br>");
         val = val.replace("<BR />", "<br>");
@@ -296,7 +308,7 @@ produccionApp.filter('searchByRefForecolor', function () {
         }
 
         var kk = array.filter(function (row) {
-            return row[prop] == val;
+            return row[prop] === val;
         });
 
         if (kk.length > 0) {
@@ -304,12 +316,12 @@ produccionApp.filter('searchByRefForecolor', function () {
         }
 
         return  null;
-    }
+    };
 });
 
 produccionApp.filter('formatText', function (){
     return function(input) {
-        if(!input) return input;
+        if(!input) {return input;}
 
         var output = input
             //replace possible line breaks.

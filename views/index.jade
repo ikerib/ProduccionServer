@@ -18,6 +18,7 @@ html.no-js
     link(rel='stylesheet', href='/css/fullcalendar.css')
     link(rel='stylesheet', href='/css/gantt/dhtmlxgantt.css')
     link(rel='stylesheet', href='/css/calendarDemo.css')
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/main.css')
     script(src='/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js')
   body(ng-app='produccionApp')(ng-controller='produccionController')
@@ -55,7 +56,8 @@ html.no-js
               li
                 a(href='#')(ng-show='isadmin')(ng-click='dologout()')
                   span.bg-primary Modo de edición activado.
-                  span  &nbsp; &nbsp;  Logout
+                  span
+                    i.fa.fa-sign-out  &nbsp;Logout
                 a(href='#/login')(ng-show='!isadmin') Login
                 //a(ng-click='#/login', class='btn-auth btn-github') Login
 

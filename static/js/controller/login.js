@@ -1,7 +1,7 @@
 /**
  * Created by ikerib on 01/07/14.
  */
-
+"use strict";
 produccionApp.controller('loginController', function ($scope, $cookieStore) {
 
     $scope.mipass='';
@@ -18,6 +18,6 @@ produccionApp.controller('loginController', function ($scope, $cookieStore) {
             $scope.iserror=true;
         }
 
-    }
+    };
 
 });

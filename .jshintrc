@@ -1,0 +1,32 @@
+{
+  "node": true,
+  "browser": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "regexp": true,
+  "undef": true,
+  "strict": true,
+  "trailing": true,
+  "smarttabs": true,
+  "globals": {
+    "jQuery": true,
+    "produccionApp": true,
+    "moment": true,
+    "window":true,
+    "alert":false,
+    "Highcharts":true,
+    "angular": true,
+    "io": true,
+    "gantt":true,
+    "dhtmlx": true,
+    "Function":true,
+    "$":true,
+    "$scope": true,
+    "$filter": false
+  }
+}

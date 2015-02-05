@@ -1,7 +1,7 @@
 /**
  * Created by ikerib on 30/06/14.
  */
-
+"use strict";
 produccionApp.controller('ganttController', function ($scope, $http, socket, $cookieStore) {
 
   $scope.gantdatuak={ data: [] };
@@ -12,7 +12,6 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
 
       $http.get('/api/getgantt/' + dsd ).success(function (data) {
           $scope.gantdatuak = data;
-          console.log(data);
           return data;
       }).error(function () {
           console.log("Hau dek akatsa hau!");
@@ -33,7 +32,7 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
       gantt.ignore_time = null;
       gantt.config.scale_height = 74;
       gantt.render();
-  }
+  };
 
   $scope.dayscale = function() {
     gantt.config.scale_unit = "day";
@@ -43,7 +42,7 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
     gantt.config.scale_height = 27;
     gantt.templates.date_scale = null;
     gantt.render();
-  }
+  };
 
   $scope.weekscale = function() {
     var weekScaleTemplate = function(date){
@@ -60,7 +59,7 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
     ];
     gantt.config.scale_height = 50;
     gantt.render();
-  }
+  };
 
   $scope.monthscale = function(){
     gantt.config.scale_unit = "month";
@@ -95,7 +94,7 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
       // gantt.config.end_date = new Date(2013, 08, 20);
       gantt.config.end_date = $scope.dtganttfin;
       gantt.render();
-  }
+  };
 
   $scope.ganttgridtoogle = function(){
     if ( $scope.mostrarganttgrid === 1 ) {
@@ -106,6 +105,6 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
       $scope.mostrarganttgrid = 1;
     }
     gantt.render();
-  }
+  };
 
 });

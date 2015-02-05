@@ -1,7 +1,7 @@
 /**
  * Created by ikerib on 30/06/14.
  */
-
+"use strict";
 produccionApp.controller('egutegiaController', function ($scope, $http, socket, $cookieStore) {
     if ( $cookieStore.get('gitekplanificacion') === "1" ) {
         $scope.uiConfig = {
@@ -86,5 +86,5 @@ produccionApp.controller('egutegiaController', function ($scope, $http, socket, 
         ).success(function () {
                 console.log("fin");
         });
-    }
+    };
 });

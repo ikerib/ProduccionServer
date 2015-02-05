@@ -1,7 +1,7 @@
 /**
  * Created by ikerib on 30/06/14.
  */
-
+"use strict";
 produccionApp.controller('linea1Controller', function ($scope, $http, $resource, socket, usSpinnerService) {
 
     $scope.getDatuak = function () {
@@ -91,7 +91,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.updateUser = function (data, l) {
         if ( checkdata(data) === false ) {
-            return "Texto mal introducido. Tiene que ser ARTICULO<br>OFXXXXX"
+            return "Texto mal introducido. Tiene que ser ARTICULO<br>OFXXXXX";
         }
         var fetxa = l.$editable.attrs.fetxa + " 11:11:11";
         var miid = l.$editable.attrs.miid;
@@ -145,7 +145,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
 
     $scope.addData = function (midata, l) {
         if ( checkdata(midata) === false ) {
-            return "Texto mal introducido. Tiene que ser ARTICULO<br>OFXXXXX"
+            return "Texto mal introducido. Tiene que ser ARTICULO<br>OFXXXXX";
         }
         var miid = l.$editable.attrs.miid;
         // id ez badauka, insert
@@ -157,7 +157,7 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
                 fetxa: moment(l.$editable.attrs.fetxa, "YYYY-MM-DD").toISOString(),
                 linea: 1,
                 ref: midata
-            }
+            };
             $http.post('/saveplanificacion', d);
         }
     };
@@ -184,8 +184,8 @@ produccionApp.controller('linea1Controller', function ($scope, $http, $resource,
     });
 
     $scope.set_color = function (kolorea) {
-        return { color: kolorea }
-    }
+        return { color: kolorea };
+    };
 
     $scope.onDrop = function($event,$data, linea,eguna){
         $data.id = $data._id;

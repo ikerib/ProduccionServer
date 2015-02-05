@@ -1,7 +1,7 @@
 /**
  * Created by ikerib on 30/06/14.
  */
-
+"use strict";
 produccionApp.controller('settingController', function ($scope, $http, socket) {
 
     $scope.getusers = function () {
@@ -54,7 +54,6 @@ produccionApp.controller('settingController', function ($scope, $http, socket) {
                 $scope.users.splice(i, 1);
             }
         }
-        ;
     };
 
     // save edits
