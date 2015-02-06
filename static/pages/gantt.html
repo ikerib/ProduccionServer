@@ -41,13 +41,19 @@
     .green .gantt_task_cell, .odd.green .gantt_task_cell {
         background-color: #BEE4BE;
     }
+    .gantt_grid_data {
+      height: auto !important;
+    }
+    .gantt_data_area {
+      height: auto !important;
+    }
 
 </style>
 
 
 
 <div class="row">&nbsp;</div>
-<div class="row" ng-controller="ganttController">
+<div class="row-fluid" ng-controller="ganttController">
     <span us-spinner spinner-key="spinner-gantt"></span>
   <div class="row">
       <div class="btn-group" role="group" >
@@ -94,7 +100,7 @@
 
   </div>
   <div class="row">
-    <div data="gantdatuak" dhx-gantt style="height:600px; width:100%;">
+    <div data="gantdatuak" dhx-gantt style="height:700px; width:100%;">
       <div gantt-column label="Task">{{task.text | lowercase}}</div>
       <!-- <div gantt-column align="center" width="200"  label="Duration">{{task.duration}}</div> -->
       <!-- <div gantt-column-add width="45"></div> -->

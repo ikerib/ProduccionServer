@@ -17,7 +17,6 @@ exports.getplanificacion = function(req, res) {
 
 
     c_planificacion.find(
-
         { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }},
     {
         sort: {linea:1,orden: 1}

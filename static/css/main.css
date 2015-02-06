@@ -6,6 +6,12 @@
 .container {
 	width: 98% !important;
 }
+.container-fluid {
+  height: 100%;
+}
+.guzia {
+  height: 100% !important;
+}
 td.tdlinea {
 	vertical-align: middle !important;
 }
