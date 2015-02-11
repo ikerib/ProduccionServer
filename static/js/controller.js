@@ -180,12 +180,13 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 
       gantt.attachEvent("onGanttRender", function(){
           usSpinnerService.stop('spinner-gantt');
-          console.log("Rendered");
+          console.log("Rendered")
           // $('.gantt_container').parent().addClass('guzia');
           // $('.gantt_grid_data').addClass('guzia');
           // $('.gantt_data_area').addClass('guzia');
           // $('.gantt_task').addClass('guzia');
       });
+
       gantt.init($element[0]);
     }
   };
