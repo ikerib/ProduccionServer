@@ -256,9 +256,11 @@ produccionApp.directive('ganttColumnAdd', ['$filter', function($filter){
   };
 }]);
 
-produccionApp.run(function (editableOptions) {
+produccionApp.run(
+  function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
+  }
+);
 
 produccionApp.filter('searchBy', function () {
     return function (array, prop, val) {
