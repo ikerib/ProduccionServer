@@ -31,6 +31,11 @@ produccionApp.config(function ($routeProvider) {
             controller:'ganttController'
         })
 
+        .when('/live', {
+            templateUrl:'pages/live.html',
+            controller:'liveController'
+        })
+
         .when('/logout', {
             controller:'logoutController'
         })

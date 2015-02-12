@@ -158,3 +158,40 @@ exports.getgantt = function(req, res) {
         });
     });
 }
+
+exports.getofs = function(req, res) {
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    var desde = moment(yyyy + "-" + mm + "-" + dd,"YYYY-MM-DD").toISOString();
+    var hasta = moment(desde).add('days', 1).toISOString();
+
+
+    c_planificacion.find(
+        { "fetxa": { $gte: new Date(desde) , $lte: new Date(hasta)  }}
+    ,
+    {
+        sort: { fetxa: 1, linea: 1, orden:1}
+    },
+    function(err, items){
+        if (err) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            res.json(500, err);
+        }
+        if (items.length === 0) {
+            res.statusCode = 404;
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            return res.send({ error: 'Ez da topatu' });
+        }
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.contentType('application/json');
+        res.send(JSON.stringify(items));
+
+    });
+}
