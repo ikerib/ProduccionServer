@@ -1,0 +1,20 @@
+
+<div class="container">
+
+  <div class="row">&nbsp;</div>
+  <div class="row" ng-controller="liveController">
+
+    <div class="row" ng-repeat="of in lOFs">
+      <h3> <span class="label label-default">Articulo:{{ of.orden }}</span>  <span class="label label-primary">OF: {{ of.of }}</span> </h3>
+      <h5> A Fabricar: {{ of.QFabricar }} - Fabricadas: {{ of.QFabricada }} - Progreso: {{ of.progress }}%</h5>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{of.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{of.progress}}%;">
+          <span class="sr-only">60% Complete</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

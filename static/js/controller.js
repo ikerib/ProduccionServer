@@ -32,6 +32,11 @@ produccionApp.config(function ($routeProvider) {
             controller:'ganttController'
         })
 
+        .when('/live', {
+            templateUrl:'pages/live.html',
+            controller:'liveController'
+        })
+
         .when('/logout', {
             controller:'logoutController'
         });
@@ -78,7 +83,7 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 
     link:function ($scope, $element, $attrs, $controller){
 
-        usSpinnerService.spin('spinner-gantt');
+      usSpinnerService.spin('spinner-gantt');
 
       $scope.$watch($attrs.data, function(collection){
         gantt.clearAll();
@@ -110,15 +115,15 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 
       // Style weekend
       gantt.templates.scale_cell_class = function(date){
-            if(date.getDay()===0||date.getDay()===6){
-                return "weekend";
-            }
-        };
-        gantt.templates.task_cell_class = function(item,date){
-            if(date.getDay()===0||date.getDay()===6){
-                return "weekend";
-            }
-        };
+        if(date.getDay()===0||date.getDay()===6){
+            return "weekend";
+        }
+      };
+      gantt.templates.task_cell_class = function(item,date){
+        if(date.getDay()===0||date.getDay()===6){
+            return "weekend";
+        }
+      };
 
       // Style completed
       gantt.templates.task_class=function(start,end,task){
@@ -129,32 +134,32 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
       };
 
 
+      // Gantt EVENTs
       gantt.attachEvent("onTaskClick", function(id,e){
         console.log(this.getTask(id));
       });
 
       gantt.attachEvent("onAfterTaskDrag", function(id, progress, e){
-
+          if ($scope.isadmin === false ){ return;}
           var task = gantt.getTask(id);
           onAfterTaskDragUpdateDenborak(task);
-
       });
 
       gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+          if ($scope.isadmin === false ){ return;}
           var task = gantt.getTask(id);
           onAfterTaskDragUpdateDenborak(task);
-
       });
 
-        gantt.attachEvent("onLightboxDelete", function(id){
-            alert("Functión no implementada.");
-            //var task = gantt.getTask(id);
-            //if (task.duration > 60){
-            //    alert("The duration is too long. Please, try again");
-            //    return false;
-            //}
-            //return true;
-        });
+      gantt.attachEvent("onLightboxDelete", function(id){
+        alert("Functión no implementada.");
+        //var task = gantt.getTask(id);
+        //if (task.duration > 60){
+        //    alert("The duration is too long. Please, try again");
+        //    return false;
+        //}
+        //return true;
+      });
 
       gantt.attachEvent("onAfter");
 
@@ -180,11 +185,6 @@ produccionApp.directive('dhxGantt', ['$http','usSpinnerService',function($http,u
 
       gantt.attachEvent("onGanttRender", function(){
           usSpinnerService.stop('spinner-gantt');
-          console.log("Rendered")
-          // $('.gantt_container').parent().addClass('guzia');
-          // $('.gantt_grid_data').addClass('guzia');
-          // $('.gantt_data_area').addClass('guzia');
-          // $('.gantt_task').addClass('guzia');
       });
 
       gantt.init($element[0]);
@@ -202,6 +202,7 @@ function templateHelper($element){
     return '"+task.'+prop+'+"';
   });
 }
+
 produccionApp.directive('ganttTemplate', ['$filter', function($filter){
   gantt.aFilter = $filter;
 
