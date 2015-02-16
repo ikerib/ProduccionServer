@@ -251,7 +251,6 @@ exports.getgantt = function(req, res) {
     });
 };
 
-
 exports.getofs = function(req, res) {
 
     var today = new Date();

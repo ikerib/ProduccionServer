@@ -9,9 +9,7 @@ produccionApp.controller('liveController', function ($scope, $http, socket, $coo
     myOFs.getOFs().then(function(d) {
         $scope.lOFs = d;
         angular.forEach($scope.lOFs, function(value, key){
-            console.log(value);
             var val = value.ref;
-            console.log(val);
             var of="";
             val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
             if (val === undefined) { return false }
@@ -81,9 +79,6 @@ produccionApp.factory('myOFs', function($http) {
         },
         getProgress: function(of) {
             //return the promise directly.
-            console.log("Kaixooooo");
-
-                console.log(of);
                 return $http({
                     method: 'GET',
                     url: '/proxy/expertis/' +of,
@@ -91,13 +86,6 @@ produccionApp.factory('myOFs', function($http) {
                     //resolve the promise as the data
                     return result.data;
                 });
-
-
-                // $http.get('/proxy/expertis/:of')
-                //        .then(function(result) {
-                //             //resolve the promise as the data
-                //             return result.data;
-                //         });
         }
    }
 });
