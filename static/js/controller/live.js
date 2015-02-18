@@ -34,9 +34,9 @@ produccionApp.controller('liveController', function ($scope, $http, socket, $coo
     var timer=$interval(function(){
 
         angular.forEach($scope.lOFs, function(value, key){
-            console.log(value);
+            // console.log(value);
             var val = value.ref;
-            console.log(val);
+            // console.log(val);
             var of="";
             val = val.replace("<BR>", " <br> ").replace("<BR />", " <br> ").replace("<br />", " <br> ");
             if (val === undefined) { return false }

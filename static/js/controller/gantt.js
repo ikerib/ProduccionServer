@@ -93,6 +93,11 @@ produccionApp.controller('ganttController', function ($scope, $http, socket, $co
       gantt.config.start_date = $scope.dtganttini;
       // gantt.config.end_date = new Date(2013, 08, 20);
       gantt.config.end_date = $scope.dtganttfin;
+      // console.log("DATA::");
+      // console.log($scope.gantdatuak);
+      // gantt.parse($scope.gantdatuak);
+      // gantt.render();
+      gantt.refreshData();
       gantt.render();
   };
 
