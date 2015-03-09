@@ -146,6 +146,7 @@ exports.getlinea2 = function(req,res) {
 
                         if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                             var miresp = res.data.toString();
+                            //console.log(miresp);
                             var mijson = JSON.parse(miresp);
                             if ( mijson.length === 0 ) {
                                 orden.badutstock = 0;
@@ -359,6 +360,8 @@ exports.sartu = function (req, res) {
             fetxa:new Date(data.fetxa),
             linea: data.linea,
             ref: data.ref,
+            denbora: data.denbora,
+            denborafin: data.denborafin,
             orden:0
     };
 

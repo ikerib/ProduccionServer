@@ -208,11 +208,15 @@ produccionApp.controller('linea3Controller', function ($scope, $http, $resource,
             var midata = config.data.ref;
             var fetxa = config.data.egunaberria + " 11:11:11";
             var milinea = config.data.lineaberria;
+            var denbora = config.data.denbora;
+            var denborafin = config.data.denborafin;
             var fetxaformatua = moment(fetxa, 'YYYY-MM-DD hh:mm:ss').toISOString();
             var d = {
                 linea: milinea,
                 fetxa: fetxaformatua,
-                ref: midata
+                ref: midata,
+                denbora: denbora,
+                denborafin: denborafin
             };
 
             $http.post('/sartu', d).success(function () {
