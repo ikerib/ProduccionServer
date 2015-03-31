@@ -7,7 +7,7 @@
                 <ul class="list-unstyled">
                     <li><input type="checkbox" ng-model="vlinea1" >Siplace</li>
                     <li><input type="checkbox" ng-model="vlinea2" >Assembleon</li>
-                    <li><input type="checkbox" ng-model="vlinea3" >Montage y Repaso</li>
+                    <li><input type="checkbox" ng-model="vlinea3" >Montaje y Repaso</li>
                     <li><input type="checkbox" ng-model="vweekend" >Fin de semana</li>
                 </ul>
               </div>
@@ -678,7 +678,7 @@
                     </tr>
 
                     <tr ng-controller="linea3Controller" ng-if="vlinea3==true">
-                        <td class="tdlinea">Montage y repaso </td>
+                        <td class="tdlinea">Montaje y repaso </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna1)">
                             <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
