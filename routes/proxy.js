@@ -7,7 +7,6 @@ var httpsync = require('httpsync');
 exports.getofdata = function(req, res) {
 
     var miof = req.params.of;
-    //var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+miof.trim();
     var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+miof.trim();
     var kk={};
     kk.mezua =url;
