@@ -4,7 +4,8 @@
 
 var moment = require('moment');
 var forEach = require('async-foreach').forEach;
-var httpsync = require('httpsync');
+//var httpsync = require('httpsync');
+var request = require('urllib-sync').request;
 
 var monk = require('monk');
 var db = monk('localhost:27017/planificacion');
@@ -52,8 +53,9 @@ exports.getlinea1 = function(req,res) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
                         var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
-                        var req = httpsync.get({ url : url});
-                        var res = req.end();
+                        //var req = httpsync.get({ url : url});
+                        var res = request(url);
+                        //var res = req.end();
 
                         if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                             var miresp = res.data.toString();
@@ -141,8 +143,9 @@ exports.getlinea2 = function(req,res) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
                         var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
-                        var req = httpsync.get({ url : url});
-                        var res = req.end();
+                        //var req = httpsync.get({ url : url});
+                        var res = request(url);
+                        //var res = req.end();
 
                         if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                             var miresp = res.data.toString();
@@ -231,8 +234,9 @@ exports.getlinea3 = function(req,res) {
                         var miarray = val.split('<br>');
                         tof = miarray[1];
                         var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
-                        var req = httpsync.get({ url : url});
-                        var res = req.end();
+                        //var req = httpsync.get({ url : url});
+                        var res = request( url);
+                        //var res = req.end();
 
                         if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                             var miresp = res.data.toString();
@@ -300,6 +304,22 @@ exports.saveorden = function(io) {
         var body = req.body;
         var miorden =  parseInt(body.orden);
         c_planificacion.findAndModify({_id: body.id}, {$set: {orden: miorden}}, {multi:false}, function(err, bug){
+            if (err) res.json(500, err);
+            else if (bug) res.json(bug);
+            else res.json(404);
+        });
+
+    }
+};
+
+exports.savehoras = function(io) {
+    return function(req, res){
+
+        var body = req.body;
+        var mihora = body.horas;
+        mihora = mihora.replace(/,/g, '.');
+        var mihoras =  parseFloat(mihora);
+        c_planificacion.findAndModify({_id: body.id}, {$set: {numhoras: mihoras}}, {multi:false}, function(err, bug){
             if (err) res.json(500, err);
             else if (bug) res.json(bug);
             else res.json(404);
