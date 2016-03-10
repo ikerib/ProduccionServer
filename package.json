@@ -4,16 +4,15 @@
   "author": "ikerib@gmail.com>",
   "version": "0.0.1",
   "dependencies": {
+    "async-foreach": "0.1.3",
     "connect": "1.8.5",
     "express": "2.5.2",
     "jade": "0.20.0",
-    "mongoose": "2.4.8",
-    "socket.io": "1.0",
-    "fs": "0.10.28",
     "moment": "^2.6.0",
-    "async-foreach": "0.1.3",
-    "httpsync": "0.0.8",
-    "monk": "0.9.0"
+    "mongoose": "2.4.8",
+    "monk": "0.9.0",
+    "socket.io": "1.0",
+    "urllib-sync": "^1.1.2"
   },
   "devDependencies": {
     "vows": "0.5.x",
