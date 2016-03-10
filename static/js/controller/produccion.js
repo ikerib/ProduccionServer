@@ -362,6 +362,20 @@ produccionApp.controller('produccionController', function ($scope, $http, $cooki
 
     };
 
+    $scope.updateHoras = function (data, l) {
+
+        var miid = l.$editable.attrs.miid;
+        var d = {
+            id: miid,
+            horas: data
+        };
+
+        $http.post('/savehoras', d).success(function () {
+            $scope.$broadcast ('eguneratu');
+        });
+
+    };
+
     $scope.updateDenbora = function (data, l) {
 
         var miid = l.$editable.attrs.miid;

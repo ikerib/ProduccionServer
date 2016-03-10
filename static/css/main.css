@@ -97,3 +97,7 @@ td.tdlinea {
 .ng-scope {
   margin-top: 0px;
 }
+
+.boxnumhoras {
+    min-height:50px !important;
+}

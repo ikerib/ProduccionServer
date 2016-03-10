@@ -69,8 +69,9 @@
                     <tr ng-controller="linea1Controller" ng-if="vlinea1==true">
                         <td class="tdlinea">Siplace</td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna1)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
-                                 style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
+                                 style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
@@ -92,7 +93,15 @@
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
 
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
