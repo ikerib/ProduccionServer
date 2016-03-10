@@ -2,17 +2,20 @@
  * Created by ikerib on 24/10/14.
  */
 
-var httpsync = require('httpsync');
+//var httpsync = require('httpsync');
+var request = require('urllib-sync').request;
 
 exports.getofdata = function(req, res) {
 
     var miof = req.params.of;
+    //var url = "http://servsm02.grupogureak.local:5080/expertis/delaoferta?of="+miof.trim();
     var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+miof.trim();
     var kk={};
     kk.mezua =url;
     //res.json(kk);
-    var req = httpsync.get({ url : url});
-    var resp = req.end();
+    //var req = httpsync.get({ url : url});
+    var resp = request( url );
+    //var resp = req.end();
     var erantzuna = {};
 
     if ( (resp.data.toString() !== "") && (resp.data.toString()!== "undefinded") ) {

@@ -4,7 +4,10 @@
 "use strict";
 var moment = require('moment');
 var forEach = require('async-foreach').forEach;
-var httpsync = require('httpsync');
+// var httpsync = require('httpsync');
+var request = require('urllib-sync').request;
+
+
 
 var monk = require('monk');
 var db = monk('localhost:27017/planificacion');
@@ -49,8 +52,9 @@ exports.getplanificacion = function(req, res) {
                     var miarray = val.split('<br>');
                     var tof = miarray[1];
                     var url = "http://10.0.0.12:5080/expertis/delaoferta?of="+ tof.trim();
-                    var req = httpsync.get({ url : url});
-                    var res = req.end();
+                    // var req = httpsync.get({ url : url});
+                    var res = request(url);
+                    //var res = req.end();
 
 
 
@@ -197,8 +201,9 @@ exports.getgantt = function(req, res) {
                     d.progress = 0;
                 } else {
                     var url2 = "http://10.0.0.12:5080/expertis/delaoferta?of="+ of.trim();
-                    var req2 = httpsync.get({ url : url2});
-                    var res = req2.end();
+                    //var req2 = httpsync.get({ url : url2});
+                    var res = request( url2 );
+                    //var res = req2.end();
                     if ( (res.data.toString() !== "") && (res.data.toString()!== "undefinded") ) {
                         var miresp = res.data.toString();
                         var mijson = JSON.parse(miresp);
