@@ -4,8 +4,6 @@ var connect = require('connect')
     , express = require('express')
     , io = require('socket.io')
     , port = (process.env.PORT || 8081)
-    , fs = require('fs')
-    , path = require('path')
     , get = require('./routes/get')
     , api = require('./routes/api')
     , proxy = require('./routes/proxy')
@@ -49,20 +47,20 @@ server.error(function(err, req, res, next){
     }
 });
 server.listen( port);
-
-//Setup Socket.IO
-var io = io.listen(server);
-io.sockets.on('connection', function(socket){
-  console.log('Client Connected');
-  socket.on('message', function(data){
-//    socket.broadcast.emit('server_message',data);
-//    socket.emit('server_message',data);
-      console.log(data);
-  });
-  socket.on('disconnect', function(){
-    console.log('Client Disconnected.');
-  });
-});
+//
+////Setup Socket.IO
+//var io = io.listen(server);
+//io.sockets.on('connection', function(socket){
+//  console.log('Client Connected');
+//  socket.on('message', function(data){
+////    socket.broadcast.emit('server_message',data);
+////    socket.emit('server_message',data);
+//      console.log(data);
+//  });
+//  socket.on('disconnect', function(){
+//    console.log('Client Disconnected.');
+//  });
+//});
 
 
 ///////////////////////////////////////////
@@ -96,6 +94,7 @@ server.get ('/proxy/expertis/:of', proxy.getofdata);
 
 server.post('/saveplanificacion', get.save(io));
 server.post('/saveorden', get.saveorden(io));
+server.post('/savehoras', get.savehoras(io));
 server.post('/savedenbora', get.savedenbora(io));
 server.post('/savedenborafin', get.savedenborafin(io));
 server.post('/savedenborafinfetxa', get.savedenborafinfetxa(io));
