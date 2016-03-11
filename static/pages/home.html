@@ -77,8 +77,8 @@
 
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -105,13 +105,18 @@
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
+
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                           data-miid="{{ orden.id }}"
                                           ng-if="!isadmin"
                                           ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                           ng-bind-html="orden.ref"
                                     ></span>
-                                    <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
+
                                         <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
@@ -123,14 +128,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna2)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -143,19 +149,32 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div> <!-- box-of -->
-                                        <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
+
+                                    <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                             data-miid="{{ orden.id }}"
                                             ng-if="!isadmin"
                                             ng-click="grafikoa(orden.ref);arraton(orden.ref);"
                                             ng-bind-html="orden.ref"
 
                                             ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div>
                             <div
@@ -166,14 +185,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna3)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -186,10 +206,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -197,7 +230,6 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
                                         <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
@@ -209,14 +241,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna4)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -229,10 +262,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -240,8 +286,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -252,14 +298,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna5)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -272,10 +319,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -283,8 +343,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -295,14 +355,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna6)" ng-if="vweekend==true">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -315,10 +376,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -326,8 +400,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -338,14 +412,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna7)" ng-if="vweekend==true">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -358,10 +433,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -369,8 +457,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -385,13 +473,14 @@
                     <tr ng-controller="linea2Controller" ng-if="vlinea2==true">
                         <td class="tdlinea">Assembleon </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna1)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -404,10 +493,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -415,8 +517,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -427,14 +529,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna2)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -447,10 +550,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -458,8 +574,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -470,14 +586,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna3)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -490,10 +607,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -501,8 +631,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -513,14 +643,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna4)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -533,10 +664,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -544,8 +688,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -556,14 +700,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna5)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -576,10 +721,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -587,8 +745,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                    <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -599,14 +757,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna6)" ng-if="vweekend==true">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -619,10 +778,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -630,8 +802,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -642,14 +814,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,2,eguna7)" ng-if="vweekend==true">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -662,10 +835,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -673,8 +859,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -689,14 +875,15 @@
                     <tr ng-controller="linea3Controller" ng-if="vlinea3==true">
                         <td class="tdlinea">Montaje y repaso </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna1)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna1" ng-repeat="orden in asteeguna1"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -709,10 +896,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -720,8 +920,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -732,14 +932,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna2)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -752,10 +953,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -763,8 +977,7 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -775,13 +988,14 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna3)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna3" ng-repeat="orden in asteeguna3"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -794,10 +1008,22 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -805,8 +1031,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -817,14 +1043,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna4)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna4" ng-repeat="orden in asteeguna4"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -837,10 +1064,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -848,8 +1088,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -860,14 +1100,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna5)">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna5" ng-repeat="orden in asteeguna5"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -880,10 +1121,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -891,8 +1145,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div
@@ -903,14 +1157,15 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna6)" ng-if="vweekend==true">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna6" ng-repeat="orden in asteeguna6"
+                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -923,10 +1178,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -934,8 +1202,8 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
 
                                 </div>
                             </div> <!-- box-of -->
@@ -947,14 +1215,14 @@
                                 onbeforesave="addData($data, this)">+</div>
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,3,eguna7)" ng-if="vweekend==true">
-                            <div class="box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
+                            <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
                                 <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
-                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Orduak:{{orden.denbora}}</div>
-                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Orduak:{{orden.denborafin}}</div>
+                                    <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
+                                    <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
                                     <span
                                         data-miid="{{ orden._id }}"
                                         data-fetxa="{{orden.fetxa}}"
@@ -967,10 +1235,23 @@
                                         ng-if="isadmin"
                                         ng-bind-html="orden.ref"
                                         onbeforesave="updateUser($data, this)"></span>
-                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.orden" onbeforesave="updateOrden($data, this)" >#{{orden.orden}}</div class="divorden">
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.orden"
+                                         onbeforesave="updateOrden($data, this)" >#{{orden.orden}}
+                                    </div>
+
+                                    <div class="divorden" ng-if="isadmin" data-miid="{{ orden._id }}"
+                                         editable-text="orden.numhoras"
+                                         onbeforesave="updateHoras($data, this)" >horas:{{orden.numhoras}}
+                                    </div>
 
                                 </div>
                                 <div>
+                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
+                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
+                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
                                         ng-if="!isadmin"
@@ -978,8 +1259,7 @@
                                         ng-bind-html="orden.ref"
 
                                         ></span>
-                                        <div class="divorden" ng-if="!isadmin && orden.denbora">Hora ini:{{orden.denbora}}</div>
-                                        <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
+                                    <div class="divorden" ng-if="!isadmin && orden.denborafin">Hora fin:{{orden.denborafin}}</div>
                                 </div>
                             </div> <!-- box-of -->
                             <div

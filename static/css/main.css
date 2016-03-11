@@ -101,3 +101,13 @@ td.tdlinea {
 .boxnumhoras {
     min-height:50px !important;
 }
+
+.flex {
+    display: flex;
+}
+.divhoraini {
+    width: 50%;
+}
+.divnumhoras {
+    flex: 1;
+}
