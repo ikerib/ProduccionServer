@@ -73,7 +73,7 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style="border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
 
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
@@ -105,9 +105,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
 
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
@@ -129,10 +130,11 @@
                         </td>
                         <td class="asteeguna" ui-on-Drop="onDrop($event,$data,1,eguna2)">
                             <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna2" ng-repeat="orden in asteeguna2"
-                                 ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
+                                 ng-style="!isadmin && { height: (65 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -162,9 +164,10 @@
 
                                 </div>
                                 <div> <!-- box-of -->
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
 
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
@@ -189,7 +192,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -219,9 +223,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -245,7 +250,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -275,9 +281,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -302,7 +309,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -332,9 +340,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -359,7 +368,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -389,9 +399,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -416,7 +427,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -446,9 +458,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -477,7 +490,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
                                     <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
@@ -506,9 +520,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -533,7 +548,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -563,9 +579,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -590,7 +607,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -620,9 +638,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -647,7 +666,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -677,9 +697,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -704,7 +725,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -734,9 +756,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -761,7 +784,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -791,9 +815,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -818,7 +843,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -848,9 +874,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -879,7 +906,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -909,9 +937,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -936,7 +965,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -966,9 +996,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -992,7 +1023,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
                                     <div class="divorden divdenborafin" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denborafin" onbeforesave="updateDenboraFin($data, this)" >Fin:{{orden.denborafin}}</div>
@@ -1020,9 +1052,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -1047,7 +1080,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -1077,9 +1111,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -1104,7 +1139,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -1134,9 +1170,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -1161,7 +1198,8 @@
                                  ng-style="!isadmin && { height: (50 * orden.numhoras) + 'px' }"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -1191,9 +1229,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
@@ -1218,7 +1257,8 @@
                             <div class="boxnumhoras box-of" ng-class="whatClassIsIt(orden.amaituta)" ng-model="asteeguna7" ng-repeat="orden in asteeguna7"
                                  style=" border:1px solid #000000; padding:3px;background-color: {{ users | searchByRefBackcolor : 'ref' : orden.ref }} !important; color:{{ users | searchByRefForecolor : 'ref' : orden.ref }} !important;" >
 
-                                <span ng-if="orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+                                <span ng-if="isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire">OJO!</span>
+
                                 <div ui-draggable="true" drag="orden" ng-if="isadmin"  on-drop-success="dropSuccessHandler($event,$index,orden)">
 
                                     <div class="divorden divdenbora" ng-if="isadmin" data-miid="{{ orden._id }}" editable-text="orden.denbora" onbeforesave="updateDenbora($data, this)" >Inicio:{{orden.denbora}}</div>
@@ -1248,9 +1288,10 @@
 
                                 </div>
                                 <div>
-                                    <div class="flex" ng-if="!isadmin && (orden.denbora || orden.numhoras)">
-                                        <div class="divhoraini" ng-if="!isadmin && orden.denbora">{{orden.denbora}}</div>
-                                        <div class="divnumhoras" ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</div>
+                                    <div class="flex">
+                                        <div class="divhoraini"><span ng-if="!isadmin && orden.denbora">{{orden.denbora}}</span></div>
+                                        <span ng-if="!isadmin && orden.badutstock == 0" class="badge glyphicon glyphicon-fire"> </span>
+                                        <div class="divnumhoras"><span ng-if="!isadmin && orden.numhoras">{{orden.numhoras}}h</span></div>
                                     </div>
                                     <span ng-style="set_color('{{ users | searchByRefForecolor : 'ref' : orden.ref }}')"
                                         data-miid="{{ orden.id }}"
